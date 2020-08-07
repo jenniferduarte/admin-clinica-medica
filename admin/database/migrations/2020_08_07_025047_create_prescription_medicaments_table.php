@@ -16,9 +16,9 @@ class CreatePrescriptionMedicamentsTable extends Migration
         Schema::create('prescription_medicaments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('prescription_id');
-            $table->foreign('prescriptions_id')->references('id')->on('prescriptions');
-            $table->unsignedBigInteger('medicaments_id');
-            $table->foreign('medicaments_id')->references('id')->on('medicaments');
+            $table->foreign('prescription_id')->references('id')->on('prescriptions');
+            $table->unsignedBigInteger('medicament_id');
+            $table->foreign('medicament_id')->references('id')->on('medicaments');
             $table->string('dosage')->nullable();
             $table->timestamps();
         });
