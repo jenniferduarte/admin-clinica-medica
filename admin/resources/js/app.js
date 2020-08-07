@@ -1,32 +1,50 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
+require('datatables.net');
+require('datatables.net-responsive');
+require('datatables.net-bs4');
+require('jquery-mask-plugin');
+require('./mask');
+require('./fileinput');
+require('select2');
+require('bootstrap-switch');
 
-window.Vue = require('vue');
+$(document).ready(function () {
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+    // Files to be deleted
+    $(function () {
+        $ids = [];
+        $('.btn-delete-file').on('click', function (e) {
+            $(e.target).closest('.col-sm-2').fadeOut();
+            $fileId = $(e.target).data('id');
+            $ids.push($fileId);
+            $('#file_deleted').val($ids);
+        });
+    })
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+    // Starts Select2
+    if ($('.select2').length > 0) {
+        $('.select2').select2();
+    }   
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+    // Starts DataTable
+    if ($('.datatable').length > 0) {
+        $(function () {
+            $('.datatable').DataTable({
+                "paging": true
+                , "lengthChange": false
+                , "searching": true
+                , "ordering": true
+                , "info": true
+                , "autoWidth": false
+                , "responsive": true
+                ,
+            });
+        });
+    } 
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+    // Bootstrap Switch
+    $("input[data-bootstrap-switch]").each(function () {
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    });
 
-const app = new Vue({
-    el: '#app',
 });
