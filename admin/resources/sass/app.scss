@@ -26,8 +26,9 @@
 @import "~datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css";
 
 // Toastr
-@import "~toastr/build/toastr.min.css";
+@import "~toastr/toastr.scss";
 
+//Lightbox
 @import "~admin-lte/plugins/ekko-lightbox/ekko-lightbox.css";
 
 // Select2
@@ -37,116 +38,5 @@
 // AdminLTE
 @import '~admin-lte/dist/css/adminlte.min.css';
 
-
-a {
-    color: $blue;
-}
-
-.badge{
-    text-transform: uppercase;
-    color: #fff;
-}
-.badge-paid{
-    background-color: #28a745;
-}
-.badge-failed{
-    background-color: #dc3545;
-}
-.badge-created{
-    background-color:  #17a2b8
-}
-
-.btn-primary {
-    color: #fff;
-    background-color: $blue;
-    border-color: $blue;
-}
-
-.brand-link {
-    text-align: center;
-}
-
-.user-panel{
-    justify-content: center;
-}
-
- #price-table tbody tr:first-child td .form-control{
-    border: 2px solid #b5b6b7;
-    color: rgb(45, 45, 45);
-}
-
-label {
-    color: #1d1d1d;
-    font-size: 17px;
-}
-.custom-file-label{
-    font-size: 14px;
-}
-
-.uploaded-files{
-    .card-tools {
-        float: right;
-        margin-right: 10px;
-
-        .btn-delete-file{
-        
-            // box-shadow: 1px 1px 3px #444444;
-
-            i{
-                font-size: 12px;
-                padding: 2px;
-            }
-            
-            &:hover{
-                background-color: #17100f !important;
-                cursor: pointer;
-            }
-        }
-    }
-}
-
-.custom-switch {
-    margin-left: 20px;
-}
-
-.select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: #e0e0e0;
-    border-color: #b7b7b7;
-    color: #151515;
-}
-
-.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-    color: rgb(8, 8, 8);
-}
-
-.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
-    color: $red;
-}
-
-.bootstrap-switch .bootstrap-switch-handle-off, 
-.bootstrap-switch .bootstrap-switch-handle-on, 
-.bootstrap-switch .bootstrap-switch-label{
-    padding: 0.5rem .5rem;
-}
-
-.snippet {
-    padding: 0.25rem 1rem 0rem 0.25rem;
-    margin-right: 10px;
-    border: none;
-    background: #3a3a3a;
-    color: #fff;
-    .card-header{
-        padding: 0.25rem;
-        border-bottom: none;
-    }
-    .code{
-        float: left; 
-        margin-bottom: auto;
-        padding: .5rem 0.15rem;
-        color: #6ce0ff;
-    }
-    .card-tools{
-        margin-left: 14px;
-        margin-top: 3px;
-    }
-}
+// Custom CSS
+@import 'custom';

@@ -26,12 +26,12 @@
 <script src="/js/app.js"></script>
 
 <script>
-    /* $(".btn.btn-danger").click(function() {
-            excluir = confirm("Tem certeza que deseja excluir?");
-            if (!excluir) {
-                return false;
-            }
-        }); */
+     $(".btn-delete").click(function() {
+        excluir = confirm("Tem certeza que deseja excluir?");
+        if (!excluir) {
+            return false;
+        }
+    }); 
 
 </script>
 

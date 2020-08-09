@@ -5,8 +5,10 @@ require('datatables.net-bs4');
 require('jquery-mask-plugin');
 require('./mask');
 require('./fileinput');
+require('bootstrap-colorpicker');
+require('ekko-lightbox');
 require('select2');
-require('bootstrap-switch');
+require('bootstrap-switch'); 
 
 $(document).ready(function () {
 

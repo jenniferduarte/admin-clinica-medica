@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Prescription;
+use App\Exam;
 use Illuminate\Http\Request;
 
-class PrescriptionController extends Controller
+class ExamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class PrescriptionController extends Controller
      */
     public function index()
     {
-        $prescriptions = Prescription::all();
-        return view('prescriptions.index', $prescriptions);
+        //
     }
 
     /**
@@ -42,10 +41,10 @@ class PrescriptionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Prescription  $prescription
+     * @param  \App\Exam  $exam
      * @return \Illuminate\Http\Response
      */
-    public function show(Prescription $prescription)
+    public function show(Exam $exam)
     {
         //
     }
@@ -53,10 +52,10 @@ class PrescriptionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Prescription  $prescription
+     * @param  \App\Exam  $exam
      * @return \Illuminate\Http\Response
      */
-    public function edit(Prescription $prescription)
+    public function edit(Exam $exam)
     {
         //
     }
@@ -65,10 +64,10 @@ class PrescriptionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Prescription  $prescription
+     * @param  \App\Exam  $exam
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Prescription $prescription)
+    public function update(Request $request, Exam $exam)
     {
         //
     }
@@ -76,10 +75,10 @@ class PrescriptionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Prescription  $prescription
+     * @param  \App\Exam  $exam
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Prescription $prescription)
+    public function destroy(Exam $exam)
     {
         //
     }

@@ -1,9 +1,11 @@
 @extends('admin.layout.template')
 
-@section('page-name') Colors @endsection {{-- Page Name  --}}
+@section('page-name') Medicamentos @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
-<a href="{{ route('colors.create') }}" class="btn btn-block btn-outline-success btn-sm">New Color</a>
+<a href="{{ route('medicaments.create') }}" class="btn btn-block btn-outline-success btn-sm">
+    <i class="nav-icon fas fa-capsules"></i>  Novo Medicamento
+</a>
 @endsection
 
 @section('content')
@@ -16,23 +18,23 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Color</th>
-                    <th>Actions</th>
+                    <th>Nome genérico</th>
+                    <th>Nome de fábrica</th>
+                    <th>Fabricante</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach($colors as $color)
+                @foreach($medicaments as $medicament)
                 <tr>
-                    <td>{{ $color->id }} </td>
-                    <td>{{ $color->name }} </td>
-                    <td>
-                        <i class="fas fa-square" style="color:{{$color->color}}"></i> {{ $color->color }} 
-                    </td>
+                    <td>{{ $medicament->id }} </td>
+                    <td>{{ $medicament->generic_name }} </td>
+                    <td>{{ $medicament->factory_name }} </td>
+                    <td>{{ $medicament->manufacturer }} </td>
                     <td> 
                         <div class="btn-group" role="group">    
-                            <a href="{{ route('colors.edit', $color->id) }}" class="btn btn-secondary ">
+                            <a href="{{ route('medicaments.edit', $medicament->id) }}" class="btn btn-secondary ">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
                         </div>
@@ -41,7 +43,6 @@
                 @endforeach
             </tbody>
         </table>
-
     </div>
 </div>
    

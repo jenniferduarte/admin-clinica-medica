@@ -11,6 +11,9 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+    require('admin-lte');
+    window.toastr = require('toastr');
+    window.Swal = require('sweetalert2');
 } catch (e) {}
 
 /**

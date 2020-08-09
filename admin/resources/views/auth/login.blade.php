@@ -3,7 +3,7 @@
 <body class="login-page">
     <div class="login-box">
         <div class="login-logo">
-            <img src="{{ asset('img/logo-mtl.png') }}" width="150px" height="auto">
+            <img src="{{ asset('img/logo.png') }}" width="150px" height="auto">
         </div>
         <!-- /.login-logo -->
         <div class="card">

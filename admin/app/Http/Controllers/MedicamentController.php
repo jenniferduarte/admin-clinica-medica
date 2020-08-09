@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Medicament;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\MedicamentStoreRequest;
 
 class MedicamentController extends Controller
 {
+    public function __construct()
+    {   
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,11 @@ class MedicamentController extends Controller
      */
     public function index()
     {
-        //
+        $medicaments = Medicament::all();
+        
+        return view('admin.medicaments.index', [
+            'medicaments' => $medicaments
+        ]);
     }
 
     /**
@@ -24,7 +35,7 @@ class MedicamentController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.medicaments.create');
     }
 
     /**
@@ -33,9 +44,16 @@ class MedicamentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MedicamentStoreRequest $request)
     {
-        //
+        $medicament = Medicament::create($request->all());
+        
+        $notification = array(
+            'message' => 'Criado com sucesso!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->action('MedicamentController@index')->with($notification);
     }
 
     /**
@@ -57,7 +75,9 @@ class MedicamentController extends Controller
      */
     public function edit(Medicament $medicament)
     {
-        //
+        return view('admin.medicaments.edit', [
+            'medicament' => $medicament
+        ]);
     }
 
     /**
@@ -67,9 +87,16 @@ class MedicamentController extends Controller
      * @param  \App\Medicament  $medicament
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Medicament $medicament)
+    public function update(MedicamentStoreRequest $request, Medicament $medicament)
     {
-        //
+        $medicament->update($request->all());
+
+        $notification = array(
+            'message' => 'Atualizado com sucesso!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->action('MedicamentController@index')->with($notification);
     }
 
     /**
@@ -80,6 +107,13 @@ class MedicamentController extends Controller
      */
     public function destroy(Medicament $medicament)
     {
-        //
+        $medicament->delete();
+
+        $notification = array(
+            'message' => 'Excluído com sucesso!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->action('MedicamentController@index')->with($notification);   
     }
 }

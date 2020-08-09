@@ -2,7 +2,7 @@
 <aside class="main-sidebar elevation-4 sidebar-light-warning">
     <!-- Brand Logo -->
     <a href="{{route('home')}}" class="brand-link">
-        <img src="{{ asset('img/logo-mtl.png') }}" width="100px" height="auto">
+        <img src="{{ asset('img/logo.png') }}" width="100px" height="auto">
     </a> 
 
     <!-- Sidebar -->
@@ -22,7 +22,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
-            with font-awesome or any other icon font library -->
+                with font-awesome or any other icon font library -->
                 
                 <li class="nav-item">
                     <a href="{{ route('home') }}" class="nav-link">
@@ -37,21 +37,21 @@
                 
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-shopping-bag"></i>
+                        <i class="nav-icon fas fa-capsules"></i>
                         <p>
-                            Products
+                            Medicamentos
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview" >
                         <li class="nav-item">
-                            <a href="{{ route('products.index') }}" class="nav-link">
-                                <p>See all</p>
+                            <a href="{{ route('medicaments.index') }}" class="nav-link">
+                                <p>Ver todos</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('products.create') }}" class="nav-link">
-                                <p>Add</p>
+                            <a href="{{ route('medicaments.create') }}" class="nav-link">
+                                <p>Adicionar</p>
                             </a>
                         </li>
                     </ul>
@@ -59,71 +59,6 @@
                 
                 <hr>
 
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-list"></i>
-
-                        <p>
-                            Categories
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('category.index') }}" class="nav-link">
-                                <p>See all</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('category.create') }}" class="nav-link">
-                                <p>Add</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <hr>
-
-
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-palette"></i>
-                        <p>
-                            Colors
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('colors.index') }}" class="nav-link">
-                                <p>See all</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('colors.create') }}" class="nav-link">
-                                <p>Add</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <hr>
-
-                <li class="nav-item">
-                    <a href="{{ route('print-shop.edit', 1) }}" class="nav-link">
-                        <i class="fas fa-print nav-icon"></i>
-                        <p>Print Shop</p>
-                    </a>
-                </li>
-
-                <hr>
-
-                <li class="nav-item">
-                    <a href="{{ route('orders.index') }}" class="nav-link">
-                        <i class="fas fa-shopping-cart nav-icon"></i>
-                        <p>Orders</p>
-                    </a>
-                </li>
 
                 <hr>
 
