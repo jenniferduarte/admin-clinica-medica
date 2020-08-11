@@ -37,6 +37,54 @@
                 
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-user-md"></i>
+                        <p>
+                            Médicos
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" >
+                        <li class="nav-item">
+                            <a href="{{ route('doctors.index') }}" class="nav-link">
+                                <p>Ver todos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('doctors.create') }}" class="nav-link">
+                                <p>Adicionar</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <hr>
+                
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-user-injured"></i>
+                        <p>
+                            Pacientes
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" >
+                        <li class="nav-item">
+                            <a href="{{ route('patients.index') }}" class="nav-link">
+                                <p>Ver todos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('patients.create') }}" class="nav-link">
+                                <p>Adicionar</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <hr>
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-capsules"></i>
                         <p>
                             Medicamentos

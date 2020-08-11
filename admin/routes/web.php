@@ -24,5 +24,9 @@ Auth::routes([
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resources([
+    'doctors' => 'DoctorController',
     'medicaments' => 'MedicamentController',
+    'patients' => 'PatientController',
+    'users' => 'UserController',
+    
 ]);

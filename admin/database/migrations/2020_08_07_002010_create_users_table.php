@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('phone', 50)->nullable();
             $table->unsignedBigInteger('gender_id')->nullable();
             $table->foreign('gender_id')->references('id')->on('genders');
-            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('role_id')->default(6);
             $table->foreign('role_id')->references('id')->on('roles');
             $table->unsignedBigInteger('clinic_id')->nullable();
             $table->foreign('clinic_id')->references('id')->on('clinics');

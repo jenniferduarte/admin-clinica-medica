@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Patient;
 use Illuminate\Http\Request;
+use App\Gender;
 
 class PatientController extends Controller
 {
@@ -14,7 +15,11 @@ class PatientController extends Controller
      */
     public function index()
     {
-        //
+        $patients = Patient::all();
+    
+        return view('admin.patients.index', [
+            'patients' => $patients
+        ]);
     }
 
     /**
@@ -23,8 +28,10 @@ class PatientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        return view('admin.patients.create', [
+            'genders' =>  Gender::all()
+        ]);
     }
 
     /**
@@ -35,7 +42,7 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Está sendo usado UserController@store
     }
 
     /**
@@ -46,7 +53,9 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        //
+        return view('admin.patients.show', [
+            'patient' => $patient
+        ]);
     }
 
     /**
@@ -57,7 +66,10 @@ class PatientController extends Controller
      */
     public function edit(Patient $patient)
     {
-        //
+        return view('admin.patients.edit', [
+            'patient' => $patient,
+            'genders' =>  Gender::all()
+        ]);
     }
 
     /**

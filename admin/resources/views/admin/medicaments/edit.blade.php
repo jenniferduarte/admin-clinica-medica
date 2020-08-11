@@ -17,13 +17,13 @@
                     <div class="form-group">
                         <label for="generic-name">Nome genérico*</label>
                         <input type="text" 
-                            class="form-control @if ($errors->has('generic_name')) is-invalid  @endif" 
+                            class="form-control @error('generic_name') is-invalid  @enderror" 
                             name="generic_name" 
                             id="generic-name" 
                             placeholder="Digite o nome genérico" 
                             value="{{ old('generic_name', $medicament->generic_name) }}">
 
-                        @if ($errors->has('generic_name')) <p class="text-danger">{{ $errors->first('generic_name') }}</p> @endif
+                        @error('generic_name') <p class="text-danger">{{ $message) }}</p> @enderror
                     </div>
                 </div>
 
@@ -31,13 +31,13 @@
                     <div class="form-group">
                         <label for="factory-name">Nome de fábrica*</label>
                         <input type="text" 
-                            class="form-control @if ($errors->has('factory_name')) is-invalid  @endif" 
+                            class="form-control @error('factory_name') is-invalid  @enderror" 
                             name="factory_name" 
                             id="factory-name" 
                             placeholder="Digite o nome de fábrica" 
                             value="{{ old('factory_name', $medicament->factory_name) }}">
 
-                        @if ($errors->has('factory_name')) <p class="text-danger">{{ $errors->first('factory_name') }}</p> @endif
+                        @error('factory_name') <p class="text-danger">{{ $message }}</p> @enderror
                     </div>
                 </div>
 
@@ -45,23 +45,23 @@
                     <div class="form-group">
                         <label for="manufacturer">Fabricante</label>
                         <input type="text" 
-                            class="form-control  @if ($errors->has('manufacturer')) is-invalid  @endif" 
+                            class="form-control @error('manufacturer') is-invalid  @enderror" 
                             name="manufacturer" 
                             id="manufacturer" 
                             placeholder="Digite o fabricante" 
                             value="{{ old('manufacturer', $medicament->manufacturer) }}">
 
-                        @if ($errors->has('manufacturer')) <p class="text-danger">{{ $errors->first('manufacturer') }}</p> @endif
+                        @error('manufacturer') <p class="text-danger">{{ $message }}</p> @enderror
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="card-footer">
-            </form>
+        </form>
    
-             <button type="submit" class="btn btn-success" form="edit-form">Salvar</button>
-             <form id="deleteForm" action="{{ route('medicaments.destroy', $medicament->id ) }}" method="post">
+            <button type="submit" class="btn btn-success" form="edit-form">Salvar</button>
+            <form id="deleteForm" action="{{ route('medicaments.destroy', $medicament->id ) }}" method="post">
                 @method('delete') @csrf
                 <button type="submit" data-id="{{ $medicament->id }}" class="text-danger btn btn-delete">Deletar</button>
             </form>
