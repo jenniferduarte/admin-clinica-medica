@@ -22,8 +22,8 @@
                             id="generic-name" 
                             placeholder="Digite o nome genérico" 
                             value="{{ old('generic_name', $medicament->generic_name) }}">
-
-                        @error('generic_name') <p class="text-danger">{{ $message) }}</p> @enderror
+                            
+                            @error('generic_name') <p class="text-danger">{{ $message }}</p> @enderror
                     </div>
                 </div>
 

@@ -1,14 +1,14 @@
 @extends('admin.layout.template')
 
-@section('page-name') Ver Paciente › {{ $patient->user->name }} @endsection {{-- Page Name --}}
+@section('page-name') Ver Médico › {{ $doctor->user->name }} @endsection {{-- Page Name --}}
 
 @section('quick-actions')
 
-  <a href="{{ route('patients.index') }}" class="btn  btn-outline-secondary btn-sm">
+  <a href="{{ route('doctors.index') }}" class="btn  btn-outline-secondary btn-sm">
     <i class="fas fa-arrow-left"></i>  Voltar
   </a>
 
-  <a href="{{ route('patients.edit', $patient->id) }}" class="btn btn-outline-success btn-sm">
+  <a href="{{ route('doctors.edit', $doctor->id) }}" class="btn btn-outline-success btn-sm">
     <i class="fas fa-pencil-alt"></i>  Editar
   </a> 
 
@@ -24,40 +24,35 @@
         <div class="card card-primary card-outline">
           <div class="card-body box-profile">
 
-          <h3 class="profile-username text-center"> {{ $patient->user->name }}</h3>
+          <div class="text-center">
 
-            <p class="text-muted text-center">{{ $patient->user->social_name }}</p>
+            <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/doctor-' . $doctor->user->gender->id . '.png') }}" 
+              alt="Médico profile picture">
+          </div>
+
+          <h3 class="profile-username text-center"> {{ $doctor->user->name }}</h3>
 
             <ul class="list-group list-group-unbordered mb-3">
               <li class="list-group-item">
-                <b>Email:</b> <a class="">{{ $patient->user->email }}</a>
+                <b>Email:</b> <a class="">{{ $doctor->user->email }}</a>
               </li>
               <li class="list-group-item">
-              <b>Data de nascimento:</b> <a class="">{{ $patient->user->birth_date->format('d/m/Y') }}</a>
+              <b>Data de nascimento:</b> <a class="">{{ $doctor->user->birth_date->format('d/m/Y') }}</a>
               </li>
               <li class="list-group-item">
-                <b>CPF:</b> <a class="">{{ $patient->user->cpf }}</a>
+                <b>CPF:</b> {{ $doctor->user->cpf }}
               </li>
               <li class="list-group-item">
-                <b>RG:</b> <a class="">{{ $patient->user->rg }}</a>
+                <b>RG:</b> {{ $doctor->user->rg }}
               </li>
               <li class="list-group-item">
-                <b>Sexo:</b> <a class="">{{ $patient->user->gender->name }}</a>
+                <b>Sexo:</b> {{ $doctor->user->gender->name }}
               </li>
               <li class="list-group-item">
-                <b>Nome da mãe:</b> <a class="">{{ $patient->mother_name }}</a>
-              </li>
-              <li class="list-group-item">
-                <b>Nome do pai:</b> <a class="">{{ $patient->father_name }}</a>
-              </li>
-              <li class="list-group-item">
-                <b>Nome do responsável:</b> <a class="">{{ $patient->responsible_name }}</a>
-              </li>
-              <li class="list-group-item">
-                <b>Telefone do responsável:</b> <a class="">{{ $patient->responsible_phone }}</a>
-              </li>
-              <li class="list-group-item">
-                <b>Observações:</b> <a class="">{{ $patient->observation }}</a>
+                <b>Especialidade:</b> 
+                  @foreach($doctor->specialties as $specialty) 
+                    {{ $specialty->name}} @if(!$loop->last) | @endif 
+                  @endforeach
               </li>
                 
             </ul>

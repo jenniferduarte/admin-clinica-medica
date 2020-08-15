@@ -65,7 +65,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td.child,table.dataTable.dtr-inlin
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Nunito", sans-serif;
+  --font-family-sans-serif: "Roboto", "Nunito", sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -97,7 +97,7 @@ section {
 
 body {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: "Roboto", "Nunito", sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
@@ -6431,7 +6431,7 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: "Roboto", "Nunito", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -6556,7 +6556,7 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Nunito", sans-serif;
+  font-family: "Roboto", "Nunito", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -17285,6 +17285,32 @@ a {
   text-decoration: underline;
 }
 
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: #e0e0e0;
+  border-color: #b7b7b7;
+  color: #151515;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  color: #080808;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+  color: #e3342f;
+}
+
+.brand-link {
+  text-align: center;
+}
+
+.user-panel {
+  justify-content: center;
+}
+
+.login-logo {
+  margin-bottom: 30px;
+}
+
 /*
 .badge{
     text-transform: uppercase;
@@ -17306,13 +17332,6 @@ a {
     border-color: $blue;
 }
 
-.brand-link {
-    text-align: center;
-}
-
-.user-panel{
-    justify-content: center;
-}
 
  #price-table tbody tr:first-child td .form-control{
     border: 2px solid #b5b6b7;
@@ -17327,45 +17346,10 @@ label {
     font-size: 14px;
 }
 
-.uploaded-files{
-    .card-tools {
-        float: right;
-        margin-right: 10px;
-
-        .btn-delete-file{
-
-            // box-shadow: 1px 1px 3px #444444;
-
-            i{
-                font-size: 12px;
-                padding: 2px;
-            }
-
-            &:hover{
-                background-color: #17100f !important;
-                cursor: pointer;
-            }
-        }
-    }
-}
-
 .custom-switch {
     margin-left: 20px;
 }
 
-.select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: #e0e0e0;
-    border-color: #b7b7b7;
-    color: #151515;
-}
-
-.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-    color: rgb(8, 8, 8);
-}
-
-.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
-    color: $red;
-}
 
 .bootstrap-switch .bootstrap-switch-handle-off, 
 .bootstrap-switch .bootstrap-switch-handle-on, 

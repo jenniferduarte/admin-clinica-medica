@@ -15,6 +15,33 @@ a {
     }
 }
 
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #e0e0e0;
+    border-color: #b7b7b7;
+    color: #151515;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: rgb(8, 8, 8);
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+    color: $red;
+}
+
+.brand-link {
+    text-align: center;
+}
+
+.user-panel{
+    justify-content: center;
+}
+
+.login-logo{
+    margin-bottom: 30px;
+}
+
+
 /*
 .badge{
     text-transform: uppercase;
@@ -36,13 +63,6 @@ a {
     border-color: $blue;
 }
 
-.brand-link {
-    text-align: center;
-}
-
-.user-panel{
-    justify-content: center;
-}
 
  #price-table tbody tr:first-child td .form-control{
     border: 2px solid #b5b6b7;
@@ -57,45 +77,10 @@ label {
     font-size: 14px;
 }
 
-.uploaded-files{
-    .card-tools {
-        float: right;
-        margin-right: 10px;
-
-        .btn-delete-file{
-        
-            // box-shadow: 1px 1px 3px #444444;
-
-            i{
-                font-size: 12px;
-                padding: 2px;
-            }
-            
-            &:hover{
-                background-color: #17100f !important;
-                cursor: pointer;
-            }
-        }
-    }
-}
-
 .custom-switch {
     margin-left: 20px;
 }
 
-.select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: #e0e0e0;
-    border-color: #b7b7b7;
-    color: #151515;
-}
-
-.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-    color: rgb(8, 8, 8);
-}
-
-.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
-    color: $red;
-}
 
 .bootstrap-switch .bootstrap-switch-handle-off, 
 .bootstrap-switch .bootstrap-switch-handle-on, 

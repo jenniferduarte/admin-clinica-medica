@@ -64,7 +64,9 @@ class MedicamentController extends Controller
      */
     public function show(Medicament $medicament)
     {
-        //
+        return view('admin.medicaments.show', [
+            'medicament' => $medicament
+        ]);
     }
 
     /**

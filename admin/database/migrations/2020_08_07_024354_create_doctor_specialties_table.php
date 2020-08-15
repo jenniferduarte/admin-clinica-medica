@@ -17,8 +17,8 @@ class CreateDoctorSpecialtiesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('doctor_id');
             $table->foreign('doctor_id')->references('id')->on('doctors');
-            $table->unsignedBigInteger('specialty');
-            $table->foreign('specialty')->references('id')->on('specialties');
+            $table->unsignedBigInteger('specialty_id');
+            $table->foreign('specialty_id')->references('id')->on('specialties');
             $table->timestamps();
         });
     }

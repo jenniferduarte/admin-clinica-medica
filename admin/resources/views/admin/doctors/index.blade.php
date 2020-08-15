@@ -3,8 +3,8 @@
 @section('page-name') Médicos @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
-<a href="{{ route('medicaments.create') }}" class="btn btn-block btn-outline-success btn-sm">
-    <i class="nav-icon fas fa-capsules"></i>  Novo Médico
+<a href="{{ route('doctors.create') }}" class="btn btn-block btn-outline-success btn-sm">
+    <i class="nav-icon fas fa-user-md"></i>  Novo médico
 </a>
 @endsection
 
@@ -18,23 +18,28 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nome genérico</th>
-                    <th>Nome de fábrica</th>
-                    <th>Fabricante</th>
+                    <th>Nome</th>
+                    <th>Especialidade</th>
+                    <th>Email</th>
+                    <th>CPF</th>
                     <th>Ações</th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach($medicaments as $medicament)
+                @foreach($doctors as $doctor)
                 <tr>
-                    <td>{{ $medicament->id }} </td>
-                    <td>{{ $medicament->generic_name }} </td>
-                    <td>{{ $medicament->factory_name }} </td>
-                    <td>{{ $medicament->manufacturer }} </td>
+                    <td>{{ $doctor->id }} </td>
+                    <td>{{ $doctor->user->name }} </td>
+                    <td> @foreach($doctor->specialties as $specialty) {{ $specialty->name }} @if(!$loop->last)|@endif @endforeach</td>
+                    <td>{{ $doctor->user->email }} </td>
+                    <td>{{ $doctor->user->cpf }} </td>
                     <td> 
-                        <div class="btn-group" role="group">    
-                            <a href="{{ route('medicaments.edit', $medicament->id) }}" class="btn btn-secondary ">
+                        <div class="btn-group" role="group">
+                            <a href="{{ route('doctors.show', $doctor->id) }}" class="btn btn-secondary">
+                                <i class="fas fa-eye"></i>
+                            </a>   
+                            <a href="{{ route('doctors.edit', $doctor->id) }}" class="btn btn-secondary">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
                         </div>

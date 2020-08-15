@@ -7,7 +7,7 @@
 <div class="card card-primary">
    
     <!-- form start -->
-    <form role="form"method="POST" action="{{ route('users.update', $patient->user->id) }}" id="edit-form">
+    <form role="form" method="POST" action="{{ route('patients.update', $patient->id) }}" id="edit-form">
         @method('PUT')
         @csrf
       
@@ -15,134 +15,10 @@
 
             <div class="row"> 
                 
-                <!-- Name -->
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                        <label for="name">Nome*</label>
-                        <input type="text" 
-                            class="form-control @error('name') is-invalid  @enderror" 
-                            name="name" id="name" 
-                            placeholder="Digite o nome do paciente" 
-                            value="{{ old('name', $patient->user->name) }}">
-
-                            @error('name') <p class="text-danger">{{ $message }}</p> @enderror
-                    </div>
-                </div>
-
-                <!-- Email -->
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                        <label for="email">Email*</label>
-                        <input type="email" 
-                            class="form-control @error('email')) is-invalid  @enderror" 
-                            name="email" id="email" 
-                            placeholder="Digite o email" 
-                            value="{{ old('email', $patient->user->email) }}">
-
-                        @error('email') <p class="text-danger">{{ $message }}</p> @enderror
-                    </div>
-                </div>
-
-                <!-- Password -->
-                <div class="col-md-3 col-sm-12">
-                    <div class="form-group">
-                        <label for="password">Senha*</label>
-                        <input type="password" 
-                            class="form-control @error('password') is-invalid  @endif" 
-                            name="password" id="password" 
-                            placeholder="Digite a senha">
-
-                        @error('password') <p class="text-danger">{{ $message }}</p> @enderror
-                    </div>
-                </div>
-
-                <!-- Password confirmation -->
-                <div class="col-md-3 col-sm-12">
-                    <div class="form-group">
-                        <label for="password-confirm">Confirmação da senha*</label>
-                        <input type="password" 
-                            class="form-control @error('password') is-invalid  @enderror" 
-                            name="password_confirmation" id="password-confirm" 
-                            placeholder="Digite o senha novamente" 
-                            autocomplete="new-password">
-
-                        @error('password') <p class="text-danger">{{ $message }}</p> @enderror
-                    </div>
-                </div>
- 
-                <!-- CPF -->
-                <div class="col-md-3 col-sm-12">
-                    <div class="form-group">
-                        <label for="cpf">CPF</label>
-                        <input type="text" 
-                            class="form-control cpf @error('cpf') is-invalid  @enderror" 
-                            name="cpf" id="cpf" 
-                            placeholder="Digite o cpf"
-                            value="{{ old('cpf', $patient->user->cpf) }}">
-
-                        @error('cpf') <p class="text-danger">{{ $message }}</p> @enderror
-                    </div>
-                </div>
-
-                <!-- RG -->
-                <div class="col-md-3 col-sm-12">
-                    <div class="form-group">
-                        <label for="rg">RG</label>
-                        <input type="text" 
-                            class="form-control @error('rg') is-invalid  @enderror" 
-                            name="rg" id="rg" 
-                            placeholder="Digite o rg"
-                            value="{{ old('rg', $patient->user->rg) }}">
-
-                        @error('rg') <p class="text-danger">{{ $message }}</p> @enderror
-                    </div>
-                </div>
-
-                <!-- Birth date -->
-                <div class="col-md-3 col-sm-12">
-                    <div class="form-group">
-                        <label for="birth-date">Data de nascimento</label>
-                        <input type="text" 
-                            class="form-control date @error('birth_date') is-invalid  @enderror" 
-                            name="birth_date" id="birth-date" 
-                            placeholder="Digite a data de nascimento"
-                            value="{{ old('birth_date', $patient->user->birth_date) }}">
-
-                        @error('birth_date') <p class="text-danger">{{ $message }}</p> @enderror
-                    </div>
-                </div>
-
-                <!-- Phone -->
-                <div class="col-md-3 col-sm-12">
-                    <div class="form-group">
-                        <label for="phone">Telefone</label>
-                        <input type="text" 
-                            class="form-control phone_with_ddd @error('phone') is-invalid  @enderror" 
-                            name="phone" id="phone" 
-                            placeholder="Digite o telefone"
-                            value="{{ old('phone', $patient->user->phone) }}">
-
-                        @error('phone') <p class="text-danger">{{ $message }}</p> @enderror
-                    </div>
-                </div>
-
-                <!-- Gender -->
-                <div class="col-md-3 col-sm-12">
-                    <div class="form-group">
-                        <label for="gender">Sexo</label>
-                        <select class="select2 form-control select2-hidden-accessible" name="gender" style="width: 100%;">
-                            @foreach($genders as $gender)
-                                <option value="{{$gender->id}}" @if($patient->user->gender_id == $gender->id) selected @endif> 
-                                    {{ $gender->name }}
-                                </option>
-                            @endforeach
-                        </select>
-
-                        @error('gender') <p class="text-danger">{{ $message }}</p> @enderror
-                    </div>
-                </div>
-
-                 <!-- Social Name -->
+                <!-- Inclui o form de edição do usuário -->
+                @include('admin.users._inputs-edit', ['data' => $patient])
+                
+                <!-- Social Name -->
                 <div class="col-md-3 col-sm-12">
                     <div class="form-group">
                         <label for="social-name">Nome social</label>
@@ -157,7 +33,7 @@
                 </div>
 
                 <!-- Mother's Name -->
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-3 col-sm-12">
                     <div class="form-group">
                         <label for="mother-name">Nome da mãe*</label>
                         <input type="text" 
@@ -171,7 +47,7 @@
                 </div>
 
                 <!-- Father's Name -->
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-3 col-sm-12">
                     <div class="form-group">
                         <label for="father-name">Nome do pai</label>
                         <input type="text" 
@@ -233,10 +109,10 @@
     </form>
 
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
-        <form id="deleteForm" action="{{ route('patients.destroy', $patient->user->id ) }}" method="post">
+        <button type="submit" class="btn btn-primary" form="edit-form">Atualizar</button>
+        <form id="deleteForm" action="{{ route('patients.destroy', $patient->id ) }}" method="post">
             @method('delete') @csrf
-            <button type="submit" data-id="{{ $patient->user->id }}" class="text-danger btn btn-delete">Deletar</button>
+            <button type="submit" data-id="{{ $patient->id }}" class="text-danger btn btn-delete">Deletar</button>
         </form>
         <a href="{{ route('patients.index') }}" class="btn btn-secondary float-right">Voltar</a>
     </div>

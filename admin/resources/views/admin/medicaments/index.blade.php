@@ -33,7 +33,10 @@
                     <td>{{ $medicament->factory_name }} </td>
                     <td>{{ $medicament->manufacturer }} </td>
                     <td> 
-                        <div class="btn-group" role="group">    
+                        <div class="btn-group" role="group">  
+                             <a href="{{ route('medicaments.show', $medicament->id) }}" class="btn btn-secondary">
+                                <i class="fas fa-eye"></i>
+                            </a>    
                             <a href="{{ route('medicaments.edit', $medicament->id) }}" class="btn btn-secondary ">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>

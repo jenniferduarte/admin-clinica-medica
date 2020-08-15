@@ -3,18 +3,18 @@
 <body class="login-page">
     <div class="login-box">
         <div class="login-logo">
-            <img src="{{ asset('img/logo.png') }}" width="150px" height="auto">
+            <img src="{{ asset('img/logo.png') }}" width="300px" height="auto">
         </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Faça login para iniciar sua sessão</p>
 
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
                     <div class="input-group mb-3">
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('E-Mail') }}"
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="E-mail"
                             name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                         <div class="input-group-append">
@@ -33,7 +33,7 @@
 
                     <div class="input-group mb-3">
 
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="{{ __('Password') }}"
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Senha"
                             name="password" required autocomplete="current-password">
 
                         <div class="input-group-append">
@@ -56,27 +56,19 @@
                                 <input  type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                 <label class="form-check-label" for="remember">
-                                    {{ __('Remember Me') }}
+                                    Lembre-me
                                 </label>
                             </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
                             <button type="submit" class="btn btn-primary btn-block">
-                                {{ __('Sign In') }}
+                                Entrar
                             </button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
-
-                <p class="mb-1">
-                    @if (Route::has('password.request'))
-                    <a href="{{ route('password.request') }}">
-                        {{ __('Forgot Your Password?') }}
-                    </a>
-                    @endif
-                </p>
                 
             </div>
             <!-- /.login-card-body -->

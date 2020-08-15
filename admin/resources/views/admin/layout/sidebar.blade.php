@@ -2,7 +2,7 @@
 <aside class="main-sidebar elevation-4 sidebar-light-warning">
     <!-- Brand Logo -->
     <a href="{{route('home')}}" class="brand-link">
-        <img src="{{ asset('img/logo.png') }}" width="100px" height="auto">
+        <img src="{{ asset('img/logo.png') }}" width="180px" height="auto">
     </a> 
 
     <!-- Sidebar -->
@@ -10,9 +10,9 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex text-center">
             <div class="info" >
-                <a href="#" class="d-block"> <i class="fas fa-user-alt"> </i> 
+                <a href="#" class="d-block">
                     @if(Auth::user())
-                    Hi, {{ Auth::user()->name }}
+                    Olá, {{ Auth::user()->name }}
                     @endif
                 </a>
             </div>

@@ -27,6 +27,4 @@ Route::resources([
     'doctors' => 'DoctorController',
     'medicaments' => 'MedicamentController',
     'patients' => 'PatientController',
-    'users' => 'UserController',
-    
 ]);

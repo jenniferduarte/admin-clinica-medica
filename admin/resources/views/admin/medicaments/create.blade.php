@@ -7,7 +7,7 @@
 <div class="card card-primary">
    
     <!-- form start -->
-    <form role="form" method="post" action="{{ route('medicaments.store') }}" id="new-color-form">
+    <form role="form" method="post" action="{{ route('medicaments.store') }}">
         @csrf
       
         <div class="card-body">
