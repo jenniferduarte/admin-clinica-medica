@@ -15,14 +15,12 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->enum('weekday', ['0','1','2','3','4','5','6']);
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->datetime('start_date');
+            $table->datetime('end_date');
             $table->unsignedBigInteger('doctor_id');
             $table->foreign('doctor_id')->references('id')->on('doctors');
-            $table->unsignedBigInteger('specialty_id');
-            $table->foreign('specialty_id')->references('id')->on('specialties');
-            $table->integer('consultation_time')->default('60');
+            $table->integer('consultation_time')->nullable()->default('60');
+            $table->boolean('vacant')->default(1);
             $table->boolean('active')->default(1);
             $table->unsignedBigInteger('clinic_id');
             $table->foreign('clinic_id')->references('id')->on('clinics');

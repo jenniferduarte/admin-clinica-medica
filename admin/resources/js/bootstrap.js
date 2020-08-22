@@ -14,6 +14,7 @@ try {
     require('admin-lte');
     window.toastr = require('toastr');
     window.Swal = require('sweetalert2');
+    global.moment = require('moment');
 } catch (e) {}
 
 /**

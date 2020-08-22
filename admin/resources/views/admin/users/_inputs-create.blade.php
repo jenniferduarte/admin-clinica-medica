@@ -117,7 +117,9 @@
         <label for="gender">Sexo</label>
         <select class="select2 form-control select2-hidden-accessible" name="gender" style="width: 100%;">
             @foreach($genders as $gender)
-                <option value="{{$gender->id}}"> {{ $gender->name }}</option>
+                <option value="{{$gender->id}}" @if( old('gender') == $gender->id) {{'selected'}} @endif>
+                    {{ $gender->name }}
+                </option>
             @endforeach
         </select>
 

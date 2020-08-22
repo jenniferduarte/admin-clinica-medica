@@ -22,4 +22,19 @@ class Doctor extends Model
     {
         return $this->belongsToMany('App\Specialty', 'doctor_specialties')->withTimestamps();
     }
+
+    public function schedules()
+    {
+        return $this->hasMany('App\Schedule');
+    }
+
+    # Função que retorna o tratamento do médico de acordo com seu sexo
+    public function getTreatmentAttribute()
+    {        
+        if($this->user->gender_id == 1){
+            return 'Dra.';
+        }
+        
+        return 'Dr.';
+    }
 }

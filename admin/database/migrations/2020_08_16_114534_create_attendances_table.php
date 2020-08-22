@@ -22,8 +22,8 @@ class CreateAttendancesTable extends Migration
             $table->unsignedBigInteger('doctor_id');
             $table->foreign('doctor_id')->references('id')->on('doctors');
 
-            $table->unsignedBigInteger('time_id');
-            $table->foreign('time_id')->references('id')->on('times');
+            $table->unsignedBigInteger('shedule_id');
+            $table->foreign('shedule_id')->references('id')->on('schedules');
 
             $table->unsignedBigInteger('status_id');
             $table->foreign('status_id')->references('id')->on('statuses');

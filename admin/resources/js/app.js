@@ -3,12 +3,11 @@ require('datatables.net');
 require('datatables.net-responsive');
 require('datatables.net-bs4');
 require('jquery-mask-plugin');
-require('./mask');
-//require('./fileinput');
-//require('bootstrap-colorpicker');
-//require('ekko-lightbox');
+require('./mask'); 
 require('select2');
 require('bootstrap-switch'); 
+require('tempusdominus-bootstrap-4');
+require('daterangepicker');
 
 $(document).ready(function () {
 

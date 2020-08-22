@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GenderSeeder::class);
         $this->call(ClinicSeeder::class);
         $this->call(ExamSeeder::class);
+        $this->call(SpecialtySeeder::class);
         $this->call(UserSeeder::class);
     }
 }

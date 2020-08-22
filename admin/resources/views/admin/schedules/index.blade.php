@@ -1,10 +1,10 @@
 @extends('admin.layout.template')
 
-@section('page-name') Médicos @endsection {{-- Page Name  --}}
+@section('page-name') {{ $doctor->treatment }} {{ $doctor->user->name }} › Disponibilidades @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
-<a href="{{ route('doctors.create') }}" class="btn btn-block btn-outline-success btn-sm">
-    <i class="nav-icon fas fa-user-md"></i>  Novo médico
+<a href="{{ route('doctors.schedules.create', $doctor->id) }}" class="btn btn-block btn-outline-success btn-sm">
+    <i class="nav-icon fas fa-user-md"></i>  Nova disponibilidade 
 </a>
 @endsection
 
@@ -27,23 +27,20 @@
             </thead>
 
             <tbody>
-                @foreach($doctors as $doctor)
+                @foreach($schedules as $schedule)
                 <tr>
-                    <td>{{ $doctor->id }} </td>
-                    <td>{{ $doctor->user->name }} </td>
-                    <td> @foreach($doctor->specialties as $specialty) {{ $specialty->name }} @if(!$loop->last)|@endif @endforeach</td>
-                    <td>{{ $doctor->user->email }} </td>
-                    <td>{{ $doctor->user->cpf }} </td>
+                    <td>{{ $schedule->id }} </td>
+                    <td> </td>
+                    <td> </td>
+                    <td></td>
+                    <td> </td>
                     <td> 
                         <div class="btn-group" role="group">
-                            <a href="{{ route('doctors.show', $doctor->id) }}" class="btn btn-secondary">
+                            <a href="{{ route('doctors.schedules.show', [$schedule->id, $doctor->id]) }}" class="btn btn-secondary">
                                 <i class="fas fa-eye"></i>
                             </a>   
-                            <a href="{{ route('doctors.edit', $doctor->id) }}" class="btn btn-secondary">
+                            <a href="{{ route('doctors.schedules.edit', [$schedule->id, $doctor->id]) }}" class="btn btn-secondary">
                                 <i class="fas fa-pencil-alt"></i>
-                            </a>
-                            <a href="{{ route('doctors.schedules.index', $doctor->id) }}" class="btn btn-secondary">
-                                <i class="fas fa-calendar-plus"></i>
                             </a>
                         </div>
                     </td>

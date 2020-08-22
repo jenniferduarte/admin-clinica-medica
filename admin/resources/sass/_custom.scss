@@ -29,6 +29,10 @@ a {
     color: $red;
 }
 
+.is-invalid .select2-container--default .select2-selection--single {
+    border: 1px solid #e3342f;
+}
+
 .brand-link {
     text-align: center;
 }
