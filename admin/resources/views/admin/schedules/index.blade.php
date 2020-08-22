@@ -1,10 +1,10 @@
 @extends('admin.layout.template')
 
-@section('page-name') {{ $doctor->treatment }} {{ $doctor->user->name }} › Disponibilidades @endsection {{-- Page Name  --}}
+@section('page-name') {{ $doctor->treatment }} {{ $doctor->user->name }} › Horários @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
 <a href="{{ route('doctors.schedules.create', $doctor->id) }}" class="btn btn-block btn-outline-success btn-sm">
-    <i class="nav-icon fas fa-user-md"></i>  Nova disponibilidade 
+    <i class="nav-icon fas fa-user-md"></i>  Novos horários 
 </a>
 @endsection
 
@@ -18,10 +18,11 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nome</th>
-                    <th>Especialidade</th>
-                    <th>Email</th>
-                    <th>CPF</th>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Tempo da consulta</th>
+                    <th>Vago</th>
+                    <th>Ativo</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -29,11 +30,12 @@
             <tbody>
                 @foreach($schedules as $schedule)
                 <tr>
-                    <td>{{ $schedule->id }} </td>
-                    <td> </td>
-                    <td> </td>
-                    <td></td>
-                    <td> </td>
+                    <td>{{ $schedule->id }}</td>
+                    <td>{{ date('d/m/Y', strtotime($schedule->start_date)) }}</td>
+                    <td>{{ date('H:i', strtotime($schedule->start_date)) }} - {{ date('H:i', strtotime($schedule->end_date)) }}</td>
+                    <td>{{ $schedule->consultation_time }}</td>
+                    <td>{{ $schedule->vacant ? 'Sim' : 'Não' }}</td>
+                    <td>{{ $schedule->active ? 'Sim' : 'Não' }}</td>
                     <td> 
                         <div class="btn-group" role="group">
                             <a href="{{ route('doctors.schedules.show', [$schedule->id, $doctor->id]) }}" class="btn btn-secondary">
