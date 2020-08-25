@@ -24,8 +24,15 @@ Auth::routes([
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resources([
+    'attendances' => 'AttendanceController',
     'doctors' => 'DoctorController',
+    'doctors.schedules' => 'ScheduleController',
     'medicaments' => 'MedicamentController',
     'patients' => 'PatientController',
-    'doctors.schedules' => 'ScheduleController',
 ]);
+
+// Ajax
+//Route::post('/search-doctors', 'DoctorController@ajaxSearch')->name('search-doctors');
+Route::get('/{doctor}/available-dates', 'DoctorController@availableDates')->name('available-dates');
+Route::get('/{doctor}/available-times', 'DoctorController@availableTimes')->name('available-times');
+Route::get('/attendances-perdate', 'AttendanceController@ajaxIndexPerDate')->name('attendances-perdate');

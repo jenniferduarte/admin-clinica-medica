@@ -107,7 +107,28 @@
                 
                 <hr>
 
-
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-id-card"></i>
+                        <p>
+                            Atendimentos
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" >
+                        <li class="nav-item">
+                            <a href="{{ route('attendances.index') }}" class="nav-link">
+                                <p>Ver todos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('attendances.create') }}" class="nav-link">
+                                <p>Marcar consulta</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
                 <hr>
 
                 <li class="nav-item">

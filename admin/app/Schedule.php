@@ -19,4 +19,9 @@ class Schedule extends Model
     {
         return $this->belongsTo('App\Clinic');
     }
+
+    public function attendance()
+    {
+        return $this->hasOne('App\Attendance');
+    }
 }

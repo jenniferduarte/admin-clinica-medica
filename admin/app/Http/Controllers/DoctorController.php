@@ -8,6 +8,8 @@ use App\Gender;
 use App\Specialty;
 use App\User;
 use App\Role;
+use App\Schedule;
+use Carbon\Carbon;
 use App\Http\Requests\DoctorStoreRequest;
 use App\Http\Requests\DoctorUpdateRequest;
 use Illuminate\Support\Facades\Hash;
@@ -114,9 +116,9 @@ class DoctorController extends Controller
     public function edit(Doctor $doctor)
     {
         return view('admin.doctors.edit', [
-            'doctor'    => $doctor,
-            'genders'   => Gender::all(),
-            'specialties' => Specialty::all()
+            'doctor'        => $doctor,
+            'genders'       => Gender::all(),
+            'specialties'   => Specialty::all()
         ]);
     }
 
@@ -175,10 +177,61 @@ class DoctorController extends Controller
         $doctor->delete();
 
         $notification = array(
-            'message' => 'Excluído com sucesso!',
-            'alert-type' => 'success'
+            'message'       => 'Excluído com sucesso!',
+            'alert-type'    => 'success'
         );
 
         return redirect()->action('DoctorController@index')->with($notification); 
+    }
+
+    public function availableDates(Request $request, Doctor $doctor)
+    {
+        $dates = Schedule::where([
+            ['start_date', '>=', now()],
+            ['doctor_id', '=', $doctor->id]
+        ])->get();
+
+        return json_encode($dates);
+    }
+
+    public function availableTimes(Request $request, Doctor $doctor)
+    {
+        $date = $request->date; 
+
+        $schedules = Schedule::whereDate('start_date', $date)->where([
+            ['doctor_id', $doctor->id],
+            ['vacant', 1]
+        ])->get();
+
+        return json_encode($schedules);
+    }
+
+    public function ajaxSearch(Request $request)
+    {
+        $search = $request->search;
+        $response = [];
+
+        if ($search == '') {
+           $doctors = User::orderby('name','asc')->select('id', 'name')->where('role_id', ROLE::DOCTOR)->limit(10)->get();
+        } else {
+            $doctors = User::orderby('name', 'asc')->select('id', 'name')->where([
+                ['role_id', '=', ROLE::DOCTOR ], 
+                ['name', 'like', '%' . $search . '%']
+            ])->limit(10)->get();
+        }
+
+        foreach ($doctors as $doctor) {
+            $response[] = array(
+                "id" => $doctor->id,
+                "text" => $doctor->name
+            );
+        }
+
+        return json_encode($response);
+        exit;
+
+        return response()->json([
+            'data' => $doctors
+        ], 200);
     }
 }

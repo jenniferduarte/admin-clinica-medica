@@ -65,8 +65,7 @@
           </div>
           <!-- /.card-body -->
         </div>
-        <!-- /.card -->   
-        <!-- /.card -->
+        
       </div>
 
       <!-- TODO: atualizar os dados -->

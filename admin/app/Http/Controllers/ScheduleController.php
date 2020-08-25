@@ -19,8 +19,8 @@ class ScheduleController extends Controller
     public function index(Doctor $doctor)
     {
         return view('admin.schedules.index', [
-            'schedules' => Schedule::all(),
-            'doctor' => $doctor
+            'schedules' => Schedule::where('doctor_id', $doctor->id)->get(),
+            'doctor'    => $doctor
         ]);
     }
 

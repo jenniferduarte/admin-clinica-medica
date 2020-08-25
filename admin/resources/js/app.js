@@ -1,3 +1,5 @@
+const { includes } = require('lodash');
+
 require('./bootstrap');
 require('datatables.net');
 require('datatables.net-responsive');
@@ -8,6 +10,7 @@ require('select2');
 require('bootstrap-switch'); 
 require('tempusdominus-bootstrap-4');
 require('daterangepicker');
+require('./fullcalendar.js');
 
 $(document).ready(function () {
 
