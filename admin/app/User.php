@@ -69,4 +69,9 @@ class User extends Authenticatable
     {
         return $this->morphMany(Address::class, 'responsible');
     }
+
+    # Função que retorna o nome do usuario com letras capitalizadas
+    public function getNameAttribute($name){
+        return ucwords($name);
+    }
 }

@@ -54,7 +54,7 @@ class AttendanceController extends Controller
                 'start' => Carbon::parse($attendanceResult->start)->toIso8601String(),
                 'end'   => Carbon::parse($attendanceResult->end)->toIso8601String(),
                 'title' => $attendance->doctor->treatment . ' ' . ucwords($attendance->doctor->user->name),
-                'url' => '/attendences/'.$attendanceResult->attendance_id,
+                'url' => '/attendances/'.$attendanceResult->attendance_id,
             ];             
         }
 
@@ -110,10 +110,9 @@ class AttendanceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Attendance $attendance)
-    {
-        //dd($attendance);
+    {     
         return view('admin.attendances.show', [
-            'attendances' => $attendance
+            'attendance' => $attendance
         ]);
     }
 

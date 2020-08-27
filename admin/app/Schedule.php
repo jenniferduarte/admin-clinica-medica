@@ -10,6 +10,8 @@ class Schedule extends Model
         'consultation_time', 'start_date', 'end_date', 'doctor_id', 'clinic_id'
     ];
 
+    protected $dates = ['start_date', 'end_date'];
+
     public function doctor()
     {
         return $this->belongsTo('App\Doctor');

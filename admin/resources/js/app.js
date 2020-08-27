@@ -49,4 +49,10 @@ $(document).ready(function () {
         $(".phone_with_ddd").unmask();
     });
 
+    $(".goback").click(function (e) {
+        e.preventDefault;
+        window.history.back();
+    });
+
+  
 });

@@ -29,6 +29,7 @@ Route::resources([
     'doctors.schedules' => 'ScheduleController',
     'medicaments' => 'MedicamentController',
     'patients' => 'PatientController',
+    'patients.records' => 'RecordController',
 ]);
 
 // Ajax

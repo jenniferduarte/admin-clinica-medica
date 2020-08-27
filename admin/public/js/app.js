@@ -103715,6 +103715,10 @@ $(document).ready(function () {
     $(".cpf").unmask();
     $(".phone_with_ddd").unmask();
   });
+  $(".goback").click(function (e) {
+    e.preventDefault;
+    window.history.back();
+  });
 });
 
 /***/ }),
@@ -103785,28 +103789,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fullcalendar_core_locales_pt_br__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fullcalendar/core/locales/pt-br */ "./node_modules/@fullcalendar/core/locales/pt-br.js");
 
 
- // interactionPlugin from '@fullcalendar/interaction';
 
-document.addEventListener('DOMContentLoaded', function () {
-  var calendarEl = document.getElementById('calendar');
-  var calendar = new _fullcalendar_core__WEBPACK_IMPORTED_MODULE_0__["Calendar"](calendarEl, {
-    plugins: [_fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_1__["default"]],
-    initialView: 'dayGridWeek',
-    locale: _fullcalendar_core_locales_pt_br__WEBPACK_IMPORTED_MODULE_2__["default"],
-    eventTimeFormat: {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
-    },
-    eventSources: [{
-      url: '/attendances-perdate',
-      color: '#3490dc',
-      textColor: '#3490dc',
-      timeZoneParam: 'America/Sao_Paulo'
-    }]
+
+if ($('#calendar').length > 0) {
+  document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new _fullcalendar_core__WEBPACK_IMPORTED_MODULE_0__["Calendar"](calendarEl, {
+      plugins: [_fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_1__["default"]],
+      initialView: 'dayGridWeek',
+      locale: _fullcalendar_core_locales_pt_br__WEBPACK_IMPORTED_MODULE_2__["default"],
+      eventTimeFormat: {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      },
+      eventSources: [{
+        url: '/attendances-perdate',
+        color: '#3490dc',
+        textColor: '#3490dc',
+        timeZoneParam: 'America/Sao_Paulo'
+      }]
+    });
+    calendar.render();
   });
-  calendar.render();
-});
+}
 
 /***/ }),
 

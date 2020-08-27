@@ -17931,21 +17931,37 @@ a {
   margin-bottom: 30px;
 }
 
-/*
-.badge{
-    text-transform: uppercase;
-    color: #fff;
-}
-.badge-paid{
-    background-color: #28a745;
-}
-.badge-failed{
-    background-color: #dc3545;
-}
-.badge-created{
-    background-color:  #17a2b8
+.uppercase {
+  text-transform: uppercase;
 }
 
+.badge {
+  text-transform: uppercase;
+  color: #fff;
+  padding: 5px;
+}
+
+.badge-confirmed {
+  background-color: #28a745;
+}
+
+.badge-canceled {
+  background-color: #dc3545;
+}
+
+.badge-absent_patient {
+  background-color: #da7a21;
+}
+
+.badge-scheduled {
+  background-color: #17a2b8;
+}
+
+.badge-finished {
+  background-color: #999999;
+}
+
+/*
 .btn-primary {
     color: #fff;
     background-color: $blue;

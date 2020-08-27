@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Gender;
 use App\User;
 use App\Role;
+use Auth;
 use App\Http\Requests\PatientStoreRequest;
 use App\Http\Requests\PatientUpdateRequest;
 use Illuminate\Support\Facades\Hash;
@@ -93,6 +94,11 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
+        if (Auth::user()->role->id == Role::DOCTOR) {
+            return view('admin.patients.show_doctor', [
+                'patient' => $patient
+            ]);
+        }   
         return view('admin.patients.show', [
             'patient' => $patient
         ]);

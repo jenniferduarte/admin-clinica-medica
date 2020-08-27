@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Record;
+use App\Patient;
 use Illuminate\Http\Request;
 
 class RecordController extends Controller
@@ -22,9 +23,11 @@ class RecordController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Patient $patient)
     {
-        //
+        return view('admin.records.create', [
+            'patient' => $patient
+        ]);
     }
 
     /**

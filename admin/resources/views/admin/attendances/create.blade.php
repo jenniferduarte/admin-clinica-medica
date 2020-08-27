@@ -11,25 +11,10 @@
         @csrf
       
         <div class="card-body">
-          <div class="col-md-12">
-            <div class="row"> 
-
-              <!-- Paciente -->
-              <div class="col-md-3 col-sm-12">
-                <div class="form-group">
-                  <label for="patients">Paciente*</label>
-                  <select class="select2 form-control select2-hidden-accessible" name="patient" style="width: 100%;">
-                    <option></option>
-                    @foreach($patients as $patient)
-                      <option value="{{$patient->id}}"> {{ $patient->user->name }} ({{ $patient->user->email }}) </option>
-                    @endforeach
-                  </select>
-                  @error('patient') <p class="text-danger">{{ $message }}</p> @enderror
-                </div>
-              </div>
-
+          <div class="col-md-6">
+          
               <!-- Médico -->
-              <div class="col-md-3 col-sm-12">
+              <div class="col-md-12 col-sm-12">
                 <div class="form-group">
                   <label for="doctors">Médico*</label>
                   <select class="select2 form-control select2-hidden-accessible doctor-select" name="doctor" style="width: 100%;">
@@ -47,7 +32,7 @@
               </div>
 
               <!-- Dia  -->
-              <div class="bootstrap-timepicker col-md-2 col-sm-12">
+              <div class="bootstrap-timepicker col-md-12 col-sm-12">
                 <div class="form-group">
                   <label>Datas disponíveis*:</label>
                   <div class="input-group" id="date" data-target-input="nearest">
@@ -63,7 +48,7 @@
               </div>
               
               <!-- Horario  -->
-              <div class="col-md-2 col-sm-12">
+              <div class="col-md-12 col-sm-12">
                 <div class="form-group">
                   <label>Horários disponíveis*:</label>
                     <select class="select2 form-control select2-hidden-accessible time-select" name="time" style="width: 100%;" disabled>
@@ -72,8 +57,22 @@
                   @error('time') <p class="text-danger">{{ $message }}</p> @enderror
                 </div>
               </div>
+
+              <!-- Paciente -->
+              <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                  <label for="patients">Paciente*</label>
+                  <select class="select2 form-control select2-hidden-accessible" name="patient" style="width: 100%;">
+                    <option></option>
+                    @foreach($patients as $patient)
+                      <option value="{{$patient->id}}"> {{ $patient->user->name }} ({{ $patient->user->email }}) </option>
+                    @endforeach
+                  </select>
+                  @error('patient') <p class="text-danger">{{ $message }}</p> @enderror
+                </div>
+              </div>
               
-            </div>
+          
           </div>
         </div>
 

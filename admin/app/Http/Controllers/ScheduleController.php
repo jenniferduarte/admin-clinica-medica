@@ -107,9 +107,12 @@ class ScheduleController extends Controller
      * @param  \App\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
-    public function edit(Schedule $schedule)
+    public function edit(Doctor $doctor, Schedule $schedule)
     {
-        //
+        return view('admin.schedules.edit', [
+            'doctor' => $doctor,
+            'schedule' => $schedule
+        ]);
     }
 
     /**

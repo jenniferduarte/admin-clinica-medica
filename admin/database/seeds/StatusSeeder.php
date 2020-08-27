@@ -16,9 +16,8 @@ class StatusSeeder extends Seeder
             ['id' => 1, 'name' => 'scheduled'],
             ['id' => 2, 'name' => 'confirmed'],
             ['id' => 3, 'name' => 'absent_patient'],
-            ['id' => 4, 'name' => 'rescheduled'],
-            ['id' => 5, 'name' => 'canceled'],
-            ['id' => 6, 'name' => 'finished'],
+            ['id' => 4, 'name' => 'canceled'],
+            ['id' => 5, 'name' => 'finished'],
         ];
 
         Status::insert($data);

@@ -38,10 +38,10 @@
                     <td>{{ $schedule->active ? 'Sim' : 'Não' }}</td>
                     <td> 
                         <div class="btn-group" role="group">
-                            <a href="{{ route('doctors.schedules.show', [$schedule->id, $doctor->id]) }}" class="btn btn-secondary">
+                            <a href="{{ route('doctors.schedules.show', [$doctor->id, $schedule->id]) }}" class="btn btn-secondary">
                                 <i class="fas fa-eye"></i>
                             </a>   
-                            <a href="{{ route('doctors.schedules.edit', [$schedule->id, $doctor->id]) }}" class="btn btn-secondary">
+                            <a href="{{ route('doctors.schedules.edit', [$doctor->id, $schedule->id]) }}" class="btn btn-secondary">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
                         </div>
