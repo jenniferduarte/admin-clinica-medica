@@ -28,6 +28,11 @@ class Doctor extends Model
         return $this->hasMany('App\Schedule');
     }
 
+    public function records()
+    {
+        return $this->hasMany('App\Record');
+    }
+
     # Função que retorna o tratamento do médico de acordo com seu sexo
     public function getTreatmentAttribute()
     {        

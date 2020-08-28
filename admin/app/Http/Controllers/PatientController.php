@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Patient;
 use Illuminate\Http\Request;
 use App\Gender;
+use App\History;
 use App\User;
 use App\Role;
 use Auth;
@@ -94,9 +95,17 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
+        $history = History::where('patient_id', $patient->id)->get()->first();
+        $records = [];
+        
+        if($history != null){
+           $records =  $history->records->sortByDesc('created_at');
+        }
+
         if (Auth::user()->role->id == Role::DOCTOR) {
             return view('admin.patients.show_doctor', [
-                'patient' => $patient
+                'patient' => $patient,
+                'records' => $records
             ]);
         }   
         return view('admin.patients.show', [

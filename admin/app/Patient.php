@@ -24,4 +24,8 @@ class Patient extends Model
         return $this->hasMany('App\Attendance');
     }
 
+    public function history()
+    {
+        return $this->belongsTo('App\History');
+    }
 }

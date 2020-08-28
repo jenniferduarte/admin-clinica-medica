@@ -103874,6 +103874,12 @@ $(document).ready(function () {
   $('.selectonfocus').mask("00/00/0000", {
     selectOnFocus: true
   });
+  $('.weight').mask("#0,00", {
+    reverse: true
+  });
+  $('.temperature').mask("00,0", {
+    reverse: true
+  });
 });
 
 /***/ }),

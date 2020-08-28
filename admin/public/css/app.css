@@ -17961,6 +17961,15 @@ a {
   background-color: #999999;
 }
 
+.card-title {
+  margin-bottom: 0;
+}
+
+.height-fixed {
+  height: 760px;
+  overflow-y: scroll;
+}
+
 /*
 .btn-primary {
     color: #fff;

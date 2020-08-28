@@ -32,6 +32,7 @@ Route::resources([
     'patients.records' => 'RecordController',
 ]);
 
+
 // Ajax
 //Route::post('/search-doctors', 'DoctorController@ajaxSearch')->name('search-doctors');
 Route::get('/{doctor}/available-dates', 'DoctorController@availableDates')->name('available-dates');

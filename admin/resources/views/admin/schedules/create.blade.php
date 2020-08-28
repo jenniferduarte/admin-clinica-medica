@@ -85,7 +85,7 @@
 @endsection
 
 @section('javascript')
-    <script type="text/javascript">
+  <script type="text/javascript">
 
 $(function() {
             
@@ -110,8 +110,6 @@ $(function() {
     })
 
 });
-
-
-          
-    </script>
+     
+</script>
 @endsection
