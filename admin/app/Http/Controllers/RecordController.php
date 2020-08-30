@@ -7,7 +7,11 @@ use App\Patient;
 use App\History;
 use App\Doctor;
 use App\Role;
+use App\Exam;
+use App\Medicament;
+use App\Prescription;
 use App\Http\Requests\RecordStoreRequest;
+use App\PrescriptionMedicament;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -37,7 +41,9 @@ class RecordController extends Controller
     {   
         if (Auth::user()->role->id == Role::DOCTOR) {
             return view('admin.records.create', [
-                'patient' => $patient
+                'patient'       => $patient,
+                'exams'         => Exam::all(),
+                'medicaments'   => Medicament::all(),
             ]);
         }
 
@@ -52,6 +58,8 @@ class RecordController extends Controller
      */
     public function store(RecordStoreRequest $request, Patient $patient)
     {
+
+       // dd($request->input('medicaments'), $request->input('dosages')[1]);
 
         $doctor = Doctor::where('user_id', Auth::user()->id)->get();
      
@@ -88,6 +96,25 @@ class RecordController extends Controller
             'drug_user'             => $request->input('drug_user'), 
             'expected_return'       => $request->input('expected_return')
         ]);
+
+        if($request->input('medicaments')){
+
+            $prescription = Prescription::create([
+                'record_id'     => $record->id,
+                'description'   => 'description'
+            ]);
+
+            foreach($request->input('medicaments') as $index => $medicament_id){
+                $medicament = Medicament::find($medicament_id);
+
+                $prescription_medicament = PrescriptionMedicament::create([
+                    'prescription_id'   => $prescription->id,
+                    'medicament_id'     => $medicament->id,
+                    'dosage'            => $request->input('dosages')[$index]
+                ]);
+            }
+            
+        }
 
         $notification = array(
             'message' => 'Criado com sucesso!',

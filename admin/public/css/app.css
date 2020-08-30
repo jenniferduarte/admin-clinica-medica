@@ -17901,6 +17901,10 @@ a {
   text-decoration: underline;
 }
 
+.hide {
+  display: none;
+}
+
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
   background-color: #e0e0e0;
   border-color: #b7b7b7;
@@ -17969,6 +17973,38 @@ a {
   height: 760px;
   overflow-y: scroll;
 }
+
+/* Medicaments */
+
+#medicaments-selections .row.medicaments:first-of-type .remove-medicament {
+  display: none;
+}
+
+.remove-medicament {
+  height: 29px;
+  margin-top: 35px;
+  margin-left: 10px;
+}
+
+.clone-medicaments:hover {
+  cursor: pointer;
+}
+
+.clone-medicaments:hover .strong {
+  text-decoration: underline;
+}
+
+/*
+.clone{
+    margin: auto;
+    position: relative;
+    top: 5px;
+
+    &.clone-medicaments{
+
+    }
+}
+*/
 
 /*
 .btn-primary {

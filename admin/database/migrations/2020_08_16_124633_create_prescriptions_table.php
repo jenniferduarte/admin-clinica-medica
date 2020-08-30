@@ -18,7 +18,6 @@ class CreatePrescriptionsTable extends Migration
             $table->string('description');
             $table->unsignedBigInteger('record_id');
             $table->foreign('record_id')->references('id')->on('records');
-            $table->datetime('expiration_date')->nullable();
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });

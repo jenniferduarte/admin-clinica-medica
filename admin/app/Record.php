@@ -45,6 +45,8 @@ class Record extends Model
 
     public function setExpectedReturnAttribute($value)
     {
-        $this->attributes['expected_return'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        if($value != null){
+            $this->attributes['expected_return'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        }
     }
 }

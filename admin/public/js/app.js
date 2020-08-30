@@ -103657,7 +103657,8 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
-    includes = _require.includes;
+    includes = _require.includes,
+    clone = _require.clone;
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
@@ -103718,6 +103719,28 @@ $(document).ready(function () {
   $(".goback").click(function (e) {
     e.preventDefault;
     window.history.back();
+  });
+
+  if ($('.select2-medicaments').length > 0) {
+    $('.select2-medicaments').select2({
+      placeholder: "Selecione"
+    });
+  }
+
+  $(".clone-medicaments").click(function (e) {
+    $('.select2-medicaments').select2("destroy");
+    $clone = $('.row.medicaments').first().clone(true);
+    $clone.closest('.remove-medicament').removeClass('hide');
+    $clone.find('.dosage').val('');
+    $('#medicaments-selections').append($clone);
+    $('.select2-medicaments').select2({
+      placeholder: "Selecione"
+    });
+  });
+  $(".remove-medicament").click(function (e) {
+    medicaments = $(this).closest('.medicaments');
+    medicaments.closest('.select2-medicaments').select2('destroy');
+    medicaments.remove();
   });
 });
 

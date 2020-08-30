@@ -299,8 +299,76 @@
             </div>
 
             <br><hr><br>
+            <h2> Prescrição </h2>
+            <br>
+         
             <div class="row">
                 <!-- TODO: Prescrições de medicamentos e exames -->
+              
+                <div class="col-md-6 col-sm-12" style="border-right: 1px solid #e5e5e5;">
+                    
+                    <div id="medicaments-selections">
+                        <!-- Medicamentos -->
+                        <div class="row medicaments">
+                        
+                            <!-- Medicamento -->
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="medicaments">Medicamento*</label>
+                                    <select class="select2-medicaments form-control select2-hidden-accessible" name="medicaments[]" 
+                                        style="width: 100%;">
+                                        <option></option>
+                                        @foreach($medicaments as $medicament)
+                                            <option value="{{$medicament->id}}"> 
+                                                {{ $medicament->generic_name }} ({{ $medicament->factory_name }})
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('medicament') <p class="text-danger">{{ $message }}</p> @enderror
+                                </div>
+                            </div>
+
+                            <!-- Posologia -->
+                            <div class="col-md-5 col-sm-12">
+                                <div class="form-group">
+                                    <label for="dosage">Posologia</label>
+                                    <input type="text" 
+                                        class="form-control dosage @error('dosage') is-invalid  @enderror" 
+                                        name="dosages[]" value="{{ old('dosage') }}">
+                                </div>
+                            </div>
+                        
+                            <!-- Remover linha do medicamento-->
+                            <div class="btn btn-sm btn-danger remove-medicament "><i class="fas fa-minus"></i></div>
+
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <a class="clone-medicaments text-secondary">
+                            <span class="btn btn-sm btn-secondary"> <i class="fas fa-plus"></i></span> 
+                            <strong>Inserir outro medicamento</strong>
+                        </a>
+                    </div>
+                    
+                </div>
+
+                <div class="col-md-6 col-sm-12">
+                    Exames
+                </div>
+
+                <div class="col-md-12 col-sm-12" style="display: none;">
+                    <div class="form-group">
+                        <label for="description">Observações</label>
+                        <input type="text" 
+                            class="form-control @error('description') is-invalid  @enderror" 
+                            name="description" id="description"   
+                            placeholder="Digite as observações, se houver" 
+                            value="{{ old('description') }}">
+                    </div>
+                </div>
+
             </div>
 
         </div>
