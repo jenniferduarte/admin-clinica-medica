@@ -304,8 +304,37 @@
          
             <div class="row">
                 <!-- TODO: Prescrições de medicamentos e exames -->
+
+                                <div class="col-md-6 col-sm-12">
+
+                    <!-- Exames -->
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="exams">Exames</label>
+                            <select class="select2 form-control select2-hidden-accessible" name="exams[]" 
+                                style="width: 100%;" multiple>
+                                <option></option>
+                                @foreach($exams as $exam)
+                                    <option value="{{$exam->id}}"> 
+                                        {{ $exam->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            @error('exam') <p class="text-danger">{{ $message }}</p> @enderror
+                        </div>
+                 
+
+                        <div class="form-group">
+                            <label for="description">Observações Gerais</label>
+                            <textarea type="text" class="form-control @error('description') is-invalid  @enderror" 
+                            name="description" id="description" value="{{ old('description') }}"></textarea>
+                        </div>
+                    </div>
+
+                </div>
               
-                <div class="col-md-6 col-sm-12" style="border-right: 1px solid #e5e5e5;">
+                <div class="col-md-6 col-sm-12">
                     
                     <div id="medicaments-selections">
                         <!-- Medicamentos -->
@@ -354,20 +383,7 @@
                     
                 </div>
 
-                <div class="col-md-6 col-sm-12">
-                    Exames
-                </div>
 
-                <div class="col-md-12 col-sm-12" style="display: none;">
-                    <div class="form-group">
-                        <label for="description">Observações</label>
-                        <input type="text" 
-                            class="form-control @error('description') is-invalid  @enderror" 
-                            name="description" id="description"   
-                            placeholder="Digite as observações, se houver" 
-                            value="{{ old('description') }}">
-                    </div>
-                </div>
 
             </div>
 

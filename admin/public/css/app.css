@@ -3359,23 +3359,16 @@ fieldset:disabled a.btn {
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #227dc7;
+  background-color: #256684ff;
   border-color: #2176bd;
 }
 
 .btn-primary:focus,
 .btn-primary.focus {
   color: #fff;
-  background-color: #227dc7;
+  background-color: #256684ff;
   border-color: #2176bd;
-  box-shadow: 0 0 0 0.2rem rgba(82, 161, 225, 0.5);
-}
-
-.btn-primary.disabled,
-.btn-primary:disabled {
-  color: #fff;
-  background-color: #3490dc;
-  border-color: #3490dc;
+  box-shadow: 0 0 0 0.2rem rgba(82, 161, 225, 0.5)
 }
 
 .btn-primary:not(:disabled):not(.disabled):active,
@@ -17992,6 +17985,13 @@ a {
 
 .clone-medicaments:hover .strong {
   text-decoration: underline;
+}
+
+.login-page {
+  background-image: url(/images/login-bg.jpg?bd4b200525922ab3f62be88c4370a848);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
 }
 
 /*

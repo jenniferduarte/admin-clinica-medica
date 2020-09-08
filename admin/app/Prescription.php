@@ -17,4 +17,9 @@ class Prescription extends Model
     {
         return $this->belongsToMany('App\Medicament', 'prescription_medicaments');
     }
+
+    public function exams()
+    {
+        return $this->belongsToMany('App\Exam', 'prescription_exams');
+    }
 }

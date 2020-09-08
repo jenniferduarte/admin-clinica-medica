@@ -11,6 +11,7 @@ use App\Exam;
 use App\Medicament;
 use App\Prescription;
 use App\Http\Requests\RecordStoreRequest;
+use App\PrescriptionExam;
 use App\PrescriptionMedicament;
 use Auth;
 use Illuminate\Http\Request;
@@ -97,14 +98,16 @@ class RecordController extends Controller
             'expected_return'       => $request->input('expected_return')
         ]);
 
-        if($request->input('medicaments')){
-
+        # Persiste os medicamentos
+        if($request->input('medicaments'))
+        {
             $prescription = Prescription::create([
                 'record_id'     => $record->id,
                 'description'   => 'description'
             ]);
 
-            foreach($request->input('medicaments') as $index => $medicament_id){
+            foreach($request->input('medicaments') as $index => $medicament_id)
+            {
                 $medicament = Medicament::find($medicament_id);
 
                 $prescription_medicament = PrescriptionMedicament::create([
@@ -113,7 +116,20 @@ class RecordController extends Controller
                     'dosage'            => $request->input('dosages')[$index]
                 ]);
             }
-            
+        }
+
+        # Persiste os exames
+        if($request->input('exams'))
+        {
+            foreach($request->input('exams') as $index => $exam_id) 
+            {
+                $exam = Exam::find($exam_id);
+
+                $prescription_exam =  PrescriptionExam::create([
+                    'prescription_id'   => $prescription->id,
+                    'exam_id'           => $exam->id
+                ]);
+            }
         }
 
         $notification = array(
