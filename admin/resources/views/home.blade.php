@@ -4,6 +4,9 @@
 
 @section('content')
 
+@can('isDoctor')
+    <div id="calendarDoctor"></div>
+@endcan
 
 @endsection
 

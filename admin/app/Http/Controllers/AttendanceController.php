@@ -7,10 +7,12 @@ use App\Doctor;
 use App\Patient;
 use App\Status;
 use App\Schedule;
+use App\Role;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\AttendanceStoreRequest;
 use Illuminate\Http\Request;
+use Auth;
 
 class AttendanceController extends Controller
 {
@@ -37,12 +39,17 @@ class AttendanceController extends Controller
     {
         $start = $request->start;
         $end = $request->end;
-
+       
         $attendancesResults = DB::table('schedules')
             ->join('attendances', 'schedules.id', '=', 'attendances.schedule_id')
-            ->whereBetween('schedules.start_date', [$start, $end])
-            ->select('schedules.start_date as start', 'schedules.end_date as end', 'attendances.id as attendance_id')
-            ->get();
+            ->whereBetween('schedules.start_date', [$start, $end]);
+
+        if (Auth::user()->role->id == ROLE::DOCTOR) {
+            $doctor_id = Auth::user()->doctors->first()->id;
+            $attendancesResults = $attendancesResults->where('schedules.doctor_id', $doctor_id);
+        }
+
+        $attendancesResults = $attendancesResults->select('schedules.start_date as start', 'schedules.end_date as end', 'attendances.id as attendance_id')->get();
 
         $attendances = [];
        
@@ -50,10 +57,15 @@ class AttendanceController extends Controller
         {   
             $attendance = Attendance::find($attendanceResult->attendance_id);
 
+            $title = $attendance->doctor->treatment . ' ' . ucwords($attendance->doctor->user->name);
+            if (Auth::user()->role->id == ROLE::DOCTOR) {
+                $title = ucwords($attendance->patient->user->name);
+            }
+
             $attendances[] = [
                 'start' => Carbon::parse($attendanceResult->start)->toIso8601String(),
                 'end'   => Carbon::parse($attendanceResult->end)->toIso8601String(),
-                'title' => $attendance->doctor->treatment . ' ' . ucwords($attendance->doctor->user->name),
+                'title' => $title,
                 'url' => '/attendances/'.$attendanceResult->attendance_id,
             ];             
         }

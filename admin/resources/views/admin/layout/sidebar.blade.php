@@ -9,7 +9,7 @@
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex text-center">
-            <div class="info" >
+            <div class="info">
                 <a href="#" class="d-block">
                     @if(Auth::user())
                     Olá, {{ Auth::user()->name }}
@@ -35,6 +35,7 @@
 
                 <hr>
                 
+                @can('isAdmin')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user-md"></i>
@@ -59,6 +60,7 @@
 
                 <hr>
                 
+                
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user-injured"></i>
@@ -82,7 +84,7 @@
                 </li>
 
                 <hr>
-
+                
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-capsules"></i>
@@ -106,6 +108,7 @@
                 </li>
                 
                 <hr>
+                @endcan
 
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">

@@ -11,6 +11,7 @@
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
+@can(!'isPatient')
 <div class="card card-primary">
     <div class="card-body">
 
@@ -50,6 +51,6 @@
         </table>
     </div>
 </div>
-   
+@endcan 
 @endsection
 

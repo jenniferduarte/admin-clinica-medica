@@ -104,6 +104,12 @@ a {
     background-repeat: no-repeat;
     background-blend-mode: overlay;
 }
+
+.fc-timegrid-event .fc-event-time,
+.fc-timegrid-event-condensed .fc-event-title{
+    font-size: 13px !important;
+}
+
 /*
 .clone{
     margin: auto;
