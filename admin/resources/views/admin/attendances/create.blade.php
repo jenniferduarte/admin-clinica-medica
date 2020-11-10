@@ -1,6 +1,6 @@
 @extends('admin.layout.template')
 
-@section('page-name')  Marcar atendimento  @endsection {{-- Page Name --}}
+@section('page-name')  Novo agendamento  @endsection {{-- Page Name --}}
 
 @section('content')
 
@@ -11,68 +11,71 @@
         @csrf
       
         <div class="card-body">
-          <div class="col-md-6">
-          
-              <!-- Médico -->
-              <div class="col-md-12 col-sm-12">
-                <div class="form-group">
-                  <label for="doctors">Médico*</label>
-                  <select class="select2 form-control select2-hidden-accessible doctor-select" name="doctor" style="width: 100%;">
-                    <option></option>
-                    @foreach($doctors as $doctor)
-                    <option value="{{$doctor->id}}"> {{ $doctor->user->name }} 
-                      (@foreach($doctor->specialties as $doctorSpecialty) 
-                        {{ $doctorSpecialty->name }} @if(!$loop->last) | @endif
-                      @endforeach)
-                    </option>
-                    @endforeach
-                  </select>
-                  @error('doctor') <p class="text-danger">{{ $message }}</p> @enderror
-                </div>
-              </div>
-
-              <!-- Dia  -->
-              <div class="bootstrap-timepicker col-md-12 col-sm-12">
-                <div class="form-group">
-                  <label>Datas disponíveis*:</label>
-                  <div class="input-group" id="date" data-target-input="nearest">
-                      <input type="text" class="form-control datetimepicker-input timepicker  @error('date') is-invalid @enderror" 
-                          data-target="#date" placeholder="Selecione" name="date"
-                          autocomplete="false" value="{{ old('date') }}">
-                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
-                          <div class="input-group-text"><i class="fas fa-calendar"></i></div>
-                        </div>
-                  </div>
-                  @error('date') <p class="text-danger">{{ $message }}</p> @enderror
-                </div>
-              </div>
-              
-              <!-- Horario  -->
-              <div class="col-md-12 col-sm-12">
-                <div class="form-group">
-                  <label>Horários disponíveis*:</label>
-                    <select class="select2 form-control select2-hidden-accessible time-select" name="time" style="width: 100%;" disabled>
+          <div class="row">
+            <div class="col-md-6">
+            
+                <!-- Médico -->
+                <div class="col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label for="doctors">Médico*</label>
+                    <select class="select2 form-control select2-hidden-accessible doctor-select" name="doctor" style="width: 100%;">
                       <option></option>
+                      @foreach($doctors as $doctor)
+                      <option value="{{$doctor->id}}"> {{ $doctor->user->name }} 
+                        (@foreach($doctor->specialties as $doctorSpecialty) 
+                          {{ $doctorSpecialty->name }} @if(!$loop->last) | @endif
+                        @endforeach)
+                      </option>
+                      @endforeach
                     </select>
-                  @error('time') <p class="text-danger">{{ $message }}</p> @enderror
+                    @error('doctor') <p class="text-danger">{{ $message }}</p> @enderror
+                  </div>
                 </div>
-              </div>
 
-              <!-- Paciente -->
-              <div class="col-md-12 col-sm-12">
-                <div class="form-group">
-                  <label for="patients">Paciente*</label>
-                  <select class="select2 form-control select2-hidden-accessible" name="patient" style="width: 100%;">
-                    <option></option>
-                    @foreach($patients as $patient)
-                      <option value="{{$patient->id}}"> {{ $patient->user->name }} ({{ $patient->user->email }}) </option>
-                    @endforeach
-                  </select>
-                  @error('patient') <p class="text-danger">{{ $message }}</p> @enderror
+                <!-- Dia  -->
+                <div class="bootstrap-timepicker col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label>Datas disponíveis*:</label>
+                    <div class="input-group" id="date" data-target-input="nearest">
+                        <input type="text" data-toggle="datetimepicker" class="form-control datetimepicker-input timepicker  @error('date') is-invalid @enderror" 
+                            data-target="#date" placeholder="Selecione" name="date"
+                            autocomplete="false" value="{{ old('date') }}">
+                          <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+                          </div>
+                    </div>
+                    @error('date') <p class="text-danger">{{ $message }}</p> @enderror
+                  </div>
                 </div>
-              </div>
-              
-          
+                
+                <!-- Horario  -->
+                <div class="col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label>Horários disponíveis*:</label>
+                      <select class="select2 form-control select2-hidden-accessible time-select" name="time" style="width: 100%;" disabled>
+                        <option></option>
+                      </select>
+                    @error('time') <p class="text-danger">{{ $message }}</p> @enderror
+                  </div>
+                </div>
+
+                @can(!'isPatient')
+                <!-- Paciente -->
+                <div class="col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label for="patients">Paciente*</label>
+                    <select class="select2 form-control select2-hidden-accessible" name="patient" style="width: 100%;">
+                      <option></option>
+                      @foreach($patients as $patient)
+                        <option value="{{$patient->id}}"> {{ $patient->user->name }} ({{ $patient->user->email }}) </option>
+                      @endforeach
+                    </select>
+                    @error('patient') <p class="text-danger">{{ $message }}</p> @enderror
+                  </div>
+                </div>
+                @endcan
+            
+            </div>
           </div>
         </div>
 

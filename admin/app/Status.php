@@ -7,11 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Status extends Model
 {
     const SCHEDULED = 1;
-    const CONFIRMED = 2;
+    const CANCELED = 2;
     const ABSENT_PATIENT = 3;
-    const CANCELED = 4;
-    const FINISHED = 5;
-    
+
     public function attendances()
     {
         return $this->hasMany('App\Attendance');

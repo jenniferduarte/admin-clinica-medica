@@ -38,3 +38,4 @@ Route::resources([
 Route::get('/{doctor}/available-dates', 'DoctorController@availableDates')->name('available-dates');
 Route::get('/{doctor}/available-times', 'DoctorController@availableTimes')->name('available-times');
 Route::get('/attendances-perdate', 'AttendanceController@ajaxIndexPerDate')->name('attendances-perdate');
+Route::put('/attendances/{attendance}/status/{status}', 'AttendanceController@updateStatus')->name('attendance-update-status');

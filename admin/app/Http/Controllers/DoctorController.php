@@ -230,8 +230,10 @@ class DoctorController extends Controller
         return json_encode($response);
         exit;
 
+        /*
         return response()->json([
             'data' => $doctors
         ], 200);
+        */
     }
 }

@@ -30,6 +30,11 @@ class AttendanceController extends Controller
     {
         $attendances = Attendance::all();
 
+        if (Auth::user()->role->id == ROLE::PATIENT) {
+            $patient_id = Auth::user()->patients->first()->id;
+            $attendances = Attendance::where('patient_id', $patient_id)->get();
+        }
+
         return view('admin.attendances.index', [
             'attendances' => $attendances
         ]);
@@ -96,8 +101,14 @@ class AttendanceController extends Controller
     {
         $schedule = Schedule::find($request->input('time'));
 
+        $patient_id = $request->input('patient');
+       
+        if (Auth::user()->role->id == ROLE::PATIENT) {
+            $patient_id = Auth::user()->patients->first()->id;   
+        }
+
         Attendance::create([
-            'patient_id' => $request->input('patient'),
+            'patient_id' => $patient_id,
             'doctor_id' => $request->input('doctor'),
             'schedule_id' => $schedule->id,
             'status_id' => Status::SCHEDULED,
@@ -160,5 +171,18 @@ class AttendanceController extends Controller
     public function destroy(Attendance $attendance)
     {
         //
+    }
+
+    public function updateStatus(Attendance $attendance, Status $status)
+    {
+        $attendance->status_id = $status->id;
+        $attendance->save();
+
+        if($status->id == Status::CANCELED){
+            $attendance->schedule->vacant = 1;
+            $attendance->schedule->save();
+        }
+
+        return response()->json($attendance, 200);
     }
 }

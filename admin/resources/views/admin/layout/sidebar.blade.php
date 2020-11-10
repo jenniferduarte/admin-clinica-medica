@@ -28,7 +28,7 @@
                     <a href="{{ route('home') }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Dashboard
+                            Início
                         </p>
                     </a>
                 </li>
@@ -114,7 +114,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-id-card"></i>
                         <p>
-                            Atendimentos
+                            Agendamentos
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -126,7 +126,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('attendances.create') }}" class="nav-link">
-                                <p>Marcar consulta</p>
+                                <p>Agendar consulta</p>
                             </a>
                         </li>
                     </ul>

@@ -17855,8 +17855,10 @@ button.toast-close-button {
   }
 }
 
-a {
-  color: #3490dc;
+a,
+.alert a.btn {
+  color: #fff;
+  text-decoration: none;
 }
 
 #deleteForm {
@@ -17974,6 +17976,10 @@ a {
 .fc-timegrid-event .fc-event-time,
 .fc-timegrid-event-condensed .fc-event-title {
   font-size: 13px !important;
+}
+
+.nav-tabs .nav-link.active {
+  color: #3490dc;
 }
 
 /*

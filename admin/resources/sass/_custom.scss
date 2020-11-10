@@ -1,7 +1,10 @@
 
-a {
-    color: $blue;
+a,
+.alert a.btn {
+    color: $white;
+    text-decoration: none;
 }
+
 
 #deleteForm {
     display: inline-block;
@@ -108,6 +111,9 @@ a {
 .fc-timegrid-event .fc-event-time,
 .fc-timegrid-event-condensed .fc-event-title{
     font-size: 13px !important;
+}
+.nav-tabs .nav-link.active{
+    color: $blue;
 }
 
 /*

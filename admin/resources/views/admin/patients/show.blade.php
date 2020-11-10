@@ -33,7 +33,8 @@
                 <b>Email:</b> <a class="">{{ $patient->user->email }}</a>
               </li>
               <li class="list-group-item">
-              <b>Data de nascimento:</b> <a class="">{{ $patient->user->birth_date->format('d/m/Y') }}</a>
+              <b>Data de nascimento:</b> 
+                <a class="">{{ $patient->user->birth_date ? $patient->user->birth_date->format('d/m/Y') : '' }}</a>
               </li>
               <li class="list-group-item">
                 <b>CPF:</b> <a class="">{{ $patient->user->cpf }}</a>
@@ -42,7 +43,7 @@
                 <b>RG:</b> <a class="">{{ $patient->user->rg }}</a>
               </li>
               <li class="list-group-item">
-                <b>Sexo:</b> <a class="">{{ $patient->user->gender->name }}</a>
+                <b>Sexo:</b> <a class="">{{ $patient->user->gender->name ?? '' }}</a>
               </li>
               <li class="list-group-item">
                 <b>Nome da mãe:</b> <a class="">{{ $patient->mother_name }}</a>
@@ -91,11 +92,9 @@
                           {{ $attendance->schedule->start_date->format('d/m/Y H:i') }}
                         </strong>
                         <span class="badge badge-{{ $attendance->status->name }} uppercase right">
-                          @if($attendance->status->id == 1) agendado @endif
-                          @if($attendance->status->id == 2) confirmado @endif
-                          @if($attendance->status->id == 3) paciente ausente @endif
-                          @if($attendance->status->id == 4) cancelado @endif
-                          @if($attendance->status->id == 5) finalizado @endif
+                          @if($attendance->status->id == Status::SCHEDULED) agendado @endif
+                          @if($attendance->status->id == Status::CANCELED) cancelado @endif
+                          @if($attendance->status->id == Status::ABSENT_PATIENT) paciente ausente @endif
                         </span>
                       </div>
                       <br>
@@ -156,11 +155,9 @@
                           {{ $attendance->schedule->start_date->format('d/m/Y H:i') }}
                         </strong>
                         <span class="badge badge-{{ $attendance->status->name }} uppercase right">
-                          @if($attendance->status->id == 1) agendado @endif
-                          @if($attendance->status->id == 2) confirmado @endif
-                          @if($attendance->status->id == 3) paciente ausente @endif
-                          @if($attendance->status->id == 4) cancelado @endif
-                          @if($attendance->status->id == 5) finalizado @endif
+                          @if($attendance->status->id == Status::SCHEDULED) agendado @endif
+                          @if($attendance->status->id == Status::CANCELED) cancelado @endif
+                          @if($attendance->status->id == Status::ABSENT_PATIENT) paciente ausente @endif
                         </span>
                       </div>
                       <br>

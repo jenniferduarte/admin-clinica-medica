@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Role;
+use App\Doctor;
+use App\Status;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +28,30 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $next_attendance = [];
+        $doctor = null;
+        if (Auth::user()->role->id == ROLE::PATIENT) {
+            $patient_id = Auth::user()->patients->first()->id;
+            
+            $next_attendance = DB::table('attendances')
+                ->where('attendances.patient_id', $patient_id)
+                ->where('attendances.status_id', '=', Status::SCHEDULED)
+                ->join('schedules', 'attendances.schedule_id', '=', 'schedules.id')
+                ->where('schedules.start_date', '>', now())
+                ->select('attendances.id', 'attendances.patient_id', 
+                        'attendances.doctor_id', 'schedules.start_date', 'attendances.status_id')
+                ->orderBy('schedules.start_date', 'asc')
+                ->limit(1)
+                ->get()->first();
+            
+            if($next_attendance){
+                $doctor = Doctor::find($next_attendance->doctor_id);
+            }
+        }
+
+        return view('home', [
+            'next_attendance' => $next_attendance,
+            'doctor' => $doctor
+        ]);
     }
 }

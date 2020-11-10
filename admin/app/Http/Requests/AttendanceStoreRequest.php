@@ -24,7 +24,7 @@ class AttendanceStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'patient' => 'required',
+            'patient' => 'sometimes|required',
             'doctor' => 'required',
             'date' => 'required',
             'time' => 'required'

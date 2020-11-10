@@ -1,10 +1,10 @@
 @extends('admin.layout.template')
 
-@section('page-name') Agendamento @endsection {{-- Page Name  --}}
+@section('page-name') Agendamentos @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
 <a href="{{ route('attendances.create') }}" class="btn btn-block btn-outline-success btn-sm">
-    <i class="nav-icon fas fa-user-md"></i>  Marcar consulta
+    <i class="nav-icon fas fa-user-md"></i>  Agendar consulta
 </a>
 @endsection
 
@@ -64,13 +64,22 @@
 
             <strong><i class="fas fa-info-circle mr-1"></i> Status</strong> <br>
             <span class="badge badge-{{ $attendance->status->name }} uppercase right">
-                @if($attendance->status->id == 1) agendado @endif
-                @if($attendance->status->id == 2) confirmado @endif
-                @if($attendance->status->id == 3) paciente ausente @endif
-                @if($attendance->status->id == 4) cancelado @endif
-                @if($attendance->status->id == 5) finalizado @endif
+                @if($attendance->status->id == Status::SCHEDULED) agendado @endif
+                @if($attendance->status->id == Status::CANCELED) cancelado @endif
+                @if($attendance->status->id == Status::ABSENT_PATIENT) paciente ausente @endif
             </span>
- 
+
+            @if($attendance->status->id == Status::SCHEDULED)
+            <hr>
+            <div>
+                <a href="#" class="btn btn-sm bg-danger update-attendance-status" 
+                    data-attendance="{{$attendance->id}}" data-status="{{ Status::CANCELED }}">
+                <i class="fas fa-times"></i>
+                Cancelar agendamento
+                </a>                        
+            </div>
+            @endif
+
         </div>
         <!-- /.card-body -->    
     </div>
