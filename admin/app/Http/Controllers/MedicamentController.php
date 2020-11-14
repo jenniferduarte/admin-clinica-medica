@@ -10,7 +10,7 @@ use App\Http\Requests\MedicamentStoreRequest;
 class MedicamentController extends Controller
 {
     public function __construct()
-    {   
+    {
         $this->middleware('auth');
     }
 
@@ -22,7 +22,7 @@ class MedicamentController extends Controller
     public function index()
     {
         $medicaments = Medicament::all();
-        
+
         return view('admin.medicaments.index', [
             'medicaments' => $medicaments
         ]);
@@ -47,7 +47,7 @@ class MedicamentController extends Controller
     public function store(MedicamentStoreRequest $request)
     {
         $medicament = Medicament::create($request->all());
-        
+
         $notification = array(
             'message' => 'Criado com sucesso!',
             'alert-type' => 'success'
@@ -98,7 +98,7 @@ class MedicamentController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->action('MedicamentController@index')->with($notification);
+        return redirect()->action('MedicamentController@edit', $medicament->id)->with($notification);
     }
 
     /**
@@ -116,6 +116,6 @@ class MedicamentController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->action('MedicamentController@index')->with($notification);   
+        return redirect()->action('MedicamentController@index')->with($notification);
     }
 }

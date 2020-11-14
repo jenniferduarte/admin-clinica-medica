@@ -24,12 +24,13 @@ Auth::routes([
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resources([
-    'attendances' => 'AttendanceController',
-    'doctors' => 'DoctorController',
+    'attendances'       => 'AttendanceController',
+    'doctors'           => 'DoctorController',
     'doctors.schedules' => 'ScheduleController',
-    'medicaments' => 'MedicamentController',
-    'patients' => 'PatientController',
-    'patients.records' => 'RecordController',
+    'medicaments'       => 'MedicamentController',
+    'patients'          => 'PatientController',
+    'patients.records'  => 'RecordController',
+    'users'             => 'UserController',
 ]);
 
 

@@ -4,13 +4,13 @@
 
 @section('quick-actions')
 
-  <a href="{{ route('medicaments.index') }}" class="btn  btn-outline-secondary btn-sm">
+  <a href="#" class="btn  btn-outline-secondary btn-sm goback">
     <i class="fas fa-arrow-left"></i>  Voltar
   </a>
 
   <a href="{{ route('medicaments.edit', $medicament->id) }}" class="btn btn-outline-success btn-sm">
     <i class="fas fa-pencil-alt"></i>  Editar
-  </a> 
+  </a>
 
 @endsection
 
@@ -20,7 +20,7 @@
   <div class="col-md-6">
 
     <div class="card card-primary">
-          
+
           <div class="card-body">
             <strong><i class="fas fa-signature mr-1"></i> Nome genérico</strong>
             <p class="text-muted"> {{ $medicament->generic_name }}</p>

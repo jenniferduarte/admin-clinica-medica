@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="{{route('home')}}" class="brand-link">
         <img src="{{ asset('img/logo.png') }}" width="180px" height="auto">
-    </a> 
+    </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -23,7 +23,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
-                
+
                 <li class="nav-item">
                     <a href="{{ route('home') }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -34,7 +34,37 @@
                 </li>
 
                 <hr>
-                
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-user-md"></i>
+                        <p>
+                            Minha conta
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" >
+                        <li class="nav-item">
+                            <a href="{{ route('users.edit', Auth::user()->id ) }}" class="nav-link">
+                                <p>
+                                    Meus dados
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <p>
+                                    Alterar senha
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+
+                </li>
+
+                <hr>
+
                 @can('isAdmin')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -59,8 +89,8 @@
                 </li>
 
                 <hr>
-                
-                
+
+
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user-injured"></i>
@@ -84,7 +114,7 @@
                 </li>
 
                 <hr>
-                
+
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-capsules"></i>
@@ -106,7 +136,7 @@
                         </li>
                     </ul>
                 </li>
-                
+
                 <hr>
                 @endcan
 
@@ -131,7 +161,7 @@
                         </li>
                     </ul>
                 </li>
-                
+
                 <hr>
 
                 <li class="nav-item">

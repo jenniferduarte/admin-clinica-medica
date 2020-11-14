@@ -7,13 +7,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Role;
 use App\Patient;
-
+use App\Gender;
+use App\Http\Requests\UserUpdateRequest;
 
 
 class UserController extends Controller
 {
     public function store(UserStoreRequest $request)
-    {           
+    {
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
@@ -46,28 +47,52 @@ class UserController extends Controller
 
             return redirect()->action('PatientController@index')->with($notification);
         };
-        
+
         return redirect()->action('UserController@index')->with($notification);
+    }
+
+    public function show(User $user)
+    {
+
+    }
+
+    public function edit(User $user)
+    {
+        if ($user->role->id == Role::PATIENT) {
+            return redirect()->action('PatientController@edit', $user->patients->first->id);
+        }
+
+        if ($user->role->id == Role::DOCTOR) {
+            return redirect()->action('DoctorController@edit', $user->doctors->first->id);
+        }
+
+        return view('admin.users.edit', [
+            'user'      => $user,
+            'genders'   => Gender::all()
+        ]);
     }
 
     public function update(UserUpdateRequest $request, User $user)
     {
         User::find($user->id)->update([
-            'name' => $request->input('name'),
-            'cpf' =>  $request->input('cpf'),
-            'rg' =>  $request->input('rg'),
-            'birth_date' =>  $request->input('birth_date'),
-            'phone' =>  $request->input('phone'),
+            'name'      => $request->input('name'),
+            'cpf'       =>  $request->input('cpf'),
+            'rg'        =>  $request->input('rg'),
+            'birth_date'=>  $request->input('birth_date'),
+            'phone'     =>  $request->input('phone'),
             'gender_id' =>  $request->input('gender'),
         ]);
 
-        if($user->role->id == Role::PATIENT ){
+
+       /* if($user->role->id == Role::PATIENT ){
+            return redirect()->action('PatientController@edit');
+
             Patient::where('user_id', $user->id)->update([
-                'social_name' => $request->input('social_name'),
-                'mother_name' => $request->input('mother_name'),
-                'father_name' => $request->input('father_name'),
-                'observation' => $request->input('observation'),
-                'responsible_name' => $request->input('responsible_name'),
+                'social_name'       => $request->input('social_name'),
+                'mother_name'       => $request->input('mother_name'),
+                'father_name'       => $request->input('father_name'),
+                'observation'       => $request->input('observation'),
+                'responsible_name'  => $request->input('responsible_name'),
                 'responsible_phone' => $request->input('responsible_phone'),
             ]);
         }
@@ -78,12 +103,13 @@ class UserController extends Controller
                 //'mother_name' => $request->input('mother_name'),
             ]);
         }
+        */
 
         $notification = array(
             'message' => 'Atualizado com sucesso!',
             'alert-type' => 'success'
         );
 
-        return redirect()->action('PatientController@index')->with($notification);
+        return redirect()->action('HomeController@index')->with($notification);
     }
 }

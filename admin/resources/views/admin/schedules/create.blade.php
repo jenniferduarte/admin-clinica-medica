@@ -5,19 +5,19 @@
 @section('content')
 
 <div class="card card-primary">
-   
+
     <!-- form start -->
     <form role="form" method="post" action="{{ route('doctors.schedules.store', $doctor->id) }}">
         @csrf
-      
+
         <div class="card-body">
-          <div class="row"> 
+          <div class="row">
             <!-- Data -->
             <div class="bootstrap-timepicker col-md-5 col-sm-12">
               <div class="form-group">
                 <label>Data:</label>
                 <div class="input-group" id="date" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input timepicker  @error('date') is-invalid @enderror" 
+                    <input type="text" class="form-control datetimepicker-input timepicker  @error('date') is-invalid @enderror"
                         data-target="#date" placeholder="Selecione" name="date"
                         autocomplete="false" value="{{ old('date') }}">
                     <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
@@ -71,13 +71,13 @@
 
                     @error('consultation_time') <p class="text-danger">{{ $message }}</p> @enderror
                 </div>
-            </div> 
+            </div>
           </div>
         </div>
 
         <div class="card-footer">
             <button type="submit" class="btn btn-primary">Cadastrar</button>
-            <a href="{{ route('doctors.schedules.index', $doctor->id) }}" class="btn btn-secondary float-right">Voltar</a>
+            <a href="#" class="btn btn-secondary float-right goback">Voltar</a>
         </div>
     </form>
 </div>
@@ -88,7 +88,7 @@
   <script type="text/javascript">
 
 $(function() {
-            
+
     //Datepicker
     $('#date').datetimepicker({
         allowMultidate: true,
@@ -110,6 +110,6 @@ $(function() {
     })
 
 });
-     
+
 </script>
 @endsection

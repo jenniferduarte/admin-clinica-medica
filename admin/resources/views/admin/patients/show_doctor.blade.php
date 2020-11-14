@@ -29,7 +29,7 @@
                 <b>Email:</b> <a class="">{{ $patient->user->email }}</a>
               </li>
               <li class="list-group-item">
-              <b>Data de nascimento:</b> <a class="">{{ $patient->user->birth_date->format('d/m/Y') }}</a>
+              <b>Data de nascimento:</b> <a class="">{{ $patient->user->birth_date ? $patient->user->birth_date->format('d/m/Y') : ''}}</a>
               </li>
               <li class="list-group-item">
                 <b>CPF:</b> <a class="">{{ $patient->user->cpf }}</a>
@@ -55,18 +55,18 @@
               <li class="list-group-item">
                 <b>Observações:</b> <a class="">{{ $patient->observation }}</a>
               </li>
-                
+
             </ul>
 
           </div>
           <!-- /.card-body -->
         </div>
-        
+
       </div>
 
       <div class="col-md-9" >
         <div class="card height-fixed">
-    
+
           <div class="card-header p-2">
             <ul class="nav nav-pills">
               <li class="nav-item"><a class="nav-link active" href="#history" data-toggle="tab">Histórico</a></li>
@@ -77,7 +77,7 @@
 
               <!-- Histórico -->
               <div class="tab-pane active" id="history">
-                
+
                 <!-- The timeline -->
                 <div class="timeline timeline-inverse">
 
@@ -89,30 +89,30 @@
                       {{ $record->created_at->format('d/m/Y') }}
                     </span>
                   </div>
-               
+
                   <div>
                     <i class="fas fa-calendar-check bg-secondary"></i>
 
                     <div class="timeline-item">
-                      
-                      <h3 class="timeline-header">Consulta com<a href="{{ route('doctors.show', $record->doctor->id)}}"> 
+
+                      <h3 class="timeline-header">Consulta com<a href="{{ route('doctors.show', $record->doctor->id)}}">
                         {{ $record->doctor->user->name }}</a>
                       </h3>
 
                       <div class="timeline-body">
-                        
+
                         @if($record->treatment_plan)
                         <strong> Plano de tratamento: </strong>{{ Str::limit($record->treatment_plan, 150) }}
                         <hr>
                         @endif
-                        
+
                         @if($record->diagnostic_conclusion)
                         <strong> Conclusão do diagnóstico: </strong> {{ Str::limit($record->diagnostic_conclusion, 150) }}
                         @endif
 
                       </div>
                       <div class="timeline-footer">
-                        <a href="{{ route('patients.records.show', [$patient->id, $record->id]) }}" 
+                        <a href="{{ route('patients.records.show', [$patient->id, $record->id]) }}"
                             class="btn btn-primary btn-sm"> <i class="fas fa-plus"></i> Ver detalhes
                         </a>
                       </div>
@@ -121,16 +121,16 @@
                   @endforeach
 
                 </div>
-                 
+
               </div>
-          
+
             </div>
           </div>
 
         </div>
       </div>
     </div>
-  </div>  
+  </div>
 
 @endsection
 

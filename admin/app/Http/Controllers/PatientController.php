@@ -12,14 +12,15 @@ use Auth;
 use App\Http\Requests\PatientStoreRequest;
 use App\Http\Requests\PatientUpdateRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Gate;
 
 class PatientController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');    
+        $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -27,8 +28,10 @@ class PatientController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Auth::user());
+
         $patients = Patient::all();
-    
+
         return view('admin.patients.index', [
             'patients' => $patients
         ]);
@@ -40,7 +43,9 @@ class PatientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {
+        Gate::authorize('create', Auth::user());
+
         return view('admin.patients.create', [
             'genders' =>  Gender::all()
         ]);
@@ -54,6 +59,8 @@ class PatientController extends Controller
      */
     public function store(PatientStoreRequest $request)
     {
+        Gate::authorize('create', Auth::user());
+
         // Cria o usuário
         $user = User::create([
             'name' => $request->input('name'),
@@ -68,7 +75,7 @@ class PatientController extends Controller
             'clinic_id' => 1
         ]);
 
-        // Cria o paciente     
+        // Cria o paciente
         Patient::create([
             'user_id' => $user->id,
             'social_name' => $request->input('social_name'),
@@ -78,7 +85,7 @@ class PatientController extends Controller
             'responsible_name' => $request->input('responsible_name'),
             'responsible_phone' => $request->input('responsible_phone'),
         ]);
-   
+
         $notification = array(
             'message' => 'Criado com sucesso!',
             'alert-type' => 'success'
@@ -95,9 +102,11 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
+        Gate::authorize('view', $patient);
+
         $history = History::where('patient_id', $patient->id)->get()->first();
         $records = [];
-        
+
         if($history != null){
            $records =  $history->records->sortByDesc('created_at');
         }
@@ -107,7 +116,7 @@ class PatientController extends Controller
                 'patient' => $patient,
                 'records' => $records
             ]);
-        }   
+        }
         return view('admin.patients.show', [
             'patient' => $patient
         ]);
@@ -121,6 +130,8 @@ class PatientController extends Controller
      */
     public function edit(Patient $patient)
     {
+        Gate::authorize('update', $patient);
+
         return view('admin.patients.edit', [
             'patient' => $patient,
             'genders' =>  Gender::all()
@@ -136,6 +147,8 @@ class PatientController extends Controller
      */
     public function update(PatientUpdateRequest $request, Patient $patient)
     {
+        Gate::authorize('update', $patient);
+
         User::find($patient->user_id)->update([
             'name'          => $request->input('name'),
             'cpf'           => $request->input('cpf'),
@@ -153,13 +166,13 @@ class PatientController extends Controller
             'responsible_name'  => $request->input('responsible_name'),
             'responsible_phone' => $request->input('responsible_phone'),
         ]);
-        
+
         $notification = array(
             'message' => 'Atualizado com sucesso!',
             'alert-type' => 'success'
         );
 
-        return redirect()->action('PatientController@index')->with($notification);
+        return redirect()->action('PatientController@edit', $patient->id)->with($notification);
     }
 
     /**
@@ -170,6 +183,8 @@ class PatientController extends Controller
      */
     public function destroy(Patient $patient)
     {
+        Gate::authorize('delete', $patient);
+
         # Exclui o usuário e o paciente
         $patient->user->delete();
         $patient->delete();
@@ -179,6 +194,6 @@ class PatientController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->action('PatientController@index')->with($notification);   
+        return redirect()->action('PatientController@index')->with($notification);
     }
 }

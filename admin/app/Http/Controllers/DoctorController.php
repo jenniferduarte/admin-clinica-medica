@@ -13,6 +13,8 @@ use Carbon\Carbon;
 use App\Http\Requests\DoctorStoreRequest;
 use App\Http\Requests\DoctorUpdateRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Gate;
+use Auth;
 
 class DoctorController extends Controller
 {
@@ -28,8 +30,10 @@ class DoctorController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Auth::user());
+
         $doctors = Doctor::all();
-    
+
         return view('admin.doctors.index', [
             'doctors' => $doctors
         ]);
@@ -42,6 +46,8 @@ class DoctorController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Auth::user());
+
         return view('admin.doctors.create', [
             'genders' =>  Gender::all(),
             'specialties' => Specialty::all()
@@ -56,6 +62,8 @@ class DoctorController extends Controller
      */
     public function store(DoctorStoreRequest $request)
     {
+        Gate::authorize('create', Auth::user());
+
         // Cria o usuário
         $user = User::create([
             'name'          => $request->input('name'),
@@ -70,7 +78,7 @@ class DoctorController extends Controller
             'clinic_id'     => 1
         ]);
 
-        // Cria o paciente     
+        // Cria o paciente
         $doctor = Doctor::create([
             'user_id'   => $user->id,
             'crm'       => $request->input('crm'),
@@ -102,6 +110,8 @@ class DoctorController extends Controller
      */
     public function show(Doctor $doctor)
     {
+        Gate::authorize('view', $doctor);
+
         return view('admin.doctors.show', [
             'doctor' => $doctor
         ]);
@@ -115,6 +125,8 @@ class DoctorController extends Controller
      */
     public function edit(Doctor $doctor)
     {
+        Gate::authorize('update', $doctor);
+
         return view('admin.doctors.edit', [
             'doctor'        => $doctor,
             'genders'       => Gender::all(),
@@ -131,6 +143,8 @@ class DoctorController extends Controller
      */
     public function update(DoctorUpdateRequest $request, Doctor $doctor)
     {
+        Gate::authorize('update', $doctor);
+
         User::find($doctor->user_id)->update([
             'name'          => $request->input('name'),
             'cpf'           => $request->input('cpf'),
@@ -154,14 +168,14 @@ class DoctorController extends Controller
                 $specialty = Specialty::find($specialty_id);
                 $doctor->specialties()->save($specialty);
             }
-        }       
-    
+        }
+
         $notification = array(
             'message'       => 'Atualizado com sucesso!',
             'alert-type'    => 'success'
         );
 
-        return redirect()->action('DoctorController@index')->with($notification);
+        return redirect()->action('DoctorController@edit', $doctor->id)->with($notification);
     }
 
     /**
@@ -172,6 +186,8 @@ class DoctorController extends Controller
      */
     public function destroy(Doctor $doctor)
     {
+        Gate::authorize('delete', $doctor);
+
         # Exclui o usuário e o médico
         $doctor->user->delete();
         $doctor->delete();
@@ -181,7 +197,7 @@ class DoctorController extends Controller
             'alert-type'    => 'success'
         );
 
-        return redirect()->action('DoctorController@index')->with($notification); 
+        return redirect()->action('DoctorController@index')->with($notification);
     }
 
     public function availableDates(Request $request, Doctor $doctor)
@@ -196,7 +212,7 @@ class DoctorController extends Controller
 
     public function availableTimes(Request $request, Doctor $doctor)
     {
-        $date = $request->date; 
+        $date = $request->date;
 
         $schedules = Schedule::whereDate('start_date', $date)->where([
             ['doctor_id', $doctor->id],
@@ -215,7 +231,7 @@ class DoctorController extends Controller
            $doctors = User::orderby('name','asc')->select('id', 'name')->where('role_id', ROLE::DOCTOR)->limit(10)->get();
         } else {
             $doctors = User::orderby('name', 'asc')->select('id', 'name')->where([
-                ['role_id', '=', ROLE::DOCTOR ], 
+                ['role_id', '=', ROLE::DOCTOR ],
                 ['name', 'like', '%' . $search . '%']
             ])->limit(10)->get();
         }

@@ -14,7 +14,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Patient'   => 'App\Policies\PatientPolicy',
+        'App\Doctor'    => 'App\Policies\DoctorPolicy',
     ];
 
     /**
@@ -26,6 +27,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        // Se for usuário do tipo Admin, possui controle total da aplicação
         $gate->before(function ($user, $ability) {
             if ($user->role->id == Role::ADMIN) {
                 return true;
@@ -34,17 +36,17 @@ class AuthServiceProvider extends ServiceProvider
 
         // Doctor
         $gate->define('isDoctor', function($user) {
-            return $user->role->id == Role::DOCTOR;
+            return $user->role->id === Role::DOCTOR;
         });
 
         // Patient
-        $gate->define('isPatient', function ($user) { 
-            return $user->role->id == Role::PATIENT;
+        $gate->define('isPatient', function ($user) {
+            return $user->role->id === Role::PATIENT;
         });
 
         // Receptionist
         $gate->define('isReceptionist', function ($user) {
-            return $user->role->id == Role::RECEPTIONIST    ;
+            return $user->role->id === Role::RECEPTIONIST    ;
         });
     }
 }

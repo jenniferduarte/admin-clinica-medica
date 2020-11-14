@@ -4,13 +4,13 @@
 
 @section('quick-actions')
 
-  <a href="{{ route('patients.index') }}" class="btn  btn-outline-secondary btn-sm">
+  <a href="#" class="btn  btn-outline-secondary btn-sm goback">
     <i class="fas fa-arrow-left"></i>  Voltar
   </a>
 
   <a href="{{ route('patients.edit', $patient->id) }}" class="btn btn-outline-success btn-sm">
     <i class="fas fa-pencil-alt"></i>  Editar
-  </a> 
+  </a>
 
 @endsection
 
@@ -33,7 +33,7 @@
                 <b>Email:</b> <a class="">{{ $patient->user->email }}</a>
               </li>
               <li class="list-group-item">
-              <b>Data de nascimento:</b> 
+              <b>Data de nascimento:</b>
                 <a class="">{{ $patient->user->birth_date ? $patient->user->birth_date->format('d/m/Y') : '' }}</a>
               </li>
               <li class="list-group-item">
@@ -60,23 +60,23 @@
               <li class="list-group-item">
                 <b>Observações:</b> <a class="">{{ $patient->observation }}</a>
               </li>
-                
+
             </ul>
 
           </div>
           <!-- /.card-body -->
         </div>
-        
+
       </div>
 
       <div class="col-md-9" >
         <div class="card">
-        
+
           <div class="card-header p-2">
             <ul class="nav nav-pills">
               <li class="nav-item"><a class="nav-link active" href="#next-attendences" data-toggle="tab">Próximas Consultas</a></li>
               <li class="nav-item"><a class="nav-link" href="#attendences" data-toggle="tab">Consultas passadas</a></li>
-              
+
             </ul>
           </div>
           <div class="card-body">
@@ -109,42 +109,42 @@
                               @endforeach
                             </p>
                             <ul class="ml-4 mb-0 fa-ul text-muted">
-                              <li class="small"><span class="fa-li"><i class="fas fa-lg fa-at"></i></span> 
+                              <li class="small"><span class="fa-li"><i class="fas fa-lg fa-at"></i></span>
                                 {{ $attendance->doctor->user->email }}
                               </li>
 
                               @if($attendance->doctor->user->phone)
-                              <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> 
+                              <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
                                 {{ $attendance->doctor->user->phone }}
                               </li>
                               @endif
                             </ul>
                           </div>
                         </div>
-                        
+
                         <div class="text-right">
 
-                          @if($attendance->status->id == 1) 
+                          @if($attendance->status->id == 1)
                           <a href="#" class="btn btn-sm bg-danger">
                             <i class="fas fa-times"></i>
                             Cancelar
-                          </a>  
+                          </a>
 
                           <a href="#" class="btn btn-sm bg-teal">
                             <i class="fas fa-check"></i>
-                            Confirmar 
-                          </a>  
+                            Confirmar
+                          </a>
                           @endif
-                     
+
                         </div>
                       </div>
-                 
+
                     </div>
                   @endif
                 @endforeach
               </div>
-          
-              
+
+
               <!-- Consultas passadas -->
               <div class="tab-pane" id="attendences">
                 @foreach($patient->attendances->sortBy('status') as $attendance)
@@ -181,7 +181,7 @@
                         </div>
 
                       </div>
-                 
+
                     </div>
                   @endif
                 @endforeach
@@ -193,7 +193,7 @@
         </div>
       </div>
     </div>
-  </div>  
+  </div>
 
 @endsection
 

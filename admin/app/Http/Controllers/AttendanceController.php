@@ -47,7 +47,8 @@ class AttendanceController extends Controller
        
         $attendancesResults = DB::table('schedules')
             ->join('attendances', 'schedules.id', '=', 'attendances.schedule_id')
-            ->whereBetween('schedules.start_date', [$start, $end]);
+            ->whereBetween('schedules.start_date', [$start, $end])
+            ->where('attendances.status_id', Status::SCHEDULED);
 
         if (Auth::user()->role->id == ROLE::DOCTOR) {
             $doctor_id = Auth::user()->doctors->first()->id;

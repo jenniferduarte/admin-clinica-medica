@@ -5,15 +5,15 @@
 @section('content')
 
 <div class="card card-primary">
-   
+
     <!-- form start -->
     <form role="form" method="post" action="{{ route('attendances.store') }}">
         @csrf
-      
+
         <div class="card-body">
           <div class="row">
             <div class="col-md-6">
-            
+
                 <!-- Médico -->
                 <div class="col-md-12 col-sm-12">
                   <div class="form-group">
@@ -21,8 +21,8 @@
                     <select class="select2 form-control select2-hidden-accessible doctor-select" name="doctor" style="width: 100%;">
                       <option></option>
                       @foreach($doctors as $doctor)
-                      <option value="{{$doctor->id}}"> {{ $doctor->user->name }} 
-                        (@foreach($doctor->specialties as $doctorSpecialty) 
+                      <option value="{{$doctor->id}}"> {{ $doctor->user->name }}
+                        (@foreach($doctor->specialties as $doctorSpecialty)
                           {{ $doctorSpecialty->name }} @if(!$loop->last) | @endif
                         @endforeach)
                       </option>
@@ -37,7 +37,7 @@
                   <div class="form-group">
                     <label>Datas disponíveis*:</label>
                     <div class="input-group" id="date" data-target-input="nearest">
-                        <input type="text" data-toggle="datetimepicker" class="form-control datetimepicker-input timepicker  @error('date') is-invalid @enderror" 
+                        <input type="text" data-toggle="datetimepicker" class="form-control datetimepicker-input timepicker  @error('date') is-invalid @enderror"
                             data-target="#date" placeholder="Selecione" name="date"
                             autocomplete="false" value="{{ old('date') }}">
                           <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
@@ -47,7 +47,7 @@
                     @error('date') <p class="text-danger">{{ $message }}</p> @enderror
                   </div>
                 </div>
-                
+
                 <!-- Horario  -->
                 <div class="col-md-12 col-sm-12">
                   <div class="form-group">
@@ -74,14 +74,14 @@
                   </div>
                 </div>
                 @endcan
-            
+
             </div>
           </div>
         </div>
 
         <div class="card-footer">
             <button type="submit" class="btn btn-primary">Agendar</button>
-            <a href="{{ route('attendances.index') }}" class="btn btn-secondary float-right">Voltar</a>
+            <a href="#" class="btn btn-secondary float-right goback">Voltar</a>
         </div>
     </form>
 </div>
@@ -109,7 +109,7 @@
 
       // Função que buscas via ajax as datas disponíveis por médico
       function availableDates($doctor_id){
-        $.ajax({ 
+        $.ajax({
           url: `/${$doctor_id}/available-dates`,
           type: 'GET',
           dataType: 'json',
@@ -125,15 +125,15 @@
               $(data).each(function(i,v){
                 onlydates.push(v.start_date);
               });
-              loadDates(onlydates);    
+              loadDates(onlydates);
           }else{
             toastr.warning("No momento, este médico não possui nenhuma agenda disponível.");
           }
-         
+
         })
       }
-    
-      // Função que carrega as datas 
+
+      // Função que carrega as datas
       function loadDates(dates){
         $('#date').datetimepicker({
           format: 'DD/MM/YYYY',
@@ -151,7 +151,7 @@
       });
 
       function availableTimes($doctor_id, $date){
-        $.ajax({ 
+        $.ajax({
           url: `/${$doctor_id}/available-times`,
           type: 'GET',
           dataType: 'json',
@@ -162,17 +162,17 @@
           processResults: function (response) {},
           cache: true
         }).done(function(data){
-          
+
           $('.time-select').empty(); // Limpa o select de horarios
 
-          // Ao finalizar a requisição, chama a função para iniciar o select com os horários  
+          // Ao finalizar a requisição, chama a função para iniciar o select com os horários
           $(data).each(function(i,v){
             newOption = new Option(moment(v.start_date).format('HH:mm'), v.id, false, false);
             $('.time-select').append(newOption).trigger('change');
           });
-         
+
           $('.time-select').prop('disabled', false);
-    
+
         })
       }
 

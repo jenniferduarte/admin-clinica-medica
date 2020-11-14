@@ -5,14 +5,14 @@
 @section('content')
 
 <div class="card card-primary">
-   
+
     <!-- form start -->
     <form role="form" method="post" action="{{ route('doctors.schedules.update', [$doctor->id, $schedule->id]) }}">
         @method('PUT')
         @csrf
-      
+
         <div class="card-body">
-          <div class="row"> 
+          <div class="row">
             <!-- Data -->
             <div class="bootstrap-timepicker col-md-5 col-sm-12">
               <div class="form-group">
@@ -68,14 +68,14 @@
 
                     @error('consultation_time') <p class="text-danger">{{ $message }}</p> @enderror
                 </div>
-            </div> 
+            </div>
 
             <div class="form-group">
                 <label for="name">Active</label> <br>
                 <div class="bootstrap-switch">
                     <div class="bootstrap-switch-container">
                         <input type="hidden" name="is_active" value="0">
-                        <input type="checkbox" name="is_active" data-bootstrap-switch="" data-off-color="danger" data-on-color="success" id="active" value="1" 
+                        <input type="checkbox" name="is_active" data-bootstrap-switch="" data-off-color="danger" data-on-color="success" id="active" value="1"
                             {{ old('is_active', $schedule->active) ? 'checked' : '' }}
                         >
                     </div>
@@ -87,13 +87,13 @@
 
         <div class="card-footer">
             <button type="submit" class="btn btn-primary">Salvar</button>
-            
+
             <form id="deleteForm" action="{{ route('doctors.schedules.destroy', [$doctor->id, $schedule->id]) }}" method="post">
               @method('delete') @csrf
               <button type="submit" data-id="{{ $doctor->id }}" class="text-danger btn btn-delete">Deletar</button>
             </form>
 
-            <a href="{{ route('doctors.schedules.index', $doctor->id) }}" class="btn btn-secondary float-right">Voltar</a>
+            <a href="#" class="btn btn-secondary float-right goback">Voltar</a>
         </div>
     </form>
 </div>
@@ -104,7 +104,7 @@
     <script type="text/javascript">
 
 $(function() {
-            
+
     //Datepicker
     $('#date').datetimepicker({
         allowMultidate: true,
@@ -128,6 +128,6 @@ $(function() {
 });
 
 
-          
+
     </script>
 @endsection
