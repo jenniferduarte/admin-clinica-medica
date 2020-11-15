@@ -53,7 +53,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <a href="{{ route('edit-password') }}" class="nav-link">
                                 <p>
                                     Alterar senha
                                 </p>

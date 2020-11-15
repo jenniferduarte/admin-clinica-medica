@@ -9,6 +9,8 @@ use App\Role;
 use App\Patient;
 use App\Gender;
 use App\Http\Requests\UserUpdateRequest;
+use Auth;
+use App\Http\Requests\UserUpdatePasswordRequest;
 
 
 class UserController extends Controller
@@ -111,5 +113,25 @@ class UserController extends Controller
         );
 
         return redirect()->action('HomeController@index')->with($notification);
+    }
+
+    public function editPassword()
+    {
+        return view('admin.users.edit-password');
+    }
+
+    public function updatePassword(UserUpdatePasswordRequest $request)
+    {
+        $user = Auth::user();
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        $notification = array(
+            'message' => 'Senha alterada com sucesso!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->action('UserController@updatePassword')->with($notification);
     }
 }

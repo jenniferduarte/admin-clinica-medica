@@ -33,6 +33,8 @@ Route::resources([
     'users'             => 'UserController',
 ]);
 
+Route::get('/password', 'UserController@editPassword')->name('edit-password');
+Route::put('/password', 'UserController@updatePassword')->name('update-password');
 
 // Ajax
 //Route::post('/search-doctors', 'DoctorController@ajaxSearch')->name('search-doctors');
