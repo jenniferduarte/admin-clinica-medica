@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class Kernel extends ConsoleKernel
 {
@@ -25,9 +26,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        # Apaga todos os horários disponíveis para marcação de consulta que estão vagos
+        # e que já passaram da data corrente menos 1 dia
         $schedule->call(function () {
-            DB::table('schedules')->where('end_date' < now() && 'vacant' == 1)->delete();
-        })->everyMinute();
+            DB::table('schedules')
+                ->where('end_date', '<', Carbon::now()->subDays(1))
+                ->where('vacant', 1)->delete();
+        })->dailyAt('23:59');
     }
 
     /**

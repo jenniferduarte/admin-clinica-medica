@@ -81,7 +81,7 @@ class ScheduleController extends Controller
                 }
             }
         }
-    
+
         $notification = array(
             'message' => 'Criado com sucesso!',
             'alert-type' => 'success'
