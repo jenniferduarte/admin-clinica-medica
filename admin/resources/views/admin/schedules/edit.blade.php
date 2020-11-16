@@ -70,14 +70,16 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="name">Active</label> <br>
-                <div class="bootstrap-switch">
-                    <div class="bootstrap-switch-container">
-                        <input type="hidden" name="is_active" value="0">
-                        <input type="checkbox" name="is_active" data-bootstrap-switch="" data-off-color="danger" data-on-color="success" id="active" value="1"
-                            {{ old('is_active', $schedule->active) ? 'checked' : '' }}
-                        >
+            <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                    <label for="name">Active</label> <br>
+                    <div class="bootstrap-switch">
+                        <div class="bootstrap-switch-container">
+                            <input type="hidden" name="is_active" value="0">
+                            <input type="checkbox" name="is_active" data-bootstrap-switch="" data-off-color="danger" data-on-color="success" id="active" value="1"
+                                {{ old('is_active', $schedule->active) ? 'checked' : '' }}
+                            >
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,14 +88,16 @@
         </div>
 
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Salvar</button>
 
             <form id="deleteForm" action="{{ route('doctors.schedules.destroy', [$doctor->id, $schedule->id]) }}" method="post">
               @method('delete') @csrf
               <button type="submit" data-id="{{ $doctor->id }}" class="text-danger btn btn-delete">Deletar</button>
             </form>
 
-            <a href="#" class="btn btn-secondary float-right goback">Voltar</a>
+            <div class="float-right">
+                <button type="submit" class="btn btn-success">Salvar</button>
+                <a href="#" class="btn btn-secondary goback">Voltar</a>
+            </div>
         </div>
     </form>
 </div>

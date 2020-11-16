@@ -60,12 +60,16 @@
         <div class="card-footer">
         </form>
 
-            <button type="submit" class="btn btn-success" form="edit-form">Salvar</button>
             <form id="deleteForm" action="{{ route('medicaments.destroy', $medicament->id ) }}" method="post">
                 @method('delete') @csrf
                 <button type="submit" data-id="{{ $medicament->id }}" class="text-danger btn btn-delete">Deletar</button>
             </form>
-            <a href="#" class="btn btn-secondary float-right goback">Voltar</a>
+
+            <div class="float-right">
+                <button type="submit" class="btn btn-success" form="edit-form">Salvar</button>
+                <a href="#" class="btn btn-secondary goback">Voltar</a>
+            </div>
+
         </div>
 
     </form>

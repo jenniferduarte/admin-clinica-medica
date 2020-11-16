@@ -57,14 +57,18 @@
     </form>
 
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary" form="edit-form">Salvar</button>
         @can('delete', $doctor)
         <form id="deleteForm" action="{{ route('doctors.destroy', $doctor->id ) }}" method="post">
             @method('delete') @csrf
             <button type="submit" data-id="{{ $doctor->id }}" class="text-danger btn btn-delete">Deletar</button>
         </form>
         @endcan
-        <a href="#" class="btn btn-secondary float-right goback">Voltar</a>
+
+        <div class="float-right">
+            <button type="submit" class="btn btn-success" form="edit-form">Salvar</button>
+            <a href="#" class="btn btn-secondary goback">Voltar</a>
+        </div>
+
     </div>
 
 </div>

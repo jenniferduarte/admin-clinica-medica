@@ -104,8 +104,10 @@
         </div>
 
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
-            <a href="#" class="btn btn-secondary float-right goback">Voltar</a>
+            <div class="float-right">
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <a href="#" class="btn btn-secondary goback">Voltar</a>
+            </div>
         </div>
     </form>
 </div>

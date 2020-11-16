@@ -99,8 +99,9 @@
       // Quando muda a seleção do médico, busca as datas disponíveis e reconstrói o calendário
       $('.doctor-select').change(function(e) {
 
-        $('.datetimepicker-input').val(''); // Limpa o select de datas
-        $('.time-select').empty(); // Limpa o select de horarios
+        $('.datetimepicker-input').val('').datetimepicker('disable'); // Limpa e desabilita o select de datas
+
+        $('.time-select').empty().prop('disabled', true); // Limpa e desabilita  o select de horarios
 
         $doctor_id = $(this).children("option:selected").val();
         availableDates($doctor_id);

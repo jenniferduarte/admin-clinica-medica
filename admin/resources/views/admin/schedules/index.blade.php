@@ -4,7 +4,7 @@
 
 @section('quick-actions')
 <a href="{{ route('doctors.schedules.create', $doctor->id) }}" class="btn btn-block btn-outline-success btn-sm">
-    <i class="nav-icon fas fa-user-md"></i>  Novos horários 
+    <i class="nav-icon fas fa-user-md"></i>  Novos horários
 </a>
 @endsection
 
@@ -36,11 +36,11 @@
                     <td>{{ $schedule->consultation_time }}</td>
                     <td>{{ $schedule->vacant ? 'Sim' : 'Não' }}</td>
                     <td>{{ $schedule->active ? 'Sim' : 'Não' }}</td>
-                    <td> 
+                    <td>
                         <div class="btn-group" role="group">
-                            <a href="{{ route('doctors.schedules.show', [$doctor->id, $schedule->id]) }}" class="btn btn-secondary">
+                            {{-- <a href="{{ route('doctors.schedules.show', [$doctor->id, $schedule->id]) }}" class="btn btn-secondary">
                                 <i class="fas fa-eye"></i>
-                            </a>   
+                            </a>    --}}
                             <a href="{{ route('doctors.schedules.edit', [$doctor->id, $schedule->id]) }}" class="btn btn-secondary">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
@@ -52,6 +52,6 @@
         </table>
     </div>
 </div>
-   
+
 @endsection
 

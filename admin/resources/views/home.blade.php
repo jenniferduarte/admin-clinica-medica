@@ -8,10 +8,11 @@
     <div id="calendarDoctor"></div>
 @endcan
 
-{{-- Patient --}}
-@can('isPatient')
+<!-- Aqui está sendo usado a verificação por role pois é para aparecer APENAS para pacientes
+(não faz muito sentido mostrar esses atalhos para administradores). -->
+@if(Auth::user()->role_id == Role::PATIENT)
     @include('home_patient')
-@endcan
+@endif
 
 @endsection
 

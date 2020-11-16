@@ -109,14 +109,18 @@
     </form>
 
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary" form="edit-form">Atualizar</button>
+
         @can('delete', $patient)
         <form id="deleteForm" action="{{ route('patients.destroy', $patient->id ) }}" method="post">
             @method('delete') @csrf
             <button type="submit" data-id="{{ $patient->id }}" class="text-danger btn btn-delete">Deletar</button>
         </form>
         @endcan
-        <a href="#" class="btn btn-secondary float-right goback">Voltar</a>
+
+        <div class="float-right">
+            <button type="submit" class="btn btn-success" form="edit-form">Atualizar</button>
+            <a href="#" class="btn btn-secondary goback">Voltar</a>
+        </div>
     </div>
 
 </div>
