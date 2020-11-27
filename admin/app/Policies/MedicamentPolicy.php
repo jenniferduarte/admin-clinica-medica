@@ -2,12 +2,11 @@
 
 namespace App\Policies;
 
-use App\Patient;
+use App\Medicament;
 use App\User;
-use App\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PatientPolicy
+class MedicamentPolicy
 {
     use HandlesAuthorization;
 
@@ -19,19 +18,19 @@ class PatientPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->role_id === Role::RECEPTIONIST || $user->role_id === Role::DOCTOR;
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Patient  $patient
+     * @param  \App\Medicament  $medicament
      * @return mixed
      */
-    public function view(User $user, Patient $patient)
+    public function view(User $user, Medicament $medicament)
     {
-        return $user->id === $patient->user_id || $user->role_id === Role::DOCTOR || $user->role_id === Role::RECEPTIONIST;
+        //
     }
 
     /**
@@ -42,29 +41,29 @@ class PatientPolicy
      */
     public function create(User $user)
     {
-        return $user->role_id === Role::RECEPTIONIST;
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Patient  $patient
+     * @param  \App\Medicament  $medicament
      * @return mixed
      */
-    public function update(User $user, Patient $patient)
+    public function update(User $user, Medicament $medicament)
     {
-        return $user->id === $patient->user_id || $user->role_id === Role::DOCTOR || $user->role_id === Role::RECEPTIONIST;
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Patient  $patient
+     * @param  \App\Medicament  $medicament
      * @return mixed
      */
-    public function delete(User $user, Patient $patient)
+    public function delete(User $user, Medicament $medicament)
     {
         //
     }
@@ -73,10 +72,10 @@ class PatientPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Patient  $patient
+     * @param  \App\Medicament  $medicament
      * @return mixed
      */
-    public function restore(User $user, Patient $patient)
+    public function restore(User $user, Medicament $medicament)
     {
         //
     }
@@ -85,10 +84,10 @@ class PatientPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Patient  $patient
+     * @param  \App\Medicament  $medicament
      * @return mixed
      */
-    public function forceDelete(User $user, Patient $patient)
+    public function forceDelete(User $user, Medicament $medicament)
     {
         //
     }

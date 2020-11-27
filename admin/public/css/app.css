@@ -17974,10 +17974,12 @@ button.toast-close-button {
 }
 
 .login-page {
-  background-image: url(/images/login-bg.jpg?bd4b200525922ab3f62be88c4370a848);
+  background-image: url(/images/login-bg.jpg?7600bf8fb85b082bada703f6e47f0e22);
   background-size: cover;
   background-repeat: no-repeat;
-  background-blend-mode: overlay;
+  background-position: top center;
+  background-blend-mode: multiply;
+  background-color: #b7b7b7;
 }
 
 .fc-timegrid-event .fc-event-time,

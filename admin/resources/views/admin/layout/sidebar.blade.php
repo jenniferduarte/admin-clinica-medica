@@ -47,7 +47,7 @@
                         <li class="nav-item">
                             <a href="{{ route('users.edit', Auth::user()->id ) }}" class="nav-link">
                                 <p>
-                                    Meus dados
+                                    Atualizar dados pessoais
                                 </p>
                             </a>
                         </li>
@@ -64,6 +64,36 @@
                 </li>
 
                 <hr>
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-syringe"></i>
+                        <p>
+                            Exames e prescrições
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" >
+                        <li class="nav-item">
+                            <a href="{{ route('results.index') }}" class="nav-link">
+                                <p>
+                                    Resultados de exames
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <p>
+                                    Prescrições
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <hr>
+
 
                 @can('isAdmin')
                 <li class="nav-item has-treeview">
@@ -138,6 +168,30 @@
                 </li>
 
                 <hr>
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-flask"></i>
+                        <p>
+                            Laboratórios
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" >
+                        <li class="nav-item">
+                            <a href="{{ route('laboratories.index') }}" class="nav-link">
+                                <p>Ver todos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('laboratories.create') }}" class="nav-link">
+                                <p>Adicionar</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <hr>
                 @endcan
 
                 <li class="nav-item has-treeview">
@@ -168,7 +222,7 @@
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();" class="nav-link">
                         <i class="fas fa-sign-out-alt nav-icon"></i>
-                        <p>{{ __('Logout') }} </p>
+                        <p>Sair</p>
                     </a>
                 </li>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

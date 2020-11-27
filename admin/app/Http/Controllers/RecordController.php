@@ -39,7 +39,7 @@ class RecordController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Patient $patient)
-    {   
+    {
         if (Auth::user()->role->id == Role::DOCTOR) {
             return view('admin.records.create', [
                 'patient'       => $patient,
@@ -59,12 +59,11 @@ class RecordController extends Controller
      */
     public function store(RecordStoreRequest $request, Patient $patient)
     {
-
-       // dd($request->input('medicaments'), $request->input('dosages')[1]);
+        # TODO: usar transaction
 
         $doctor = Doctor::where('user_id', Auth::user()->id)->get();
-     
-        //Verifica se o cliente já tem algum histórico, se não tiver, cria um
+
+        # Verifica se o cliente já tem algum histórico, se não tiver, cria um
         $patient_history = History::where('patient_id', $patient->id)->get();
         if(!count($patient_history))
         {
@@ -72,29 +71,29 @@ class RecordController extends Controller
                 'patient_id' => $patient->id
             ]);
         }
-    
+
         $patient_history = History::where('patient_id', $patient->id)->get()[0];
 
         $record = Record::create([
-            'anamnesis'             => $request->input('anamnesis'), 
-            'family_history'        => $request->input('family_history'), 
-            'treatment_plan'        => $request->input('treatment_plan'), 
+            'anamnesis'             => $request->input('anamnesis'),
+            'family_history'        => $request->input('family_history'),
+            'treatment_plan'        => $request->input('treatment_plan'),
             'history_id'            => $patient_history->id,
             'doctor_id'             => $doctor[0]->id,
-            'diagnostic_conclusion' => $request->input('diagnostic_conclusion'), 
-            'weight'                => $request->input('weight'), 
-            'height'                => $request->input('height'), 
-            'heart_rate'            => $request->input('heart_rate'), 
+            'diagnostic_conclusion' => $request->input('diagnostic_conclusion'),
+            'weight'                => $request->input('weight'),
+            'height'                => $request->input('height'),
+            'heart_rate'            => $request->input('heart_rate'),
             'respiratory_frequency' => $request->input('respiratory_frequency'),
-            'systolic_bp'           => $request->input('systolic_bp'), 
-            'diastolic_bp'          => $request->input('diastolic_bp'), 
-            'temperature'           => $request->input('temperature'), 
-            'allergy'               => $request->input('allergy'), 
+            'systolic_bp'           => $request->input('systolic_bp'),
+            'diastolic_bp'          => $request->input('diastolic_bp'),
+            'temperature'           => $request->input('temperature'),
+            'allergy'               => $request->input('allergy'),
             'chronic_diseases'      => $request->input('chronic_diseases'),
-            'hypertension'          => $request->input('hypertension'), 
-            'diabetes'              => $request->input('diabetes'), 
-            'smoker'                => $request->input('smoker'), 
-            'drug_user'             => $request->input('drug_user'), 
+            'hypertension'          => $request->input('hypertension'),
+            'diabetes'              => $request->input('diabetes'),
+            'smoker'                => $request->input('smoker'),
+            'drug_user'             => $request->input('drug_user'),
             'expected_return'       => $request->input('expected_return')
         ]);
 
@@ -121,7 +120,7 @@ class RecordController extends Controller
         # Persiste os exames
         if($request->input('exams'))
         {
-            foreach($request->input('exams') as $index => $exam_id) 
+            foreach($request->input('exams') as $index => $exam_id)
             {
                 $exam = Exam::find($exam_id);
 
@@ -150,7 +149,7 @@ class RecordController extends Controller
     {
         return view('admin.records.show',[
             'patient' => $patient,
-            'record'  => $record  
+            'record'  => $record
         ]);
     }
 

@@ -4,7 +4,21 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+use Illuminate\Support\Facades\Gate;
 use App\Role;
+
+use App\Result;
+use App\Policies\ResultPolicy;
+
+use App\Doctor;
+use App\Laboratory;
+use App\Medicament;
+use App\Patient;
+use App\Policies\DoctorPolicy;
+use App\Policies\LaboratoryPolicy;
+use App\Policies\MedicamentPolicy;
+use App\Policies\PatientPolicy;
+
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,8 +28,12 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Patient'   => 'App\Policies\PatientPolicy',
-        'App\Doctor'    => 'App\Policies\DoctorPolicy',
+        #'App\Doctor'        => 'App\Policies\DoctorPolicy',
+        #'App\Laboratory'    => 'App\Policies\LaboratoryPolicy',
+        #'App\Medicament'    => 'App\Policies\MedicamentPolicy',
+        #'App\Patient'       => 'App\Policies\PatientPolicy',
+        #'App\Result'       => 'App\Policies\ResultPolicy',
+        Result::class => ResultPolicy::class,
     ];
 
     /**
@@ -27,6 +45,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        //Gate::define('loremipsum', 'App\Policies\ResultPolicy@viewAny');
+
         // Se for usuário do tipo Admin, possui controle total da aplicação
         $gate->before(function ($user, $ability) {
             if ($user->role->id == Role::ADMIN) {
@@ -34,8 +54,9 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        /*
         // Doctor
-        $gate->define('isDoctor', function($user) {
+        $gate->define('isDoctor', function ($user) {
             return $user->role->id === Role::DOCTOR;
         });
 
@@ -46,7 +67,14 @@ class AuthServiceProvider extends ServiceProvider
 
         // Receptionist
         $gate->define('isReceptionist', function ($user) {
-            return $user->role->id === Role::RECEPTIONIST    ;
+            return $user->role->id === Role::RECEPTIONIST;
         });
+
+        $gate->define('isLaboratory', function ($user) {
+            return $user->role->id === Role::LABORATORY;
+        });
+        */
+
+
     }
 }

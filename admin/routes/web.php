@@ -27,9 +27,11 @@ Route::resources([
     'attendances'       => 'AttendanceController',
     'doctors'           => 'DoctorController',
     'doctors.schedules' => 'ScheduleController',
+    'laboratories'      => 'LaboratoryController',
     'medicaments'       => 'MedicamentController',
     'patients'          => 'PatientController',
     'patients.records'  => 'RecordController',
+    'results'           => 'ResultController',
     'users'             => 'UserController',
 ]);
 

@@ -23,18 +23,13 @@
     </form>
 
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary" form="edit-form">Salvar</button>
-
-        <a href="#" class="btn btn-secondary float-right goback">Voltar</a>
+        <div class="float-right">
+            <button type="submit" class="btn btn-success" form="edit-form">Salvar</button>
+            <a href="#" class="btn btn-secondary goback">Voltar</a>
+        </div>
     </div>
 
 </div>
 
-
 @endsection
 
-@section('javascript')
-
-<script></script>
-
-@endsection

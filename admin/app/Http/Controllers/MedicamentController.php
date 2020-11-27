@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Medicament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\MedicamentStoreRequest;
 
 class MedicamentController extends Controller
@@ -21,6 +22,8 @@ class MedicamentController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny');
+
         $medicaments = Medicament::all();
 
         return view('admin.medicaments.index', [
@@ -35,6 +38,8 @@ class MedicamentController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create');
+
         return view('admin.medicaments.create');
     }
 
@@ -46,6 +51,8 @@ class MedicamentController extends Controller
      */
     public function store(MedicamentStoreRequest $request)
     {
+        Gate::authorize('create');
+
         $medicament = Medicament::create($request->all());
 
         $notification = array(
@@ -64,6 +71,8 @@ class MedicamentController extends Controller
      */
     public function show(Medicament $medicament)
     {
+        Gate::authorize('view', $medicament);
+
         return view('admin.medicaments.show', [
             'medicament' => $medicament
         ]);
@@ -77,6 +86,8 @@ class MedicamentController extends Controller
      */
     public function edit(Medicament $medicament)
     {
+        Gate::authorize('update', $medicament);
+
         return view('admin.medicaments.edit', [
             'medicament' => $medicament
         ]);
@@ -91,6 +102,8 @@ class MedicamentController extends Controller
      */
     public function update(MedicamentStoreRequest $request, Medicament $medicament)
     {
+        Gate::authorize('update', $medicament);
+
         $medicament->update($request->all());
 
         $notification = array(
@@ -109,6 +122,8 @@ class MedicamentController extends Controller
      */
     public function destroy(Medicament $medicament)
     {
+        Gate::authorize('delete', $medicament);
+
         $medicament->delete();
 
         $notification = array(

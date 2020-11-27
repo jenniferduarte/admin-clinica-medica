@@ -110,7 +110,9 @@
     background-image: url('./img/login-bg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-blend-mode: overlay;
+    background-position: top center;
+    background-blend-mode: multiply;
+    background-color: #b7b7b7;
 }
 
 .fc-timegrid-event .fc-event-time,

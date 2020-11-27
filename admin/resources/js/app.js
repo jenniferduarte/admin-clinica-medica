@@ -5,13 +5,14 @@ require('datatables.net');
 require('datatables.net-responsive');
 require('datatables.net-bs4');
 require('jquery-mask-plugin');
-require('./mask'); 
+require('./mask');
 require('select2');
-require('bootstrap-switch'); 
+require('bootstrap-switch');
 require('tempusdominus-bootstrap-4');
 require('daterangepicker');
 require('./fullcalendar.js');
 require('./attendance.js');
+import bsCustomFileInput from 'bs-custom-file-input';
 
 
 $(document).ready(function () {
@@ -21,7 +22,7 @@ $(document).ready(function () {
         $('.select2').select2({
             placeholder: "Selecione"
         });
-    }   
+    }
 
     // Inicializa o DataTable
     if ($('.datatable').length > 0) {
@@ -37,7 +38,7 @@ $(document).ready(function () {
                 "order": [[ 0, "desc" ]]
             });
         });
-    } 
+    }
 
     // Bootstrap Switch
     $("input[data-bootstrap-switch]").each(function () {
@@ -49,6 +50,7 @@ $(document).ready(function () {
         $(".date").unmask();
         $(".cpf").unmask();
         $(".phone_with_ddd").unmask();
+        $(".cnpj").unmask();
     });
 
     $(".goback").click(function (e) {
@@ -61,7 +63,7 @@ $(document).ready(function () {
         $('.select2-medicaments').select2({
             placeholder: "Selecione"
         });
-    }   
+    }
 
     $(".clone-medicaments").click(function (e) {
         $('.select2-medicaments').select2("destroy");
@@ -70,12 +72,14 @@ $(document).ready(function () {
         $clone.find('.dosage').val('');
         $('#medicaments-selections').append($clone);
         $('.select2-medicaments').select2({placeholder: "Selecione"});
-    }); 
+    });
 
     $(".remove-medicament").click(function (e){
         medicaments = $(this).closest('.medicaments');
         medicaments.closest('.select2-medicaments').select2('destroy');
         medicaments.remove();
     });
-  
+
+    bsCustomFileInput.init()
+
 });

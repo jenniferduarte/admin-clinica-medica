@@ -188,8 +188,8 @@
                     </div>
                 </div>
 
-                 <!-- Fumante -->
-                  <div class="col-md-2 col-sm-12">
+                <!-- Fumante -->
+                <div class="col-md-2 col-sm-12">
                     <label for="smoker">Fumante?</label> <br>
                     <div class="bootstrap-switch">
                         <div class="bootstrap-switch-container">
