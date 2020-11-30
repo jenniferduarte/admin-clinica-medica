@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label for="name">Nome*</label>
+                        <label for="name">Nome do laboratório*</label>
                         <input type="text"
                             class="form-control @error('name') is-invalid  @enderror"
                             name="name" id="name"
@@ -30,7 +30,7 @@
 
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">Email institucional*</label>
                         <input type="email"
                             class="form-control @error('email') is-invalid  @enderror"
                             name="email" id="email"
@@ -45,7 +45,7 @@
 
                 <div class="col-md-4 col-sm-12">
                     <div class="form-group">
-                        <label for="phone">Telefone</label>
+                        <label for="phone">Telefone para contato</label>
                         <input type="tel"
                             class="form-control phone_with_ddd @error('phone') is-invalid  @enderror"
                             name="phone" id="phone"
@@ -78,6 +78,7 @@
                     <div class="form-group">
                         <label for="user">Usuário responsável*</label>
                         <select class="select2 form-control select2-hidden-accessible" name="user_id" style="width: 100%;" required>
+                            <option></option>
                             @foreach($users as $user)
                                 <option value="{{$user->id}}"> {{ $user->name }} ({{ $user->email }})</option>
                             @endforeach

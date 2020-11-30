@@ -39,10 +39,13 @@
                 <strong><i class="fas fa-building mr-1"></i> Laboratório </strong>
                 <p class="text-muted">{{ $result->laboratory->name }}</p>
 
+                @can('isDoctor')
                 <hr>
 
                 <strong><i class="fas fa-building mr-1"></i> Visível ao paciente</strong>
                 <p class="text-muted">{{ $result->show_to_patient ? 'Sim' : 'Não' }}</p>
+                @endcan
+
             </div>
         </div>
     </div>

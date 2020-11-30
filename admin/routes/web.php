@@ -31,6 +31,8 @@ Route::resources([
     'medicaments'       => 'MedicamentController',
     'patients'          => 'PatientController',
     'patients.records'  => 'RecordController',
+    'receptionists'     => 'ReceptionistController',
+    'responsibles'      => 'ResponsibleController',
     'results'           => 'ResultController',
     'users'             => 'UserController',
 ]);

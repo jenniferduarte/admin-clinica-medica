@@ -62,6 +62,12 @@
                     </div>
                 </div>
 
+                {{-- TODO: temporario. depois passar a utilizar como validação. requiredIf..  --}}
+                @can('isLaboratory')
+                <input type="hidden" name="laboratory_id" value="{{ Auth::user()->laboratory->id }}"/>
+                <input type="hidden" name="show_to_patient" value="0"/>
+                @endcan
+
                 @can('isAdmin')
                 <!-- Laboratório -->
                 <div class="col-md-4 col-sm-12">
@@ -79,6 +85,8 @@
                     </div>
                 </div>
                 @endcan
+
+
 
                 @can('isDoctor')
                 <!-- Mostrar ao paciente -->

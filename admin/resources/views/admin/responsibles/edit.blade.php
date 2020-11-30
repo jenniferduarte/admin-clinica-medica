@@ -1,6 +1,6 @@
 @extends('admin.layout.template')
 
-@section('page-name') Editar dados › {{ $user->name }} @endsection {{-- Page Name --}}
+@section('page-name') Editar receptionista › {{ $user->name }} @endsection {{-- Page Name --}}
 
 @section('content')
 
@@ -23,7 +23,6 @@
     </form>
 
     <div class="card-footer">
-
         @can('delete', $user)
         <form id="deleteForm" action="{{ route('users.destroy', $user->id ) }}" method="post">
             @method('delete') @csrf
@@ -35,9 +34,9 @@
             <button type="submit" class="btn btn-success" form="edit-form">Salvar</button>
             <a href="#" class="btn btn-secondary goback">Voltar</a>
         </div>
+
     </div>
 
 </div>
 
 @endsection
-

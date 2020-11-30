@@ -35,9 +35,9 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Recepcionista',
-            'email' => 'recepcionista@recepcionista.com',
-            'password' => Hash::make('recepcionista123'),
+            'name' => 'Receptionista',
+            'email' => 'receptionista@receptionista.com',
+            'password' => Hash::make('receptionista123'),
             'role_id' => '4',
             'clinic_id' => '1'
         ]);

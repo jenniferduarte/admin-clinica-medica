@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserUpdateRequest extends FormRequest
+class UserStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +25,7 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name'          => 'required',
+            'email'         => 'required|email|unique:users',
 
             // Address Rules
             'street'        => 'required',
@@ -42,8 +43,11 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name.required'         => 'Este campo deve ser preenchido.',
+            'email.required'        => 'Este campo deve ser preenchido.',
+            'email.email'           => 'Favor preencha corretamente.',
+            'email.unique'          => 'Email já cadastrado.',
 
-            // Address rules
+            // Address Rules
             'street.required'       => 'Este campo deve ser preenchido.',
             'number.required'       => 'Este campo deve ser preenchido.',
             'district.required'     => 'Este campo deve ser preenchido.',
@@ -54,5 +58,4 @@ class UserUpdateRequest extends FormRequest
             // End Address Rules
         ];
     }
-
 }

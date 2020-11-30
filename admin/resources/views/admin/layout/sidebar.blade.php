@@ -147,6 +147,31 @@
 
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-user-clock"></i>
+                        <p>
+                            Recepcionistas
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" >
+                        <li class="nav-item">
+                            <a href="{{ route('receptionists.index') }}" class="nav-link">
+                                <p>Ver todos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('receptionists.create') }}" class="nav-link">
+                                <p>Adicionar</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <hr>
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-capsules"></i>
                         <p>
                             Medicamentos
@@ -161,6 +186,30 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('medicaments.create') }}" class="nav-link">
+                                <p>Adicionar</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <hr>
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-flask"></i>
+                        <p>
+                            Responsáveis (Lab)
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" >
+                        <li class="nav-item">
+                            <a href="{{ route('responsibles.index') }}" class="nav-link">
+                                <p>Ver todos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                        <a href="{{ route('responsibles.create') }}" class="nav-link">
                                 <p>Adicionar</p>
                             </a>
                         </li>

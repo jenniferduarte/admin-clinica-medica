@@ -2,24 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Doctor;
 use Illuminate\Http\Request;
-use App\Gender;
-use App\Specialty;
 use App\User;
 use App\Role;
-use App\Schedule;
 use App\Address;
-use Carbon\Carbon;
-use App\Http\Requests\DoctorStoreRequest;
-use App\Http\Requests\DoctorUpdateRequest;
+use App\Gender;
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
 use Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\UserRegistered;
 
-class DoctorController extends Controller
+class ResponsibleController extends Controller
 {
     public function __construct()
     {
@@ -36,10 +32,10 @@ class DoctorController extends Controller
     {
         Gate::authorize('viewAny', Auth::user());
 
-        $doctors = Doctor::all();
+        $responsibles = User::where('role_id', Role::LABORATORY)->get();
 
-        return view('admin.doctors.index', [
-            'doctors' => $doctors
+        return view('admin.responsibles.index', [
+            'responsibles' => $responsibles
         ]);
     }
 
@@ -52,9 +48,8 @@ class DoctorController extends Controller
     {
         Gate::authorize('create', Auth::user());
 
-        return view('admin.doctors.create', [
-            'genders' =>  Gender::all(),
-            'specialties' => Specialty::all()
+        return view('admin.responsibles.create', [
+            'genders' =>  Gender::all()
         ]);
     }
 
@@ -64,7 +59,7 @@ class DoctorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DoctorStoreRequest $request)
+    public function store(UserStoreRequest $request)
     {
         Gate::authorize('create', Auth::user());
 
@@ -78,19 +73,13 @@ class DoctorController extends Controller
             'name'          => $request->input('name'),
             'email'         => $request->input('email'),
             'password'      => Hash::make($password),
-            'role_id'       => Role::DOCTOR,
+            'role_id'       => Role::LABORATORY,
             'cpf'           => $request->input('cpf'),
             'rg'            => $request->input('rg'),
             'birth_date'    => $request->input('birth_date'),
             'phone'         => $request->input('phone'),
             'gender_id'     => $request->input('gender'),
             'clinic_id'     => 1
-        ]);
-
-        // Cria o paciente
-        $doctor = Doctor::create([
-            'user_id'   => $user->id,
-            'crm'       => $request->input('crm'),
         ]);
 
         // Cria o endereço
@@ -107,16 +96,6 @@ class DoctorController extends Controller
             'responsible_id'    => $user->id
         ]);
 
-        // Cadastro das especialidades
-        if ($request->has('specialties')) {
-            $specialties = $request->input('specialties');
-
-            foreach ($specialties as $specialty_id) {
-                $specialty = Specialty::find($specialty_id);
-                $doctor->specialties()->save($specialty);
-            }
-        }
-
         Mail::to($user)->send(new UserRegistered($user, $password));
 
         $notification = array(
@@ -124,38 +103,37 @@ class DoctorController extends Controller
             'alert-type'    => 'success'
         );
 
-        return redirect()->action('DoctorController@index')->with($notification);
+        return redirect()->action('ResponsibleController@index')->with($notification);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Doctor  $doctor
+     * @param  \App\Receptionist  $receptionist
      * @return \Illuminate\Http\Response
      */
-    public function show(Doctor $doctor)
+    public function show(User $responsible)
     {
-        Gate::authorize('view', $doctor);
+        Gate::authorize('view', $responsible);
 
-        return view('admin.doctors.show', [
-            'doctor' => $doctor
+        return view('admin.users.show', [
+            'user' => $responsible
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Doctor  $doctor
+     * @param  \App\Receptionist  $receptionist
      * @return \Illuminate\Http\Response
      */
-    public function edit(Doctor $doctor)
+    public function edit(User $responsible)
     {
-        Gate::authorize('update', $doctor);
+        Gate::authorize('update', $responsible);
 
-        return view('admin.doctors.edit', [
-            'doctor'        => $doctor,
+        return view('admin.users.edit', [
+            'user'          => $responsible,
             'genders'       => Gender::all(),
-            'specialties'   => Specialty::all()
         ]);
     }
 
@@ -163,14 +141,14 @@ class DoctorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Doctor  $doctor
+     * @param  \App\Receptionist  $receptionist
      * @return \Illuminate\Http\Response
      */
-    public function update(DoctorUpdateRequest $request, Doctor $doctor)
+    public function update(UserUpdateRequest $request, User $responsible)
     {
-        Gate::authorize('update', $doctor);
+        Gate::authorize('update', $responsible);
 
-        User::find($doctor->user_id)->update([
+        User::find($responsible->id)->update([
             'name'          => $request->input('name'),
             'cpf'           => $request->input('cpf'),
             'rg'            => $request->input('rg'),
@@ -179,12 +157,8 @@ class DoctorController extends Controller
             'birth_date'    => $request->input('birth_date'),
         ]);
 
-        Doctor::find($doctor->id)->update([
-            'crm' => $request->input('crm'),
-        ]);
-
         // Atualiza o endereço
-        Address::find($doctor->user->addresses()->first()->id)->update([
+        Address::find($responsible->addresses()->first()->id)->update([
             'street'            => $request->input('street'),
             'number'            => $request->input('number'),
             'district'          => $request->input('district'),
@@ -195,98 +169,32 @@ class DoctorController extends Controller
             'city'              => $request->input('city'),
         ]);
 
-        // Remove todas as categorias associadas e cadastra as novas
-        $doctor->specialties()->detach();
-
-        if ($request->has('specialties')) {
-            $specialties = $request->input('specialties');
-
-            foreach ($specialties as $specialty_id) {
-                $specialty = Specialty::find($specialty_id);
-                $doctor->specialties()->save($specialty);
-            }
-        }
-
         $notification = array(
             'message'       => 'Atualizado com sucesso!',
             'alert-type'    => 'success'
         );
 
-        return redirect()->action('DoctorController@edit', $doctor->id)->with($notification);
+        return redirect()->action('ReceptionistController@edit', $responsible->id)->with($notification);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Doctor  $doctor
+     * @param  \App\User  $receptionist
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Doctor $doctor)
+    public function destroy(User $responsible)
     {
-        Gate::authorize('delete', $doctor);
+        Gate::authorize('delete', $responsible);
 
-        # Exclui o usuário e o médico
-        $doctor->user->delete();
-        $doctor->delete();
+        # Exclui o usuário
+        $responsible->delete();
 
         $notification = array(
             'message'       => 'Excluído com sucesso!',
             'alert-type'    => 'success'
         );
 
-        return redirect()->action('DoctorController@index')->with($notification);
-    }
-
-    public function availableDates(Request $request, Doctor $doctor)
-    {
-        $dates = Schedule::where([
-            ['start_date', '>=', now()],
-            ['doctor_id', '=', $doctor->id]
-        ])->get();
-
-        return json_encode($dates);
-    }
-
-    public function availableTimes(Request $request, Doctor $doctor)
-    {
-        $date = $request->date;
-
-        $schedules = Schedule::whereDate('start_date', $date)->where([
-            ['doctor_id', $doctor->id],
-            ['vacant', 1]
-        ])->get();
-
-        return json_encode($schedules);
-    }
-
-    public function ajaxSearch(Request $request)
-    {
-        $search = $request->search;
-        $response = [];
-
-        if ($search == '') {
-           $doctors = User::orderby('name','asc')->select('id', 'name')->where('role_id', ROLE::DOCTOR)->limit(10)->get();
-        } else {
-            $doctors = User::orderby('name', 'asc')->select('id', 'name')->where([
-                ['role_id', '=', ROLE::DOCTOR ],
-                ['name', 'like', '%' . $search . '%']
-            ])->limit(10)->get();
-        }
-
-        foreach ($doctors as $doctor) {
-            $response[] = array(
-                "id" => $doctor->id,
-                "text" => $doctor->name
-            );
-        }
-
-        return json_encode($response);
-        exit;
-
-        /*
-        return response()->json([
-            'data' => $doctors
-        ], 200);
-        */
+        return redirect()->action('ResponsiblesController@index')->with($notification);
     }
 }

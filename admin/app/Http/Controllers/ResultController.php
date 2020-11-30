@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Auth;
-use App\User;
+use App\Role;
 use App\Policies\ResultPolicy;
 
 class ResultController extends Controller
@@ -20,6 +20,7 @@ class ResultController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('preventBackHistory');
     }
 
     /**
@@ -33,10 +34,23 @@ class ResultController extends Controller
 
         $results = Result::all();
 
+        if(Auth::user()->role_id == Role::LABORATORY){
+            $results = Result::where('laboratory_id', Auth::user()->laboratory->id)->get();
+        }
+
+        if (Auth::user()->role_id == Role::PATIENT) {
+            $results = Result::where([['patient_id', Auth::user()->patients->first()->id], ['show_to_patient', 1] ])->get();
+        }
+
+        if (Auth::user()->role_id == Role::DOCTOR) {
+            $results = Result::where('doctor_id', Auth::user()->doctors->first()->id)->get();
+        }
+
         return view('admin.results.index', [
             'results' => $results
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -45,7 +59,7 @@ class ResultController extends Controller
      */
     public function create()
     {
-        Gate::authorize('create', Auth::user());
+       // Gate::authorize('create');
 
         $doctors = Doctor::all();
         $pacients = Patient::all();
@@ -66,11 +80,16 @@ class ResultController extends Controller
      */
     public function store(ResultStoreRequest $request)
     {
-        Gate::authorize('create');
+        Gate::authorize('create', 'App\Result');
 
         $file = $request->file;
 
         $laboratory_id = $request->laboratory_id;
+
+        if(Auth::user()->role_id == Role::LABORATORY){
+            $laboratory_id = Auth::user()->laboratory->id;
+        }
+
         $doctor_id = $request->doctor_id;
         $patient_id = $request->patient_id;
         $filename = Carbon::now()->timestamp.'_'.'d'.$doctor_id.'_'.'p'.$patient_id.'_'.$file->getClientOriginalName();
@@ -119,8 +138,15 @@ class ResultController extends Controller
     {
         Gate::authorize('update', $result);
 
+        $doctors = Doctor::all();
+        $pacients = Patient::all();
+        $laboratories = Laboratory::all();
+
         return view('admin.results.edit', [
-            'result' => $result
+            'result'        => $result,
+            'doctors'       => $doctors,
+            'patients'      => $pacients,
+            'laboratories'  => $laboratories
         ]);
     }
 

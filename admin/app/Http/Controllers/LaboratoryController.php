@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\LaboratoryStoreRequest;
 use App\Http\Requests\LaboratoryUpdateRequest;
 use App\User;
+use App\Gender;
 use App\Role;
 
 class LaboratoryController extends Controller
@@ -15,6 +16,7 @@ class LaboratoryController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('preventBackHistory');
     }
 
     /**
@@ -27,6 +29,7 @@ class LaboratoryController extends Controller
         Gate::authorize('viewAny');
 
         $laboratories = Laboratory::all();
+
 
         return view('admin.laboratories.index', [
             'laboratories' => $laboratories
@@ -42,9 +45,20 @@ class LaboratoryController extends Controller
     {
         Gate::authorize('create');
 
-        $users = User::where([['role_id', Role::LABORATORY],['active', 1]])->get();
+        // Só mostra os usuários do tipo laboratório que não possuem vinculo com nenhum laboratório.
 
-        return view('admin.laboratories.create', ['users' => $users]);
+        $users_ids = User::where([['role_id', Role::LABORATORY], ['active', 1]])->pluck('id')->toArray();
+
+        $labs_users_ids = Laboratory::all()->pluck('user_id')->toArray();
+
+        $users_without_lab = array_diff($users_ids, $labs_users_ids);
+
+        $users = User::find($users_without_lab);
+
+        return view('admin.laboratories.create', [
+            'users'     => $users,
+            'genders'   => Gender::all()
+        ]);
     }
 
     /**
@@ -56,6 +70,8 @@ class LaboratoryController extends Controller
     public function store(LaboratoryStoreRequest $request)
     {
         Gate::authorize('create');
+
+        //$user = User::create($request->all());
 
         $laboratory = Laboratory::create($request->all());
 

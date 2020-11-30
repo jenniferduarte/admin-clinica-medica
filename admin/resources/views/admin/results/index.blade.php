@@ -21,7 +21,8 @@
                     <th>Médico</th>
                     <th>Paciente</th>
                     <th>Laboratório</th>
-                    <th>Visível ao paciente</th>
+                    @can('isDoctor')<th>Visível ao paciente</th>@endcan
+                    <th>Última atualização</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -30,10 +31,19 @@
                 @foreach($results as $result)
                 <tr>
                     <td>{{ $result->id }} </td>
+
                     <td>{{ $result->doctor->treatment . ' ' . $result->doctor->user->name }} </td>
+
                     <td>{{ $result->patient->user->name . ' (' . $result->patient->user->email . ')' }} </td>
+
                     <td>{{ $result->laboratory->name  }} </td>
+
+                    @can('isDoctor')
                     <td>{{ $result->show_to_patient ? 'Sim' : 'Não' }} </td>
+                    @endcan
+
+                    <td>{{ $result->updated_at->format('d/m/Y H:s:i') }} </td>
+
                     <td>
                         <div class="btn-group" role="group">
                              <a href="{{ route('results.show', $result->id) }}" class="btn btn-secondary">
@@ -44,6 +54,7 @@
                             </a>
                         </div>
                     </td>
+
                 </tr>
                 @endforeach
             </tbody>

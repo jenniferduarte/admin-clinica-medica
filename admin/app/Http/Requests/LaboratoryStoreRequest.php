@@ -25,8 +25,7 @@ class LaboratoryStoreRequest extends FormRequest
     {
         return [
             'name'  => 'required|max:200',
-            'email' => 'email'
-
+            'email' => 'email',
         ];
     }
 
@@ -37,7 +36,7 @@ class LaboratoryStoreRequest extends FormRequest
             'name.max'          => 'Este campo deve ter no máximo 200 caracteres',
             'email.required'    => 'Este campo deve ser preenchido.',
             'email.email'       => 'Preencha o email corretamente',
-            'email.unique'      => 'Este email já está cadastrado.'
+            'email.unique'      => 'Este email já está cadastrado.',
         ];
     }
 }

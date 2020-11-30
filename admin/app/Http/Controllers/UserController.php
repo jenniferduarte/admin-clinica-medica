@@ -6,8 +6,9 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Role;
-use App\Patient;
+use App\Address;
 use App\Gender;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\UserUpdateRequest;
 use Auth;
 use App\Http\Requests\UserUpdatePasswordRequest;
@@ -18,10 +19,12 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('preventBackHistory');
     }
 
     public function store(UserStoreRequest $request)
     {
+        /*
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
@@ -40,22 +43,8 @@ class UserController extends Controller
             'alert-type' => 'success'
         );
 
-        // Cria o paciente
-        if($request->input('role') == Role::PATIENT ){
-            Patient::create([
-                'user_id' => $user->id,
-                'social_name' => $request->input('social_name'),
-                'mother_name' => $request->input('mother_name'),
-                'father_name' => $request->input('father_name'),
-                'observation' => $request->input('observation'),
-                'responsible_name' => $request->input('responsible_name'),
-                'responsible_phone' => $request->input('responsible_phone'),
-            ]);
-
-            return redirect()->action('PatientController@index')->with($notification);
-        };
-
         return redirect()->action('UserController@index')->with($notification);
+        */
     }
 
     public function show(User $user)
@@ -100,6 +89,18 @@ class UserController extends Controller
             'gender_id' =>  $request->input('gender'),
         ]);
 
+        // Atualiza o endereço
+        Address::find($user->addresses()->first()->id)->update([
+            'street'            => $request->input('street'),
+            'number'            => $request->input('number'),
+            'district'          => $request->input('district'),
+            'complement'        => $request->input('complement'),
+            'state'             => $request->input('state'),
+            'country'           => $request->input('country'),
+            'cep'               => $request->input('cep'),
+            'city'              => $request->input('city'),
+        ]);
+
         $notification = array(
             'message' => 'Atualizado com sucesso!',
             'alert-type' => 'success'
@@ -107,6 +108,22 @@ class UserController extends Controller
 
         return redirect()->action('UserController@edit', $user->id)->with($notification);
     }
+
+    public function destroy(User $user)
+    {
+        Gate::authorize('delete', $user);
+
+        # Exclui o usuário
+        $user->delete();
+
+        $notification = array(
+            'message' => 'Excluído com sucesso!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->action('UserController@index')->with($notification);
+    }
+
 
     public function editPassword()
     {
