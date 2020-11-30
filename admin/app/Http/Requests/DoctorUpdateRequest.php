@@ -24,7 +24,17 @@ class DoctorUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required',
+
+            // Address rules
+            'street'        => 'required',
+            'number'        => 'required',
+            'district'      => 'required',
+            'city'          => 'required',
+            'state'         => 'required',
+            'country'       => 'required',
+            'cep'           => 'required',
+            // End Address Rules
         ];
     }
 
@@ -32,6 +42,16 @@ class DoctorUpdateRequest extends FormRequest
     {
         return [
             'name.required' => 'Este campo deve ser preenchido.',
+
+            // Address rules
+            'street.required'       => 'Este campo deve ser preenchido.',
+            'number.required'       => 'Este campo deve ser preenchido.',
+            'district.required'     => 'Este campo deve ser preenchido.',
+            'city.required'         => 'Este campo deve ser preenchido.',
+            'state.required'        => 'Este campo deve ser preenchido.',
+            'country.required'      => 'Este campo deve ser preenchido.',
+            'cep.required'          => 'Este campo deve ser preenchido.',
+            // End Address Rules
         ];
     }
 }

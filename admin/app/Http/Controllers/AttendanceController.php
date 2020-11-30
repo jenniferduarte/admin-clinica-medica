@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\AttendanceStoreRequest;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AttendenceScheduled;
+use App\Mail\AttendenceCanceled;
 
 class AttendanceController extends Controller
 {
@@ -44,7 +47,7 @@ class AttendanceController extends Controller
     {
         $start = $request->start;
         $end = $request->end;
-       
+
         $attendancesResults = DB::table('schedules')
             ->join('attendances', 'schedules.id', '=', 'attendances.schedule_id')
             ->whereBetween('schedules.start_date', [$start, $end])
@@ -58,9 +61,9 @@ class AttendanceController extends Controller
         $attendancesResults = $attendancesResults->select('schedules.start_date as start', 'schedules.end_date as end', 'attendances.id as attendance_id')->get();
 
         $attendances = [];
-       
+
         foreach($attendancesResults as $attendanceResult)
-        {   
+        {
             $attendance = Attendance::find($attendanceResult->attendance_id);
 
             $title = $attendance->doctor->treatment . ' ' . ucwords($attendance->doctor->user->name);
@@ -73,7 +76,7 @@ class AttendanceController extends Controller
                 'end'   => Carbon::parse($attendanceResult->end)->toIso8601String(),
                 'title' => $title,
                 'url' => '/attendances/'.$attendanceResult->attendance_id,
-            ];             
+            ];
         }
 
         return response()->json($attendances, 200);
@@ -102,14 +105,15 @@ class AttendanceController extends Controller
     {
         $schedule = Schedule::find($request->input('time'));
 
-        $patient_id = $request->input('patient');
-       
+        $patient = Patient::find($request->input('patient'));
+
         if (Auth::user()->role->id == ROLE::PATIENT) {
-            $patient_id = Auth::user()->patients->first()->id;   
+            $patient = Patient::find(Auth::user()->patients->first()->id);
         }
 
-        Attendance::create([
-            'patient_id' => $patient_id,
+
+        $attendance = Attendance::create([
+            'patient_id' => $patient->id,
             'doctor_id' => $request->input('doctor'),
             'schedule_id' => $schedule->id,
             'status_id' => Status::SCHEDULED,
@@ -118,6 +122,8 @@ class AttendanceController extends Controller
 
         $schedule->vacant = 0;
         $schedule->save();
+
+        Mail::to($patient->user)->send(new AttendenceScheduled($attendance));
 
         $notification = array(
             'message'       => 'Agendado com sucesso!',
@@ -134,7 +140,7 @@ class AttendanceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Attendance $attendance)
-    {     
+    {
         return view('admin.attendances.show', [
             'attendance' => $attendance
         ]);
@@ -182,6 +188,8 @@ class AttendanceController extends Controller
         if($status->id == Status::CANCELED){
             $attendance->schedule->vacant = 1;
             $attendance->schedule->save();
+
+            Mail::to($attendance->patient->user)->send(new AttendenceCanceled($attendance));
         }
 
         return response()->json($attendance, 200);

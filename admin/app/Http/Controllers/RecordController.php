@@ -97,8 +97,9 @@ class RecordController extends Controller
             'expected_return'       => $request->input('expected_return')
         ]);
 
+
         # Persiste os medicamentos
-        if($request->input('medicaments'))
+        if($request->input('medicaments') && !is_null($request->input('medicaments')[0]))
         {
             $prescription = Prescription::create([
                 'record_id'     => $record->id,
@@ -117,6 +118,7 @@ class RecordController extends Controller
             }
         }
 
+        dd($request->input('exams'));
         # Persiste os exames
         if($request->input('exams'))
         {

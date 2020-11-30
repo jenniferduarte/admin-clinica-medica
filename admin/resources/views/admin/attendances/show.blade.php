@@ -3,17 +3,19 @@
 @section('page-name') Agendamentos @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
+@can('scheduleAttendance', $attendance)
 <a href="{{ route('attendances.create') }}" class="btn btn-block btn-outline-success btn-sm">
     <i class="nav-icon fas fa-user-md"></i>  Agendar consulta
 </a>
+@endcan
 @endsection
 
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <div class="card">
-    
-    <div class="card-header card-title"> Dados gerais 
+
+    <div class="card-header card-title"> Dados gerais
         <div class="card-tools">
             <small> Última atualização {{ $attendance->updated_at->format('d/m/Y H:i') }} </small>
         </div>
@@ -33,14 +35,14 @@
             <p class="text-muted">
                 <strong>{{ $attendance->doctor->treatment }} {{ $attendance->doctor->user->name }} </strong> <br>
                 {{ $attendance->doctor->user->email }} <br>
-                
+
                 @foreach($attendance->doctor->specialties as $specialty)
                     {{ $specialty->name }} @if(!$loop->last) | @endif
                 @endforeach
 
                 <br><br>
-                <a href="{{ route('doctors.show', $attendance->doctor->id)}}" 
-                    class="btn btn-outline-secondary btn-sm">Ver perfil completo  <i class="fas fa-arrow-right"></i> 
+                <a href="{{ route('doctors.show', $attendance->doctor->id)}}"
+                    class="btn btn-outline-secondary btn-sm">Ver perfil completo  <i class="fas fa-arrow-right"></i>
                 </a>
             </p>
 
@@ -48,15 +50,15 @@
 
             <strong><i class="fas fa-user-injured mr-1"></i> Paciente</strong>
 
-            <p class="text-muted"> 
+            <p class="text-muted">
                 <strong> {{ $attendance->patient->user->name }} </strong> <br>
 
-                {{ $attendance->patient->user->email }} <br> 
-                CPF: {{ $attendance->patient->user->cpf }} 
+                {{ $attendance->patient->user->email }} <br>
+                CPF: {{ $attendance->patient->user->cpf }}
 
                 <br><br>
-                <a href="{{ route('patients.show', $attendance->patient->id)}}" 
-                    class="btn btn-outline-secondary btn-sm">Ver perfil completo <i class="fas fa-arrow-right"></i> 
+                <a href="{{ route('patients.show', $attendance->patient->id)}}"
+                    class="btn btn-outline-secondary btn-sm">Ver perfil completo <i class="fas fa-arrow-right"></i>
                 </a>
             </p>
 
@@ -69,22 +71,31 @@
                 @if($attendance->status->id == Status::ABSENT_PATIENT) paciente ausente @endif
             </span>
 
-            @if($attendance->status->id == Status::SCHEDULED)
             <hr>
+            @if($attendance->status->id == Status::SCHEDULED)
+
             <div>
-                <a href="#" class="btn btn-sm bg-danger update-attendance-status" 
-                    data-attendance="{{$attendance->id}}" data-status="{{ Status::CANCELED }}">
-                <i class="fas fa-times"></i>
-                Cancelar agendamento
-                </a>                        
+
+                @can('cancelAttendance', $attendance)
+                    <a href="#" class="btn btn-sm bg-danger update-attendance-status"
+                        data-attendance="{{$attendance->id}}" data-status="{{ Status::CANCELED }}">
+                        <i class="fas fa-times"></i> Cancelar agendamento
+                    </a>
+                @endcan
+
+                @can('addRecord', $attendance)
+                   <a href="{{ route('patients.records.create', $attendance->patient->id) }}"
+                        class="btn btn-sm bg-success">
+                        <i class="fas fa-bookmark"></i>  Iniciar atendimento
+                    </a>
+                @endcan
             </div>
+
             @endif
 
         </div>
-        <!-- /.card-body -->    
+        <!-- /.card-body -->
     </div>
 </div>
-    
-    
 @endsection
 

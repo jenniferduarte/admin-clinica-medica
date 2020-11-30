@@ -15,6 +15,11 @@ use Carbon\Carbon;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function store(UserStoreRequest $request)
     {
         $user = User::create([

@@ -51,6 +51,8 @@ $(document).ready(function () {
         $(".cpf").unmask();
         $(".phone_with_ddd").unmask();
         $(".cnpj").unmask();
+        $(".cep");
+        $(this).find('button[type=submit]').prop('disabled', true);
     });
 
     $(".goback").click(function (e) {

@@ -9,12 +9,15 @@ use App\Specialty;
 use App\User;
 use App\Role;
 use App\Schedule;
+use App\Address;
 use Carbon\Carbon;
 use App\Http\Requests\DoctorStoreRequest;
 use App\Http\Requests\DoctorUpdateRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
 use Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserRegistered;
 
 class DoctorController extends Controller
 {
@@ -64,11 +67,16 @@ class DoctorController extends Controller
     {
         Gate::authorize('create', Auth::user());
 
+        // Gera uma senha aleatória
+        // Padrão: 5 primeiros caracteres do email do usuário + 3 dígitos aleatórios. Em caixa alta
+        $numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        $password = strtoupper(substr(str_replace(" ", "", $request->input('email')), 0, 5) . array_rand($numbers, 1) . array_rand($numbers, 1) . array_rand($numbers, 1));
+
         // Cria o usuário
         $user = User::create([
             'name'          => $request->input('name'),
             'email'         => $request->input('email'),
-            'password'      => Hash::make($request->input('password')),
+            'password'      => Hash::make($password),
             'role_id'       => Role::DOCTOR,
             'cpf'           => $request->input('cpf'),
             'rg'            => $request->input('rg'),
@@ -84,6 +92,20 @@ class DoctorController extends Controller
             'crm'       => $request->input('crm'),
         ]);
 
+        // Cria o endereço
+        Address::create([
+            'street'            => $request->input('street'),
+            'number'            => $request->input('number'),
+            'district'          => $request->input('district'),
+            'complement'        => $request->input('complement'),
+            'state'             => $request->input('state'),
+            'country'           => $request->input('country'),
+            'cep'               => $request->input('cep'),
+            'city'              => $request->input('city'),
+            'responsible_type'  => 'App\User',
+            'responsible_id'    => $user->id
+        ]);
+
         // Cadastro das especialidades
         if ($request->has('specialties')) {
             $specialties = $request->input('specialties');
@@ -93,6 +115,8 @@ class DoctorController extends Controller
                 $doctor->specialties()->save($specialty);
             }
         }
+
+        Mail::to($user)->send(new UserRegistered($user, $password));
 
         $notification = array(
             'message'       => 'Criado com sucesso!',
@@ -156,6 +180,18 @@ class DoctorController extends Controller
 
         Doctor::find($doctor->id)->update([
             'crm' => $request->input('crm'),
+        ]);
+
+        // Atualiza o endereço
+        Address::find($doctor->user->addresses()->first()->id)->update([
+            'street'            => $request->input('street'),
+            'number'            => $request->input('number'),
+            'district'          => $request->input('district'),
+            'complement'        => $request->input('complement'),
+            'state'             => $request->input('state'),
+            'country'           => $request->input('country'),
+            'cep'               => $request->input('cep'),
+            'city'              => $request->input('city'),
         ]);
 
         // Remove todas as categorias associadas e cadastra as novas

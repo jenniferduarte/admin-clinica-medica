@@ -24,24 +24,40 @@ class PatientStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8|confirmed',
-            'mother_name' => 'required'
+            'name'          => 'required',
+            'email'         => 'required|email|unique:users',
+            'mother_name'   => 'required',
+
+            // Address Rules
+            'street'        => 'required',
+            'number'        => 'required',
+            'district'      => 'required',
+            'city'          => 'required',
+            'state'         => 'required',
+            'country'       => 'required',
+            'cep'           => 'required',
+            // End Address Rules
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Este campo deve ser preenchido.',
-            'email.required' => 'Este campo deve ser preenchido.',
-            'email.email' => 'Favor preencha corretamente.',
-            'email.unique' => 'Email já cadastrado.',
-            'password.required' => 'Este campo deve ser preenchido.',
-            'password.min' => 'A senha deve ter pelo menos 8 caracteres',
-            'password.confirmed' => 'As senhas devem ser iguais.',
-            'mother_name.required' => 'Este campo deve ser preenchido.',
+            'name.required'         => 'Este campo deve ser preenchido.',
+            'email.required'        => 'Este campo deve ser preenchido.',
+            'email.email'           => 'Favor preencha corretamente.',
+            'email.unique'          => 'Email já cadastrado.',
+            'mother_name.required'  => 'Este campo deve ser preenchido.',
+
+            // Address Rules
+            'street.required'       => 'Este campo deve ser preenchido.',
+            'number.required'       => 'Este campo deve ser preenchido.',
+            'district.required'     => 'Este campo deve ser preenchido.',
+            'city.required'         => 'Este campo deve ser preenchido.',
+            'state.required'        => 'Este campo deve ser preenchido.',
+            'country.required'      => 'Este campo deve ser preenchido.',
+            'cep.required'          => 'Este campo deve ser preenchido.',
+            // End Address Rules
         ];
     }
 }

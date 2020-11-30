@@ -31,7 +31,7 @@ class CreateRecordsTable extends Migration
             $table->integer('diastolic_bp')->nullable();
             $table->float('temperature', 3, 1)->nullable();
             $table->string('allergy')->nullable();
-            $table->string('chronic_diseases')->nullable();   
+            $table->string('chronic_diseases')->nullable();
             $table->boolean('hypertension')->nullable();
             $table->boolean('diabetes')->nullable();
             $table->boolean('smoker')->nullable();

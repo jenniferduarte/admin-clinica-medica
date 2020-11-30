@@ -8,11 +8,14 @@ use App\Gender;
 use App\History;
 use App\User;
 use App\Role;
+use App\Address;
 use Auth;
 use App\Http\Requests\PatientStoreRequest;
 use App\Http\Requests\PatientUpdateRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserRegistered;
 
 class PatientController extends Controller
 {
@@ -61,30 +64,51 @@ class PatientController extends Controller
     {
         Gate::authorize('create', Auth::user());
 
+        // Gera uma senha aleatória
+        // Padrão: 5 primeiros caracteres do email do usuário + 3 dígitos aleatórios. Em caixa alta
+        $numbers = [0,1,2,3,4,5,6,7,8,9];
+        $password = strtoupper(substr(str_replace(" ", "", $request->input('email')), 0,5) . array_rand($numbers, 1) . array_rand($numbers, 1) . array_rand($numbers, 1));
+
         // Cria o usuário
         $user = User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
-            'role_id' => Role::PATIENT,
-            'cpf' =>  $request->input('cpf'),
-            'rg' =>  $request->input('rg'),
-            'birth_date' =>  $request->input('birth_date'),
-            'phone' =>  $request->input('phone'),
-            'gender_id' =>  $request->input('gender'),
-            'clinic_id' => 1
+            'name'          => $request->input('name'),
+            'email'         => $request->input('email'),
+            'password'      => Hash::make($password),
+            'role_id'       => Role::PATIENT,
+            'cpf'           => $request->input('cpf'),
+            'rg'            => $request->input('rg'),
+            'birth_date'    => $request->input('birth_date'),
+            'phone'         => $request->input('phone'),
+            'gender_id'     => $request->input('gender'),
+            'clinic_id'     => 1
         ]);
 
         // Cria o paciente
         Patient::create([
-            'user_id' => $user->id,
-            'social_name' => $request->input('social_name'),
-            'mother_name' => $request->input('mother_name'),
-            'father_name' => $request->input('father_name'),
-            'observation' => $request->input('observation'),
-            'responsible_name' => $request->input('responsible_name'),
+            'user_id'           => $user->id,
+            'social_name'       => $request->input('social_name'),
+            'mother_name'       => $request->input('mother_name'),
+            'father_name'       => $request->input('father_name'),
+            'observation'       => $request->input('observation'),
+            'responsible_name'  => $request->input('responsible_name'),
             'responsible_phone' => $request->input('responsible_phone'),
         ]);
+
+        // Cria o endereço
+        Address::create([
+            'street'            => $request->input('street'),
+            'number'            => $request->input('number'),
+            'district'          => $request->input('district'),
+            'complement'        => $request->input('complement'),
+            'state'             => $request->input('state'),
+            'country'           => $request->input('country'),
+            'cep'               => $request->input('cep'),
+            'city'              => $request->input('city'),
+            'responsible_type'  => 'App\User',
+            'responsible_id'    => $user->id
+        ]);
+
+        Mail::to($user)->send(new UserRegistered($user, $password));
 
         $notification = array(
             'message' => 'Criado com sucesso!',
@@ -149,7 +173,8 @@ class PatientController extends Controller
     {
         Gate::authorize('update', $patient);
 
-        User::find($patient->user_id)->update([
+        // Atualiza o usuário
+        $user = User::find($patient->user_id)->update([
             'name'          => $request->input('name'),
             'cpf'           => $request->input('cpf'),
             'rg'            => $request->input('rg'),
@@ -158,6 +183,7 @@ class PatientController extends Controller
             'birth_date'    => $request->input('birth_date'),
         ]);
 
+        // Atualiza o paciente
         Patient::find($patient->id)->update([
             'social_name'       => $request->input('social_name'),
             'mother_name'       => $request->input('mother_name'),
@@ -165,6 +191,18 @@ class PatientController extends Controller
             'observation'       => $request->input('observation'),
             'responsible_name'  => $request->input('responsible_name'),
             'responsible_phone' => $request->input('responsible_phone'),
+        ]);
+
+        // Atualiza o endereço
+        Address::find($patient->user->addresses()->first()->id)->update([
+            'street'            => $request->input('street'),
+            'number'            => $request->input('number'),
+            'district'          => $request->input('district'),
+            'complement'        => $request->input('complement'),
+            'state'             => $request->input('state'),
+            'country'           => $request->input('country'),
+            'cep'               => $request->input('cep'),
+            'city'              => $request->input('city'),
         ]);
 
         $notification = array(

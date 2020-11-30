@@ -28,12 +28,11 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        #'App\Doctor'        => 'App\Policies\DoctorPolicy',
-        #'App\Laboratory'    => 'App\Policies\LaboratoryPolicy',
-        #'App\Medicament'    => 'App\Policies\MedicamentPolicy',
-        #'App\Patient'       => 'App\Policies\PatientPolicy',
-        #'App\Result'       => 'App\Policies\ResultPolicy',
-        Result::class => ResultPolicy::class,
+        'App\Doctor'        => 'App\Policies\DoctorPolicy',
+        'App\Laboratory'    => 'App\Policies\LaboratoryPolicy',
+        'App\Medicament'    => 'App\Policies\MedicamentPolicy',
+        'App\Patient'       => 'App\Policies\PatientPolicy',
+        'App\Result'       => 'App\Policies\ResultPolicy',
     ];
 
     /**
@@ -45,16 +44,15 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //Gate::define('loremipsum', 'App\Policies\ResultPolicy@viewAny');
 
         // Se for usuário do tipo Admin, possui controle total da aplicação
         $gate->before(function ($user, $ability) {
-            if ($user->role->id == Role::ADMIN) {
+            if ($user->role->id == Role::SUPERADMIN) {
                 return true;
             }
         });
 
-        /*
+
         // Doctor
         $gate->define('isDoctor', function ($user) {
             return $user->role->id === Role::DOCTOR;
@@ -70,11 +68,32 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role->id === Role::RECEPTIONIST;
         });
 
+        // Laboratory
         $gate->define('isLaboratory', function ($user) {
             return $user->role->id === Role::LABORATORY;
         });
-        */
 
+        // Cancelar atendimento
+        $gate->define('cancelAttendance', function ($user, $attendance) {
+            if($user->role->id === Role::RECEPTIONIST || $user->id == $attendance->patient->user->id){
+                return true;
+            }
+        });
+
+        // Agendar atendimento
+        $gate->define('scheduleAttendance', function ($user, $attendance) {
+            if ($user->role->id === Role::RECEPTIONIST || $user->id == $attendance->patient->user->id) {
+                return true;
+            }
+        });
+
+
+        // Adicionar registro
+        $gate->define('addRecord', function ($user, $attendance) {
+            if ($user->role->id === Role::DOCTOR && $user->id == $attendance->doctor->user->id) {
+                return true;
+            }
+        });
 
     }
 }

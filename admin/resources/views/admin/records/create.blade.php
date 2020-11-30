@@ -272,7 +272,7 @@
                 <!-- Plano de tratamento -->
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label for="treatment_plan">Plano de tratamento</label>
+                        <label for="treatment_plan">Plano de tratamento*</label>
                         <textarea rows="3"
                             class="form-control @error('treatment_plan') is-invalid  @enderror"
                             name="treatment_plan" id="treatment_plan"
@@ -286,7 +286,7 @@
                 <!-- Conclusão do diagnóstico -->
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label for="diagnostic_conclusion">Conclusão do diagnóstico</label>
+                        <label for="diagnostic_conclusion">Conclusão do diagnóstico*</label>
                         <textarea rows="3"
                             class="form-control @error('diagnostic_conclusion') is-invalid  @enderror"
                             name="diagnostic_conclusion" id="diagnostic_conclusion"
@@ -303,9 +303,8 @@
             <br>
 
             <div class="row">
-                <!-- TODO: Prescrições de medicamentos e exames -->
 
-                                <div class="col-md-6 col-sm-12">
+                <div class="col-md-6 col-sm-12">
 
                     <!-- Exames -->
                     <div class="col-md-12 col-sm-12">
@@ -390,8 +389,10 @@
         </div>
 
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Salvar</button>
-            <a href="#" class="btn btn-secondary float-right goback">Voltar</a>
+            <div class="float-right">
+                <button type="submit" class="btn btn-success">Salvar</button>
+                <a href="#" class="btn btn-secondary goback">Voltar</a>
+            </div>
         </div>
     </form>
 </div>

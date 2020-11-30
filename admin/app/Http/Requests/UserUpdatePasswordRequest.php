@@ -36,6 +36,7 @@ class UserUpdatePasswordRequest extends FormRequest
             'password.required' => 'Este campo deve ser preenchido.',
             'password.min' => 'A senha deve ter pelo menos 8 caracteres',
             'password.confirmed' => 'As senhas devem ser iguais.',
+            'current_password.required' => 'Este campo deve ser preenchido.'
         ];
     }
 }

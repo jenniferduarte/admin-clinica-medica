@@ -25,6 +25,7 @@ class LaboratoryStoreRequest extends FormRequest
     {
         return [
             'name'  => 'required|max:200',
+            'email' => 'email'
 
         ];
     }

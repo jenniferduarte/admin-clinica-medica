@@ -18,7 +18,7 @@ class RecordStoreRequest extends FormRequest
         if(Auth::user()->role->id == ROLE::DOCTOR){
             return true;
         }
-        
+
         return false;
     }
 
@@ -30,7 +30,16 @@ class RecordStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'treatment_plan' => 'required',
+            'diagnostic_conclusion' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'treatment_plan.required' => 'Este campo deve ser preenchido',
+            'diagnostic_conclusion.required' => 'Este campo deve ser preenchido',
         ];
     }
 }

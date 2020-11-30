@@ -2,10 +2,10 @@
 <div class="col-md-6 col-sm-12">
     <div class="form-group">
         <label for="name">Nome*</label>
-        <input type="text" 
-            class="form-control @error('name') is-invalid  @enderror" 
-            name="name" id="name" 
-            placeholder="Digite o nome" 
+        <input type="text"
+            class="form-control @error('name') is-invalid  @enderror"
+            name="name" id="name"
+            placeholder="Digite o nome"
             value="{{ old('name') }}">
 
             @error('name') <p class="text-danger">{{ $message }}</p> @enderror
@@ -16,42 +16,13 @@
 <div class="col-md-6 col-sm-12">
     <div class="form-group">
         <label for="email">Email*</label>
-        <input type="email" 
-            class="form-control @error('email')) is-invalid  @enderror" 
-            name="email" id="email" 
-            placeholder="Digite o email" 
+        <input type="email"
+            class="form-control @error('email')) is-invalid  @enderror"
+            name="email" id="email"
+            placeholder="Digite o email"
             value="{{ old('email') }}">
 
         @error('email') <p class="text-danger">{{ $message }}</p> @enderror
-    </div>
-</div>
-
-<!-- Password -->
-<div class="col-md-3 col-sm-12">
-    <div class="form-group">
-        <label for="password">Senha*</label>
-        <input type="password" 
-            class="form-control @error('password') is-invalid  @endif" 
-            name="password" id="password" 
-            placeholder="Digite a senha" 
-            value="{{ old('password') }}">
-
-        @error('password') <p class="text-danger">{{ $message }}</p> @enderror
-    </div>
-</div>
-
-<!-- Password confirmation -->
-<div class="col-md-3 col-sm-12">
-    <div class="form-group">
-        <label for="password-confirm">Confirmação da senha*</label>
-        <input type="password" 
-            class="form-control @error('password') is-invalid  @enderror" 
-            name="password_confirmation" id="password-confirm" 
-            placeholder="Digite o senha novamente" 
-            autocomplete="new-password"
-            value="{{ old('password') }}">
-
-        @error('password') <p class="text-danger">{{ $message }}</p> @enderror
     </div>
 </div>
 
@@ -59,9 +30,9 @@
 <div class="col-md-3 col-sm-12">
     <div class="form-group">
         <label for="cpf">CPF</label>
-        <input type="text" 
-            class="form-control cpf @error('cpf') is-invalid  @enderror" 
-            name="cpf" id="cpf" 
+        <input type="text"
+            class="form-control cpf @error('cpf') is-invalid  @enderror"
+            name="cpf" id="cpf"
             placeholder="Digite o cpf"
             value="{{ old('cpf') }}">
 
@@ -73,9 +44,9 @@
 <div class="col-md-3 col-sm-12">
     <div class="form-group">
         <label for="rg">RG</label>
-        <input type="text" 
-            class="form-control @error('rg') is-invalid  @enderror" 
-            name="rg" id="rg" 
+        <input type="text"
+            class="form-control @error('rg') is-invalid  @enderror"
+            name="rg" id="rg"
             placeholder="Digite o rg"
             value="{{ old('rg') }}">
 
@@ -87,9 +58,9 @@
 <div class="col-md-3 col-sm-12">
     <div class="form-group">
         <label for="birth-date">Data de nascimento</label>
-        <input type="text" 
-            class="form-control date @error('birth_date') is-invalid  @enderror" 
-            name="birth_date" id="birth-date" 
+        <input type="text"
+            class="form-control date @error('birth_date') is-invalid  @enderror"
+            name="birth_date" id="birth-date"
             placeholder="Digite a data de nascimento"
             value="{{ old('birth_date') }}">
 
@@ -101,9 +72,9 @@
 <div class="col-md-3 col-sm-12">
     <div class="form-group">
         <label for="phone">Telefone</label>
-        <input type="text" 
-            class="form-control phone_with_ddd @error('phone') is-invalid  @enderror" 
-            name="phone" id="phone" 
+        <input type="text"
+            class="form-control phone_with_ddd @error('phone') is-invalid  @enderror"
+            name="phone" id="phone"
             placeholder="Digite o telefone"
             value="{{ old('phone') }}">
 
@@ -124,5 +95,120 @@
         </select>
 
         @error('gender') <p class="text-danger">{{ $message }}</p> @enderror
+    </div>
+</div>
+
+
+<!-- ==== Address ==== -->
+
+<!-- Street -->
+<div class="col-md-3 col-sm-12">
+    <div class="form-group">
+        <label for="street">Rua*</label>
+        <input type="text"
+            class="form-control @error('street') is-invalid  @enderror"
+            name="street" id="street"
+            placeholder="Digite a rua"
+            value="{{ old('street') }}">
+
+        @error('street') <p class="text-danger">{{ $message }}</p> @enderror
+    </div>
+</div>
+
+<!-- Number -->
+<div class="col-md-2 col-sm-12">
+    <div class="form-group">
+        <label for="number">Número*</label>
+        <input type="text"
+            class="form-control @error('number') is-invalid  @enderror"
+            name="number" id="number"
+            placeholder="Digite o número"
+            value="{{ old('number') }}">
+
+        @error('number') <p class="text-danger">{{ $message }}</p> @enderror
+    </div>
+</div>
+
+<!-- District -->
+<div class="col-md-2 col-sm-12">
+    <div class="form-group">
+        <label for="district">Bairro*</label>
+        <input type="text"
+            class="form-control @error('district') is-invalid  @enderror"
+            name="district" id="district"
+            placeholder="Digite o bairro"
+            value="{{ old('district') }}">
+
+        @error('district') <p class="text-danger">{{ $message }}</p> @enderror
+    </div>
+</div>
+
+<!-- Complement -->
+<div class="col-md-2 col-sm-12">
+    <div class="form-group">
+        <label for="complement">Complemento</label>
+        <input type="text"
+            class="form-control @error('complement') is-invalid  @enderror"
+            name="complement" id="complement"
+            placeholder="Digite o complemento"
+            value="{{ old('complement') }}">
+
+        @error('complement') <p class="text-danger">{{ $message }}</p> @enderror
+    </div>
+</div>
+
+<!-- City -->
+<div class="col-md-2 col-sm-12">
+    <div class="form-group">
+        <label for="city">Cidade*</label>
+        <input type="text"
+            class="form-control @error('city') is-invalid  @enderror"
+            name="city" id="city"
+            placeholder="Digite a cidade"
+            value="{{ old('city') }}">
+
+        @error('city') <p class="text-danger">{{ $message }}</p> @enderror
+    </div>
+</div>
+
+<!-- State -->
+<div class="col-md-2 col-sm-12">
+    <div class="form-group">
+        <label for="state">Estado*</label>
+        <input type="text"
+            class="form-control @error('state') is-invalid  @enderror"
+            name="state" id="state"
+            placeholder="Digite o estado"
+            value="{{ old('state') }}">
+
+        @error('state') <p class="text-danger">{{ $message }}</p> @enderror
+    </div>
+</div>
+
+<!-- Country -->
+<div class="col-md-2 col-sm-12">
+    <div class="form-group">
+        <label for="country">País*</label>
+        <input type="text"
+            class="form-control @error('country') is-invalid  @enderror"
+            name="country" id="country"
+            placeholder="Digite o país"
+            value="{{ old('country') }}">
+
+        @error('country') <p class="text-danger">{{ $message }}</p> @enderror
+    </div>
+</div>
+
+<!-- Cep -->
+<div class="col-md-2 col-sm-12">
+    <div class="form-group">
+        <label for="cep">CEP*</label>
+        <input type="text"
+            class="form-control @error('cep') is-invalid  @enderror cep"
+            name="cep" id="cep"
+            placeholder="Digite o CEP"
+            value="{{ old('cep') }}">
+
+        @error('cep') <p class="text-danger">{{ $message }}</p> @enderror
     </div>
 </div>

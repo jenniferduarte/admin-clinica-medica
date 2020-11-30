@@ -24,6 +24,7 @@ class ScheduleStoreRequest extends FormRequest
     public function rules()
     {
         return [
+            'date' => 'required',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time'
         ];
@@ -32,6 +33,7 @@ class ScheduleStoreRequest extends FormRequest
     public function messages()
     {
         return [
+            'date.required' => 'Este campo deve ser preenchido',
             'start_time.required' => 'Este campo deve ser preenchido.',
             'end_time.required' => 'Este campo deve ser preenchido.',
             'end_time.after' => 'Deve ser um valor posterior a hora inicial.',

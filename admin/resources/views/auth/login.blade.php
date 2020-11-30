@@ -7,7 +7,7 @@
         <div class="login-box">
             <br>
             <div class="login-logo">
-            <img src="{{ asset('img/logo.png') }}" width="300px" height="auto">
+            <img src="{{ asset('img/logo.png') }}" width="230px" height="auto">
         </div>
         <!-- /.login-logo -->
         <div class="card-body login-card-body">
@@ -74,7 +74,7 @@
             </form>
 
             <p class="mb-1">
-                <a href="forgot-password.html">Esqueci minha senha</a>
+                <a href="{{ route('password.request')}}">Esqueci minha senha</a>
             </p>
 
         </div>

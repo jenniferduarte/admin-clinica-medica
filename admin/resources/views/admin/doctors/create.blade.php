@@ -16,7 +16,7 @@
                 @include('admin.users._inputs-create')
 
                 <!-- CRM -->
-                <div class="col-md-3 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                     <div class="form-group">
                         <label for="crm">CRM</label>
                         <input type="text"
@@ -30,7 +30,7 @@
                 </div>
 
                 <!-- Especialidade -->
-                <div class="col-md-3 col-sm-12">
+                <div class="col-md-12 col-sm-12">
                     <div class="form-group">
                         <label for="gender">Especialidade</label>
                         <select class="select2 form-control select2-hidden-accessible" name="specialties[]" style="width: 100%;" multiple>

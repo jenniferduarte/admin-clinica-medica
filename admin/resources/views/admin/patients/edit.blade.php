@@ -19,7 +19,7 @@
                 @include('admin.users._inputs-edit', ['user' => $patient->user])
 
                 <!-- Social Name -->
-                <div class="col-md-3 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                     <div class="form-group">
                         <label for="social-name">Nome social</label>
                         <input type="text"
@@ -89,7 +89,7 @@
                 </div>
 
                 <!-- Observation -->
-                <div class="col-md-12 col-sm-12">
+                <div class="col-md-6 col-sm-12">
                     <div class="form-group">
                         <label for="observation">Observação</label>
                         <input type="text"

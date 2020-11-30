@@ -26,7 +26,16 @@ class DoctorStoreRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:8|confirmed',
+
+            // Address Rules
+            'street'        => 'required',
+            'number'        => 'required',
+            'district'      => 'required',
+            'city'          => 'required',
+            'state'         => 'required',
+            'country'       => 'required',
+            'cep'           => 'required',
+            // End Address Rules
         ];
     }
 
@@ -37,9 +46,16 @@ class DoctorStoreRequest extends FormRequest
             'email.required' => 'Este campo deve ser preenchido.',
             'email.email' => 'Favor preencha corretamente.',
             'email.unique' => 'Email já cadastrado.',
-            'password.required' => 'Este campo deve ser preenchido.',
-            'password.min' => 'A senha deve ter pelo menos 8 caracteres',
-            'password.confirmed' => 'As senhas devem ser iguais.',
+
+            // Address Rules
+            'street.required'       => 'Este campo deve ser preenchido.',
+            'number.required'       => 'Este campo deve ser preenchido.',
+            'district.required'     => 'Este campo deve ser preenchido.',
+            'city.required'         => 'Este campo deve ser preenchido.',
+            'state.required'        => 'Este campo deve ser preenchido.',
+            'country.required'      => 'Este campo deve ser preenchido.',
+            'cep.required'          => 'Este campo deve ser preenchido.',
+            // End Address Rules
         ];
     }
 }

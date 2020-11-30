@@ -5,7 +5,7 @@
 @section('quick-actions')
 
   <a href="{{ route('patients.records.create', $patient->id) }}" class="btn  btn-outline-secondary btn-sm">
-    <i class="fas fa-bookmark"></i>   Adicionar registro
+    <i class="fas fa-bookmark"></i>   Iniciar atendimento
   </a>
 
 @endsection
@@ -70,6 +70,8 @@
           <div class="card-header p-2">
             <ul class="nav nav-pills">
               <li class="nav-item"><a class="nav-link active" href="#history" data-toggle="tab">Histórico</a></li>
+              <!--<li class="nav-item"><a class="nav-link " href="#prescriptions" data-toggle="tab">Prescrições</a></li>
+              <li class="nav-item"><a class="nav-link " href="#exams" data-toggle="tab">Exames</a></li> -->
             </ul>
           </div>
           <div class="card-body">

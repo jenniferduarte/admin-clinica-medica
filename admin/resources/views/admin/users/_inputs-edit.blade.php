@@ -97,3 +97,118 @@
         @error('gender') <p class="text-danger">{{ $message }}</p> @enderror
     </div>
 </div>
+
+
+<!-- ==== Address ==== -->
+
+<!-- Street -->
+<div class="col-md-3 col-sm-12">
+    <div class="form-group">
+        <label for="street">Rua*</label>
+        <input type="text"
+            class="form-control @error('street') is-invalid  @enderror"
+            name="street" id="street"
+            placeholder="Digite a rua"
+            value="{{ old('street', $user->addresses()->first()->street) }}">
+
+        @error('street') <p class="text-danger">{{ $message }}</p> @enderror
+    </div>
+</div>
+
+<!-- Number -->
+<div class="col-md-2 col-sm-12">
+    <div class="form-group">
+        <label for="number">Número*</label>
+        <input type="text"
+            class="form-control @error('number') is-invalid  @enderror"
+            name="number" id="number"
+            placeholder="Digite o número"
+            value="{{ old('number', $user->addresses()->first()->number) }}">
+
+        @error('number') <p class="text-danger">{{ $message }}</p> @enderror
+    </div>
+</div>
+
+<!-- District -->
+<div class="col-md-2 col-sm-12">
+    <div class="form-group">
+        <label for="district">Bairro*</label>
+        <input type="text"
+            class="form-control @error('district') is-invalid  @enderror"
+            name="district" id="district"
+            placeholder="Digite o bairro"
+            value="{{ old('district', $user->addresses()->first()->district) }}">
+
+        @error('district') <p class="text-danger">{{ $message }}</p> @enderror
+    </div>
+</div>
+
+<!-- Complement -->
+<div class="col-md-2 col-sm-12">
+    <div class="form-group">
+        <label for="complement">Complemento</label>
+        <input type="text"
+            class="form-control @error('complement') is-invalid  @enderror"
+            name="complement" id="complement"
+            placeholder="Digite o complemento"
+            value="{{ old('complement', $user->addresses()->first()->complement) }}">
+
+        @error('complement') <p class="text-danger">{{ $message }}</p> @enderror
+    </div>
+</div>
+
+<!-- City -->
+<div class="col-md-2 col-sm-12">
+    <div class="form-group">
+        <label for="city">Cidade*</label>
+        <input type="text"
+            class="form-control @error('city') is-invalid  @enderror"
+            name="city" id="city"
+            placeholder="Digite a cidade"
+            value="{{ old('city', $user->addresses()->first()->city) }}">
+
+        @error('city') <p class="text-danger">{{ $message }}</p> @enderror
+    </div>
+</div>
+
+<!-- State -->
+<div class="col-md-2 col-sm-12">
+    <div class="form-group">
+        <label for="state">Estado*</label>
+        <input type="text"
+            class="form-control @error('state') is-invalid  @enderror"
+            name="state" id="state"
+            placeholder="Digite o estado"
+            value="{{ old('state', $user->addresses()->first()->state) }}">
+
+        @error('state') <p class="text-danger">{{ $message }}</p> @enderror
+    </div>
+</div>
+
+<!-- Country -->
+<div class="col-md-2 col-sm-12">
+    <div class="form-group">
+        <label for="country">País*</label>
+        <input type="text"
+            class="form-control @error('country') is-invalid  @enderror"
+            name="country" id="country"
+            placeholder="Digite o país"
+            value="{{ old('country', $user->addresses()->first()->country) }}">
+
+        @error('country') <p class="text-danger">{{ $message }}</p> @enderror
+    </div>
+</div>
+
+<!-- Cep -->
+<div class="col-md-2 col-sm-12">
+    <div class="form-group">
+        <label for="cep">CEP*</label>
+        <input type="text"
+            class="form-control @error('cep') is-invalid  @enderror cep"
+            name="cep" id="cep"
+            placeholder="Digite o CEP"
+            value="{{ old('cep', $user->addresses()->first()->cep) }}">
+
+        @error('cep') <p class="text-danger">{{ $message }}</p> @enderror
+    </div>
+</div>
