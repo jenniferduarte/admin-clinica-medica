@@ -67,20 +67,6 @@ $(document).ready(function () {
         });
     }
 
-    $(".clone-medicaments").click(function (e) {
-        $('.select2-medicaments').select2("destroy");
-        $clone = $('.row.medicaments').first().clone(true);
-        $clone.closest('.remove-medicament').removeClass('hide');
-        $clone.find('.dosage').val('');
-        $('#medicaments-selections').append($clone);
-        $('.select2-medicaments').select2({placeholder: "Selecione"});
-    });
-
-    $(".remove-medicament").click(function (e){
-        medicaments = $(this).closest('.medicaments');
-        medicaments.closest('.select2-medicaments').select2('destroy');
-        medicaments.remove();
-    });
 
     bsCustomFileInput.init()
 

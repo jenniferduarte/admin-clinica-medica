@@ -26,7 +26,7 @@ class Patient extends Model
 
     public function history()
     {
-        return $this->belongsTo('App\History');
+        return $this->HasOne('App\History');
     }
 
     public function result()

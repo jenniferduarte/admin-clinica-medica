@@ -26,6 +26,7 @@ class UserUpdateRequest extends FormRequest
         return [
             'name'          => 'required',
 
+
             // Address Rules
             'street'        => 'required',
             'number'        => 'required',

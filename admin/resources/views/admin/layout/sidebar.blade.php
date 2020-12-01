@@ -65,36 +65,6 @@
 
                 <hr>
 
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-syringe"></i>
-                        <p>
-                            Exames e prescrições
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview" >
-                        <li class="nav-item">
-                            <a href="{{ route('results.index') }}" class="nav-link">
-                                <p>
-                                    Resultados de exames
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <p>
-                                    Prescrições
-                                </p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <hr>
-
-
                 @can('isAdmin')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -266,6 +236,44 @@
                 </li>
 
                 <hr>
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-syringe"></i>
+                        <p>
+                            Exames e prescrições
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" >
+                        <li class="nav-item">
+                            <a href="{{ route('results.index') }}" class="nav-link">
+                                <p>
+                                    Resultado de exame
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('index-prescriptions-exams') }} " class="nav-link">
+                                <p>
+                                    Prescrição de exame
+                                </p>
+                            </a>
+                        </li>
+
+                         <li class="nav-item">
+                            <a href="{{ route('index-prescriptions-medicaments') }} " class="nav-link">
+                                <p>
+                                    Prescrição de medicamento
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <hr>
+
 
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();

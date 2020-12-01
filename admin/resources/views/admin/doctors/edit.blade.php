@@ -19,7 +19,7 @@
                 @include('admin.users._inputs-edit', ['user' => $doctor->user])
 
                  <!-- CRM -->
-                <div class="col-md-3 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                     <div class="form-group">
                         <label for="social-name">CRM</label>
                         <input type="text"
@@ -33,7 +33,7 @@
                 </div>
 
                 <!-- Especialidade -->
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-12 col-sm-12">
                     <div class="form-group">
                         <label for="gender">Especialidade</label>
                         <select class="select2 form-control select2-hidden-accessible"

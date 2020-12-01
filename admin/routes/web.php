@@ -31,6 +31,7 @@ Route::resources([
     'medicaments'       => 'MedicamentController',
     'patients'          => 'PatientController',
     'patients.records'  => 'RecordController',
+    'prescriptions'     => 'PrescriptionController',
     'receptionists'     => 'ReceptionistController',
     'responsibles'      => 'ResponsibleController',
     'results'           => 'ResultController',
@@ -39,6 +40,10 @@ Route::resources([
 
 Route::get('/password', 'UserController@editPassword')->name('edit-password');
 Route::put('/password', 'UserController@updatePassword')->name('update-password');
+
+Route::get('/prescriptions-exams', 'PrescriptionController@indexExams')->name('index-prescriptions-exams');
+Route::get('/prescriptions-medicaments', 'PrescriptionController@indexMedicaments')->name('index-prescriptions-medicaments');;
+
 
 // Ajax
 //Route::post('/search-doctors', 'DoctorController@ajaxSearch')->name('search-doctors');

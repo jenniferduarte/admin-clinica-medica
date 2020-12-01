@@ -37,6 +37,11 @@ class HomeController extends Controller
             return redirect()->action('AttendanceController@index');
         }
 
+        // Laboratory
+        if (Auth::user()->role->id == Role::LABORATORY) {
+            return redirect()->action('ResultController@index');
+        }
+
         // Paciente
         if (Auth::user()->role->id == ROLE::PATIENT) {
             $patient_id = Auth::user()->patients->first()->id;

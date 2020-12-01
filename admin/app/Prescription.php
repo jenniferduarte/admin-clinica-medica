@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Prescription extends Model
 {
-    protected $fillable = ['description', 'record_id'];
+    //Const Roles
+    const EXAM = 'exam';
+    const MEDICAMENT = 'medicament';
+
+    protected $fillable = ['description', 'record_id', 'type'];
 
     public function record()
     {
-        $this->belongsTo('App\Record');
+        return $this->belongsTo('App\Record');
     }
 
     public function medicaments()

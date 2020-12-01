@@ -324,11 +324,11 @@
                         </div>
 
 
-                        <div class="form-group">
+                       {{-- <div class="form-group">
                             <label for="description">Observações Gerais</label>
                             <textarea type="text" class="form-control @error('description') is-invalid  @enderror"
                             name="description" id="description" value="{{ old('description') }}"></textarea>
-                        </div>
+                        </div> --}}
                     </div>
 
                 </div>
@@ -412,6 +412,22 @@ $(function() {
         minDate: moment(),
     });
 
+});
+
+// TODO: colocar no app.js
+$(".clone-medicaments").click(function (e) {
+    $('.select2-medicaments').select2("destroy");
+    $clone = $('.row.medicaments').first().clone(true);
+    $clone.closest('.remove-medicament').removeClass('hide');
+    $clone.find('.dosage').val('');
+    $('#medicaments-selections').append($clone);
+    $('.select2-medicaments').select2({placeholder: "Selecione"});
+});
+
+$(".remove-medicament").click(function (e){
+    medicaments = $(this).closest('.medicaments');
+    medicaments.closest('.select2-medicaments').select2('destroy');
+    medicaments.remove();
 });
 
 </script>

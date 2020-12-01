@@ -104,7 +104,8 @@ class RecordController extends Controller
         {
             $prescription = Prescription::create([
                 'record_id'     => $record->id,
-                'description'   => 'description'
+                'description'   => '',
+                'type'          => Prescription::MEDICAMENT
             ]);
 
             foreach($request->input('medicaments') as $index => $medicament_id)
@@ -119,16 +120,21 @@ class RecordController extends Controller
             }
         }
 
-        dd($request->input('exams'));
         # Persiste os exames
         if($request->input('exams'))
         {
+            $prescription_exam = Prescription::create([
+                'record_id'     => $record->id,
+                'description'   => '',
+                'type'          => Prescription::EXAM
+            ]);
+
             foreach($request->input('exams') as $index => $exam_id)
             {
                 $exam = Exam::find($exam_id);
 
                 $prescription_exam =  PrescriptionExam::create([
-                    'prescription_id'   => $prescription->id,
+                    'prescription_id'   => $prescription_exam->id,
                     'exam_id'           => $exam->id
                 ]);
             }

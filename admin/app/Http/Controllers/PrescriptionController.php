@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Prescription;
+use App\PrescriptionExam;
+use App\PrescriptionMedicament;
 use Illuminate\Http\Request;
+use Auth;
+use App\Role;
 
 class PrescriptionController extends Controller
 {
@@ -18,11 +22,43 @@ class PrescriptionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function indexExams()
     {
-        $prescriptions = Prescription::all();
-        return view('prescriptions.index', $prescriptions);
+        $prescriptions = Prescription::where('type', Prescription::EXAM)->get();
+
+        // TODO: finalizar
+        if(Auth::user()->role_id == Role::PATIENT){
+
+        }
+
+        if (Auth::user()->role_id == Role::DOCTOR) {
+
+        }
+
+        return view('admin.prescriptions.index-exams', [
+            'prescriptions' => $prescriptions
+        ]);
     }
+
+
+    public function indexMedicaments()
+    {
+        $prescriptions = Prescription::where('type', Prescription::MEDICAMENT)->get();
+
+        // TODO: finalizar
+        if (Auth::user()->role_id == Role::PATIENT) {
+        }
+
+        if (Auth::user()->role_id == Role::DOCTOR) {
+        }
+
+        return view('admin.prescriptions.index-medicaments', [
+            'prescriptions' => $prescriptions
+        ]);
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -53,7 +89,12 @@ class PrescriptionController extends Controller
      */
     public function show(Prescription $prescription)
     {
-        //
+        // TODO: fazer gate
+       // Gate::authorize('view', $prescription);
+
+        return view('admin.prescriptions.show', [
+            'prescription' => $prescription
+        ]);
     }
 
     /**

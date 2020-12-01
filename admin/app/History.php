@@ -10,7 +10,7 @@ class History extends Model
 
     public function patient()
     {
-        return $this->HasOne('App\Patient');
+        return $this->belongsTo('App\Patient');
     }
 
     public function records()
