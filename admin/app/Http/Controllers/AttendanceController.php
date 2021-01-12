@@ -39,6 +39,11 @@ class AttendanceController extends Controller
             $attendances = Attendance::where('patient_id', $patient_id)->get();
         }
 
+        if (Auth::user()->role->id == ROLE::DOCTOR) {
+            $doctor_id = Auth::user()->doctors->first()->id;
+            $attendances = Attendance::where('doctor_id', $doctor_id)->get();
+        }
+
         return view('admin.attendances.index', [
             'attendances' => $attendances
         ]);
@@ -57,6 +62,11 @@ class AttendanceController extends Controller
         if (Auth::user()->role->id == ROLE::DOCTOR) {
             $doctor_id = Auth::user()->doctors->first()->id;
             $attendancesResults = $attendancesResults->where('schedules.doctor_id', $doctor_id);
+        }
+
+        if (Auth::user()->role->id == ROLE::PATIENT) {
+            $patient_id = Auth::user()->patients->first()->id;
+            $attendancesResults = $attendancesResults->where('attendances.patient_id', $patient_id);
         }
 
         $attendancesResults = $attendancesResults->select('schedules.start_date as start', 'schedules.end_date as end', 'attendances.id as attendance_id')->get();
@@ -108,6 +118,7 @@ class AttendanceController extends Controller
 
         $patient = Patient::find($request->input('patient'));
 
+        // Força o paciente para que só agende uma consulta para ele mesmo
         if (Auth::user()->role->id == ROLE::PATIENT) {
             $patient = Patient::find(Auth::user()->patients->first()->id);
         }

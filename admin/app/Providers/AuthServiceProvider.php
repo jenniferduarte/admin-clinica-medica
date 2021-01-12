@@ -81,12 +81,12 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         // Agendar atendimento
-        $gate->define('scheduleAttendance', function ($user, $attendance) {
-            if ($user->role->id === Role::RECEPTIONIST || $user->id == $attendance->patient->user->id) {
+        // Pode agendar um atendimento se for recepcionista ou paciente
+        $gate->define('scheduleAttendance', function ($user) {
+            if ($user->role->id === Role::RECEPTIONIST || $user->role->id === Role::PATIENT) {
                 return true;
             }
         });
-
 
         // Adicionar registro
         $gate->define('addRecord', function ($user, $attendance) {

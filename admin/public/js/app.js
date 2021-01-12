@@ -104635,6 +104635,10 @@ $(document).ready(function () {
     e.preventDefault;
     window.history.back();
   });
+  $(".btn-print").click(function (e) {
+    e.preventDefault;
+    window.print();
+  });
 
   if ($('.select2-medicaments').length > 0) {
     $('.select2-medicaments').select2({

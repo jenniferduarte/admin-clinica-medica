@@ -3,7 +3,7 @@
 @section('page-name') Agendamentos @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
-@can('scheduleAttendance', $attendance)
+@can('scheduleAttendance')
 <a href="{{ route('attendances.create') }}" class="btn btn-block btn-outline-success btn-sm">
     <i class="nav-icon fas fa-user-md"></i>  Agendar consulta
 </a>
@@ -21,6 +21,16 @@
         </div>
     </div>
         <div class="card-body">
+
+            <strong><i class="fas fa-info-circle mr-1"></i> Status</strong> <br>
+            <span class="badge badge-{{ $attendance->status->name }} uppercase right">
+                @if($attendance->status->id == Status::SCHEDULED) agendado @endif
+                @if($attendance->status->id == Status::CANCELED) cancelado @endif
+                @if($attendance->status->id == Status::ABSENT_PATIENT) paciente ausente @endif
+            </span>
+
+            <hr>
+
             <strong><i class="fas fa-clock mr-1"></i> Data e hora </strong>
 
             <p class="text-muted">
@@ -40,14 +50,17 @@
                     {{ $specialty->name }} @if(!$loop->last) | @endif
                 @endforeach
 
+                {{--
                 <br><br>
                 <a href="{{ route('doctors.show', $attendance->doctor->id)}}"
                     class="btn btn-outline-secondary btn-sm">Ver perfil completo  <i class="fas fa-arrow-right"></i>
                 </a>
+                --}}
             </p>
 
             <hr>
 
+            @if(!Auth::user()->role_id == Role::PATIENT)
             <strong><i class="fas fa-user-injured mr-1"></i> Paciente</strong>
 
             <p class="text-muted">
@@ -55,26 +68,23 @@
 
                 {{ $attendance->patient->user->email }} <br>
                 CPF: {{ $attendance->patient->user->cpf }}
-
-                <br><br>
-                <a href="{{ route('patients.show', $attendance->patient->id)}}"
-                    class="btn btn-outline-secondary btn-sm">Ver perfil completo <i class="fas fa-arrow-right"></i>
-                </a>
             </p>
 
             <hr>
+            @endif
 
-            <strong><i class="fas fa-info-circle mr-1"></i> Status</strong> <br>
-            <span class="badge badge-{{ $attendance->status->name }} uppercase right">
-                @if($attendance->status->id == Status::SCHEDULED) agendado @endif
-                @if($attendance->status->id == Status::CANCELED) cancelado @endif
-                @if($attendance->status->id == Status::ABSENT_PATIENT) paciente ausente @endif
-            </span>
+            <div class="float-right">
 
-            <hr>
+            @can('isDoctor')
+            <br><br>
+            <a href="{{ route('patients.show', $attendance->patient->id)}}"
+                class="btn btn-outline-secondary btn-sm">Ver perfil
+            </a>
+            @endcan
+
             @if($attendance->status->id == Status::SCHEDULED)
 
-            <div>
+
 
                 @can('cancelAttendance', $attendance)
                     <a href="#" class="btn btn-sm bg-danger update-attendance-status"

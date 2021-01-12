@@ -90,7 +90,6 @@
 
                 <hr>
 
-
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user-injured"></i>
@@ -227,11 +226,13 @@
                                 <p>Ver todos</p>
                             </a>
                         </li>
+                        @can('scheduleAttendance')
                         <li class="nav-item">
                             <a href="{{ route('attendances.create') }}" class="nav-link">
                                 <p>Agendar consulta</p>
                             </a>
                         </li>
+                        @endcan
                     </ul>
                 </li>
 

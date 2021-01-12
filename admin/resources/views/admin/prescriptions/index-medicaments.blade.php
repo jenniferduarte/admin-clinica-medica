@@ -16,7 +16,9 @@
             <thead>
                 <tr>
                     <th>ID</th>
+                    @can(!'isDoctor')
                     <th>Médico solicitante</th>
+                    @endcan
                     <th>Data</th>
                     <th>Medicamentos</th>
                     <th>Ações</th>
@@ -27,7 +29,9 @@
                 @foreach($prescriptions as $prescription)
                 <tr>
                     <td>{{ $prescription->id }}</td>
+                    @can(!'isDoctor')
                     <td>{{ $prescription->record->doctor->treatment . ' ' . $prescription->record->doctor->user->name }}</td>
+                    @endcan
                     <td>{{ $prescription->created_at->format('d/m/Y H:s:i') }} </td>
                     <td>@foreach($prescription->medicaments as $medicament) {{ $medicament->generic_name }} @if(!$loop->last)|@endif @endforeach</td>
                     <td>

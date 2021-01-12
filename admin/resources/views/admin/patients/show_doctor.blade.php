@@ -80,50 +80,51 @@
               <!-- Histórico -->
               <div class="tab-pane active" id="history">
 
+                @if($records)
                 <!-- The timeline -->
                 <div class="timeline timeline-inverse">
-
-                  <!-- Loop dos registros de um histórico -->
-                  @foreach($records as $record)
-                  <!-- timeline time label -->
-                  <div class="time-label">
-                    <span class="bg-secondary">
-                      {{ $record->created_at->format('d/m/Y') }}
-                    </span>
-                  </div>
-
-                  <div>
-                    <i class="fas fa-calendar-check bg-secondary"></i>
-
-                    <div class="timeline-item">
-
-                      <h3 class="timeline-header">Consulta com<a href="{{ route('doctors.show', $record->doctor->id)}}">
-                        {{ $record->doctor->user->name }}</a>
-                      </h3>
-
-                      <div class="timeline-body">
-
-                        @if($record->treatment_plan)
-                        <strong> Plano de tratamento: </strong>{{ Str::limit($record->treatment_plan, 150) }}
-                        <hr>
-                        @endif
-
-                        @if($record->diagnostic_conclusion)
-                        <strong> Conclusão do diagnóstico: </strong> {{ Str::limit($record->diagnostic_conclusion, 150) }}
-                        @endif
-
-                      </div>
-                      <div class="timeline-footer">
-                        <a href="{{ route('patients.records.show', [$patient->id, $record->id]) }}"
-                            class="btn btn-primary btn-sm"> <i class="fas fa-plus"></i> Ver detalhes
-                        </a>
-                      </div>
+                    <!-- Loop dos registros de um histórico -->
+                    @foreach($records as $record)
+                    <!-- timeline time label -->
+                    <div class="time-label">
+                        <span class="bg-secondary">
+                        {{ $record->created_at->format('d/m/Y') }}
+                        </span>
                     </div>
-                  </div>
-                  @endforeach
 
+                    <div>
+                        <i class="fas fa-calendar-check bg-secondary"></i>
+
+                        <div class="timeline-item">
+
+                        <h3 class="timeline-header">Consulta com<a href="{{ route('doctors.show', $record->doctor->id)}}">
+                            {{ $record->doctor->user->name }}</a>
+                        </h3>
+
+                        <div class="timeline-body">
+
+                            @if($record->treatment_plan)
+                            <strong> Plano de tratamento: </strong>{{ Str::limit($record->treatment_plan, 150) }}
+                            <hr>
+                            @endif
+
+                            @if($record->diagnostic_conclusion)
+                            <strong> Conclusão do diagnóstico: </strong> {{ Str::limit($record->diagnostic_conclusion, 150) }}
+                            @endif
+
+                        </div>
+                        <div class="timeline-footer">
+                            <a href="{{ route('patients.records.show', [$patient->id, $record->id]) }}"
+                                class="btn btn-primary btn-sm"> <i class="fas fa-plus"></i> Ver detalhes
+                            </a>
+                        </div>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
-
+                @else
+                <p> O paciente não possui registros. </p>
+                @endif
               </div>
 
             </div>

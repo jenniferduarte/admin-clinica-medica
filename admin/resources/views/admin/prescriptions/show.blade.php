@@ -104,6 +104,12 @@
         </div>
         <!-- /.row -->
 
+        <div class="row no-print">
+            <div class="col-12">
+                <button type="button" class="btn btn-secondary float-right btn-print"><i class="fas fa-print"></i> Imprimir</button>
+            </div>
+        </div>
+
     </div>
   </div>
 </div>

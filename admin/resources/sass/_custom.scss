@@ -89,7 +89,9 @@
     height: 760px;
     overflow-y: scroll;
 }
-
+.opacity{
+    opacity: 0.6
+}
 /* Medicaments */
 #medicaments-selections .row.medicaments:first-of-type .remove-medicament{
     display: none;

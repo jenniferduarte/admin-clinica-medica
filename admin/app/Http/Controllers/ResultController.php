@@ -15,6 +15,7 @@ use Auth;
 use App\Role;
 use App\Policies\ResultPolicy;
 
+
 class ResultController extends Controller
 {
     public function __construct()
@@ -100,7 +101,7 @@ class ResultController extends Controller
             'doctor_id'         => $doctor_id,
             'patient_id'        => $patient_id,
             'laboratory_id'     => $laboratory_id,
-            'file'              =>  $laboratory_id.'/'.$filename,
+            'file'              => $laboratory_id.'/'.$filename,
             'show_to_patient'   => $request->show_to_patient
         ]);
 
