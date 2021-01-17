@@ -15,7 +15,7 @@ class CreateResultsTable extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
-            $table->longText('file');
+            $table->longText('filepath');
             $table->unsignedBigInteger('patient_id');
             $table->foreign('patient_id')->references('id')->on('patients');
             $table->unsignedBigInteger('doctor_id');

@@ -51,7 +51,7 @@
     </div>
 
     <div class="col-md-6 col-sm-12">
-        <embed src="{{ asset('files/'.$result->file)}}" width="100%" height="800px" type="application/pdf">
+        <embed src="{{Storage::disk('s3')->url('results/'.$result->filepath)}}" width="100%" height="800px" type="application/pdf">
     </div>
 
 </div>

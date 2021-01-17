@@ -10,7 +10,7 @@ class Result extends Model
 {
     use Notifiable, SoftDeletes;
 
-    protected $fillable = ['patient_id', 'doctor_id', 'laboratory_id', 'show_to_patient','file'];
+    protected $fillable = ['patient_id', 'doctor_id', 'laboratory_id', 'show_to_patient','filepath'];
 
     public function doctor()
     {
