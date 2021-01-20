@@ -212,6 +212,7 @@
                 <hr>
                 @endcan
 
+                @can('scheduleAttendance')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-id-card"></i>
@@ -237,6 +238,7 @@
                 </li>
 
                 <hr>
+                @endcan
 
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">

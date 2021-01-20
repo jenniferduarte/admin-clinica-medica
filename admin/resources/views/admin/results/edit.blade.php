@@ -7,7 +7,7 @@
 <div class="card card-primary">
 
     <!-- form start -->
-    <form role="form" method="POST" action="{{ route('results.update', $result) }}" id="edit-form">
+    <form role="form" method="POST" action="{{ route('results.update', $result) }}" id="edit-form" enctype="multipart/form-data">
         @method('PUT')
         @csrf
 
@@ -87,6 +87,12 @@
                 </div>
                 @endcan
 
+                {{-- TODO: temporario. depois passar a utilizar como validação. requiredIf..  --}}
+                @can('isLaboratory')
+                <input type="hidden" name="laboratory_id" value="{{ Auth::user()->laboratory->id }}"/>
+                <input type="hidden" name="show_to_patient" value="0"/>
+                @endcan
+
                 @can('isDoctor')
                 <!-- Mostrar ao paciente -->
                 <div class="col-md-2 col-sm-12">
@@ -112,8 +118,8 @@
                   <span class="mailbox-attachment-icon"><i class="fas fa-file-pdf"></i></span>
 
                   <div class="mailbox-attachment-info">
-                    <a href={{ asset('files/'.$result->file)}}  target="_blank"
-                        class="mailbox-attachment-name">  {{ $result->file }}</a>
+                    <a href={{Storage::disk('s3')->url($result->filepath)}}  target="_blank"
+                        class="mailbox-attachment-name">  {{ $result->file_original_name ??  $result->filepath}}</a>
                   </div>
                 </li>
 

@@ -93,7 +93,7 @@ class ResultController extends Controller
 
         $doctor_id = $request->doctor_id;
         $patient_id = $request->patient_id;
-        $filename = Carbon::now()->timestamp.'_'.'d'.$doctor_id.'_'.'p'.$patient_id.'_'.$file->getClientOriginalName();
+        $filename = Carbon::now()->timestamp.'_'.$file->getClientOriginalName();
 
         Storage::putFileAs('results/'.$laboratory_id, $file, $filename);
 
@@ -101,7 +101,8 @@ class ResultController extends Controller
             'doctor_id'         => $doctor_id,
             'patient_id'        => $patient_id,
             'laboratory_id'     => $laboratory_id,
-            'filepath'              => $laboratory_id.'/'.$filename,
+            'filepath'          => 'results/'.$laboratory_id.'/'.$filename,
+            'file_original_name'=> $file->getClientOriginalName(),
             'show_to_patient'   => $request->show_to_patient
         ]);
 
@@ -160,7 +161,49 @@ class ResultController extends Controller
      */
     public function update(Request $request, Result $result)
     {
-        //
+        //Gate::authorize('update', 'App\Result');
+
+        $laboratory_id = $request->laboratory_id;
+
+        if (Auth::user()->role_id == Role::LABORATORY) {
+            $laboratory_id = Auth::user()->laboratory->id;
+        }
+
+        $doctor_id = $request->doctor_id;
+        $patient_id = $request->patient_id;
+
+
+        $file = null;
+        if ($request->file) {
+
+            $file = $request->file;
+            $filename = Carbon::now()->timestamp . '_' . $file->getClientOriginalName();
+
+            Storage::putFileAs('results/' . $laboratory_id, $file, $filename);
+
+            $result = $result->update([
+                'filepath'           => 'results/' . $laboratory_id . '/' . $filename,
+                'file_original_name' => $file->getClientOriginalName(),
+                'doctor_id'         => $doctor_id,
+                'patient_id'        => $patient_id,
+                'laboratory_id'     => $laboratory_id,
+                'show_to_patient'   => $request->show_to_patient
+            ]);
+        }else{
+            $result = $result->update([
+                'doctor_id'         => $doctor_id,
+                'patient_id'        => $patient_id,
+                'laboratory_id'     => $laboratory_id,
+                'show_to_patient'   => $request->show_to_patient
+            ]);
+        }
+
+        $notification = array(
+            'message' => 'Atualizado com sucesso!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->action('ResultController@index')->with($notification);
     }
 
     /**
@@ -171,6 +214,16 @@ class ResultController extends Controller
      */
     public function destroy(Result $result)
     {
-        //
+        Gate::authorize('delete', $result);
+
+        # Exclui o resultado
+        $result->delete();
+
+        $notification = array(
+            'message'       => 'Excluído com sucesso!',
+            'alert-type'    => 'success'
+        );
+
+        return redirect()->action('ResultController@index')->with($notification);
     }
 }

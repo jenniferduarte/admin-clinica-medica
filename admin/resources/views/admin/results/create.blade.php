@@ -86,8 +86,6 @@
                 </div>
                 @endcan
 
-
-
                 @can('isDoctor')
                 <!-- Mostrar ao paciente -->
                 <div class="col-md-2 col-sm-12">
