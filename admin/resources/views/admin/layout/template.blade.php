@@ -1,7 +1,7 @@
 @extends('admin.layout.app')
 
 @section('body')
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed overlay dark">
     <div class="wrapper">
         @include('admin.layout.navbar')
         @include('admin.layout.sidebar')

@@ -88,9 +88,25 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
-        // Adicionar registro
+        // Adicionar registro médico
         $gate->define('addRecord', function ($user, $attendance) {
             if ($user->role->id === Role::DOCTOR && $user->id == $attendance->doctor->user->id) {
+                return true;
+            }
+        });
+
+
+        // Visualizar exames e prescrições
+        // Médico, paciente ou responsável pelo laboratório
+        $gate->define('viewExamsAndPrescriptionsList', function ($user) {
+            if ($user->role->id === Role::DOCTOR || $user->role->id === Role::PATIENT || $user->role->id === Role::LABORATORY) {
+               return true;
+            }
+        });
+
+        // Adicionar resultado de exame
+        $gate->define('addExamResults', function ($user) {
+            if ($user->role->id === Role::LABORATORY) {
                 return true;
             }
         });

@@ -3,9 +3,11 @@
 @section('page-name') Resultados de exames @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
+@can('addExamResults')
 <a href="{{ route('results.create') }}" class="btn btn-block btn-outline-success btn-sm">
     <i class="nav-icon fas fa-capsules"></i>  Adicionar resultado
 </a>
+@endcan
 @endsection
 
 @section('content')

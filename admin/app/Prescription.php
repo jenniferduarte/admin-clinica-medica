@@ -19,7 +19,7 @@ class Prescription extends Model
 
     public function medicaments()
     {
-        return $this->belongsToMany('App\Medicament', 'prescription_medicaments');
+        return $this->belongsToMany('App\Medicament', 'prescription_medicaments')->withPivot('dosage');;
     }
 
     public function exams()

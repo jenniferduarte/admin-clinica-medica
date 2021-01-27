@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Gate;
 use Auth;
 use App\Role;
 use App\Policies\ResultPolicy;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 
 class ResultController extends Controller

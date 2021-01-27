@@ -240,6 +240,7 @@
                 <hr>
                 @endcan
 
+                @can('viewExamsAndPrescriptionsList')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-syringe"></i>
@@ -276,6 +277,7 @@
                 </li>
 
                 <hr>
+                @endcan
 
 
                 <li class="nav-item">

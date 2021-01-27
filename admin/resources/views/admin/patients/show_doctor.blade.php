@@ -123,7 +123,7 @@
                     @endforeach
                 </div>
                 @else
-                <p> O paciente não possui registros. </p>
+                <p> Este paciente ainda não possui registros. </p>
                 @endif
               </div>
 

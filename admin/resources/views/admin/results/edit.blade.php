@@ -50,6 +50,11 @@
                     </div>
                 </div>
 
+                {{-- TODO: temporario. depois passar a utilizar como validação. requiredIf..  --}}
+                @can('isLaboratory')
+
+                @endcan
+
                 <!-- Paciente -->
                 <div class="col-md-4 col-sm-12">
                     <div class="form-group">
@@ -85,12 +90,8 @@
                         @error('laboratory_id') <p class="text-danger">{{ $message }}</p> @enderror
                     </div>
                 </div>
-                @endcan
-
-                {{-- TODO: temporario. depois passar a utilizar como validação. requiredIf..  --}}
-                @can('isLaboratory')
-                <input type="hidden" name="laboratory_id" value="{{ Auth::user()->laboratory->id }}"/>
-                <input type="hidden" name="show_to_patient" value="0"/>
+                @else
+                <input type="hidden" name="laboratory_id" value="{{ Auth::user()->laboratory->id ?? $result->laboratory->id}}"/>
                 @endcan
 
                 @can('isDoctor')
@@ -103,12 +104,15 @@
                             <input type="checkbox" name="show_to_patient" data-bootstrap-switch=""
                                 data-on-text="Sim" data-off-text="Não"
                                 data-off-color="danger" data-on-color="success" id="show_to_patient" value="1"
-                                {{ old('show_to_patient') ? 'checked' : '' }}
+                                {{ old('show_to_patient', $result->show_to_patient) ? 'checked' : '' }}
+
                             >
                             @error('show_to_patient') <p class="text-danger">{{ $message }}</p> @enderror
                         </div>
                     </div>
                 </div>
+                @else
+                <input type="hidden" name="show_to_patient" value="0"/>
                 @endcan
 
             </div>

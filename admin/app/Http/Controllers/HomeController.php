@@ -32,8 +32,8 @@ class HomeController extends Controller
         $next_attendance = [];
         $doctor = null;
 
-        // Médico
-        if(Auth::user()->role->id == Role::DOCTOR){
+        // Médico ou recepcionista
+        if(Auth::user()->role->id == Role::DOCTOR || Auth::user()->role->id == Role::RECEPTIONIST){
             return redirect()->action('AttendanceController@index');
         }
 

@@ -5,7 +5,6 @@
 @section('content')
 
 <div class="card card-primary">
-
     <!-- form start -->
     <form role="form" method="post" action="{{ route('attendances.store') }}">
         @csrf
@@ -59,7 +58,7 @@
                   </div>
                 </div>
 
-                @can(!'isPatient')
+                @can('isReceptionist')
                 <!-- Paciente -->
                 <div class="col-md-12 col-sm-12">
                   <div class="form-group">
@@ -74,6 +73,7 @@
                   </div>
                 </div>
                 @endcan
+
 
             </div>
           </div>

@@ -104672,6 +104672,7 @@ $(document).ready(function () {
   });
 
   function updateStatus(attendance, status) {
+    $('.overlay.d-none').removeClass('d-none');
     $.ajax({
       url: "/attendances/".concat(attendance, "/status/").concat(status),
       type: 'PUT',
@@ -104688,9 +104689,8 @@ $(document).ready(function () {
       window.location.href;
       location.reload();
     }).fail(function () {
-      console.log("error");
-    }).always(function () {
-      console.log("complete");
+      alert("Ocorreu um erro. Por favor, tente novamente mais tarde.");
+    }).always(function () {//
     });
   }
 });
