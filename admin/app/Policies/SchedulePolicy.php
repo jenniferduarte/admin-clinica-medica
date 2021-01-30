@@ -2,12 +2,13 @@
 
 namespace App\Policies;
 
-use App\Doctor;
 use App\User;
+use App\Schedule;
 use App\Role;
+use App\Doctor;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class DoctorPolicy
+class SchedulePolicy
 {
     use HandlesAuthorization;
 
@@ -26,12 +27,12 @@ class DoctorPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Doctor  $doctor
+     * @param  \App\Schedule  $schedule
      * @return mixed
      */
-    public function view(User $user, Doctor $doctor)
+    public function view(User $user, Schedule $Schedule)
     {
-        return $user->id === $doctor->user_id ||  $user->role_id === Role::ADMIN;
+        return $user->role_id === Role::ADMIN;
     }
 
     /**
@@ -49,22 +50,22 @@ class DoctorPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Doctor  $doctor
+     * @param  \App\Schedule  $schedule
      * @return mixed
      */
-    public function update(User $user, Doctor $doctor)
+    public function update(User $user, Schedule $schedule)
     {
-        return $user->id === $doctor->user_id || $user->role_id === Role::ADMIN;
+        return $user->role_id === Role::ADMIN;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Doctor  $doctor
+     * @param  \App\Schedule  $schedule
      * @return mixed
      */
-    public function delete(User $user, Doctor $doctor)
+    public function delete(User $user, Schedule $schedule)
     {
         return $user->role_id === Role::ADMIN;
     }
@@ -73,10 +74,10 @@ class DoctorPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Doctor  $doctor
+     * @param  \App\Schedule  $schedule
      * @return mixed
      */
-    public function restore(User $user, Doctor $doctor)
+    public function restore(User $user, Schedule $schedule)
     {
         //
     }
@@ -85,10 +86,10 @@ class DoctorPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Doctor  $doctor
+     * @param  \App\Schedule  $schedule
      * @return mixed
      */
-    public function forceDelete(User $user, Doctor $doctor)
+    public function forceDelete(User $user, Schedule $schedule)
     {
         //
     }

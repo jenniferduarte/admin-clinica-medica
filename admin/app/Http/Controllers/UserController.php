@@ -49,7 +49,11 @@ class UserController extends Controller
 
     public function show(User $user)
     {
+        Gate::authorize('isAdmin');
 
+        return view('admin.users.show', [
+            'user' => $user
+        ]);
     }
 
     public function edit(User $user)

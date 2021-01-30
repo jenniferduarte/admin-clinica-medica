@@ -30,7 +30,7 @@ class ReceptionistController extends Controller
      */
     public function index()
     {
-        Gate::authorize('viewAny', Auth::user());
+        Gate::authorize('isAdmin');
 
         $receptionists = User::where('role_id', Role::RECEPTIONIST)->get();
 
@@ -46,7 +46,7 @@ class ReceptionistController extends Controller
      */
     public function create()
     {
-        Gate::authorize('create', Auth::user());
+        Gate::authorize('isAdmin');
 
         return view('admin.receptionists.create', [
             'genders' =>  Gender::all()
@@ -61,7 +61,7 @@ class ReceptionistController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
-        Gate::authorize('create', Auth::user());
+        Gate::authorize('isAdmin');
 
         // Gera uma senha aleatória
         // Padrão: 5 primeiros caracteres do email do usuário + 3 dígitos aleatórios. Em caixa alta
@@ -114,7 +114,7 @@ class ReceptionistController extends Controller
      */
     public function show(User $receptionist)
     {
-        Gate::authorize('view', $receptionist);
+        Gate::authorize('isAdmin');
 
         return view('admin.users.show', [
             'user' => $receptionist
@@ -129,7 +129,7 @@ class ReceptionistController extends Controller
      */
     public function edit(User $receptionist)
     {
-        Gate::authorize('update', $receptionist);
+        Gate::authorize('isAdmin');
 
         return view('admin.users.edit', [
             'user'          => $receptionist,
@@ -146,7 +146,7 @@ class ReceptionistController extends Controller
      */
     public function update(UserUpdateRequest $request, User $receptionist)
     {
-        Gate::authorize('update', $receptionist);
+        Gate::authorize('isAdmin');
 
         User::find($receptionist->id)->update([
             'name'          => $request->input('name'),
@@ -185,7 +185,7 @@ class ReceptionistController extends Controller
      */
     public function destroy(User $receptionist)
     {
-        Gate::authorize('delete', $receptionist);
+        Gate::authorize('isAdmin');
 
         # Exclui o usuário
         $receptionist->delete();

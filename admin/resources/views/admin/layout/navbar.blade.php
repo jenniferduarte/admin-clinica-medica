@@ -7,7 +7,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
 
-       <!-- TODO: remover isso. (é apenas para facilitar o desenvolvimento) -->
+       <!-- TODO: remover isso. (é apenas para facilitar o desenvolvimento/teste) -->
         <li class="nav-item">
             <strong class="nav-link"> Função: {{ Auth::user()->role->name}} </strong>
         </li>

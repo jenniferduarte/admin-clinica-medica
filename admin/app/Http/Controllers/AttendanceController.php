@@ -16,6 +16,7 @@ use Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AttendenceScheduled;
 use App\Mail\AttendenceCanceled;
+use Illuminate\Support\Facades\Gate;
 
 class AttendanceController extends Controller
 {
@@ -100,6 +101,8 @@ class AttendanceController extends Controller
      */
     public function create()
     {
+        Gate::authorize('scheduleAttendance');
+
         return view('admin.attendances.create', [
             'doctors' => Doctor::all(),
             'patients' => Patient::all()
@@ -114,6 +117,8 @@ class AttendanceController extends Controller
      */
     public function store(AttendanceStoreRequest $request)
     {
+        Gate::authorize('scheduleAttendance');
+
         $schedule = Schedule::find($request->input('time'));
 
         $patient = Patient::find($request->input('patient'));

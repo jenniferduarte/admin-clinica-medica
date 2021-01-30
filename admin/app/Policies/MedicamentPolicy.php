@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Medicament;
 use App\User;
+use App\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MedicamentPolicy
@@ -18,7 +19,7 @@ class MedicamentPolicy
      */
     public function viewAny(User $user)
     {
-        return true;
+        return $user->role_id === Role::ADMIN;
     }
 
     /**
@@ -30,7 +31,7 @@ class MedicamentPolicy
      */
     public function view(User $user, Medicament $medicament)
     {
-        //
+        return $user->role_id === Role::ADMIN;
     }
 
     /**
@@ -41,7 +42,7 @@ class MedicamentPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->role_id === Role::ADMIN;
     }
 
     /**
@@ -53,7 +54,7 @@ class MedicamentPolicy
      */
     public function update(User $user, Medicament $medicament)
     {
-        //
+        return $user->role_id === Role::ADMIN;
     }
 
     /**
@@ -65,7 +66,7 @@ class MedicamentPolicy
      */
     public function delete(User $user, Medicament $medicament)
     {
-        //
+        return $user->role_id === Role::ADMIN;
     }
 
     /**

@@ -19,7 +19,8 @@ class PatientPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->role_id === Role::RECEPTIONIST || $user->role_id === Role::DOCTOR;
+        return $user->role_id === Role::RECEPTIONIST ||
+        $user->role_id === Role::ADMIN;
     }
 
     /**
@@ -31,7 +32,10 @@ class PatientPolicy
      */
     public function view(User $user, Patient $patient)
     {
-        return $user->id === $patient->user_id || $user->role_id === Role::DOCTOR || $user->role_id === Role::RECEPTIONIST;
+        return $user->id === $patient->user_id ||
+        $user->role_id === Role::DOCTOR ||
+        $user->role_id === Role::RECEPTIONIST ||
+        $user->role_id === Role::ADMIN;
     }
 
     /**
@@ -42,7 +46,7 @@ class PatientPolicy
      */
     public function create(User $user)
     {
-        return $user->role_id === Role::RECEPTIONIST;
+        return $user->role_id === Role::RECEPTIONIST || $user->role_id === Role::ADMIN;
     }
 
     /**
@@ -54,7 +58,9 @@ class PatientPolicy
      */
     public function update(User $user, Patient $patient)
     {
-        return $user->id === $patient->user_id || $user->role_id === Role::DOCTOR || $user->role_id === Role::RECEPTIONIST;
+        return $user->id === $patient->user_id ||
+        $user->role_id === Role::RECEPTIONIST ||
+        $user->role_id === Role::ADMIN;
     }
 
     /**
@@ -66,7 +72,7 @@ class PatientPolicy
      */
     public function delete(User $user, Patient $patient)
     {
-        //
+        return $user->role_id === Role::RECEPTIONIST || $user->role_id === Role::ADMIN;
     }
 
     /**

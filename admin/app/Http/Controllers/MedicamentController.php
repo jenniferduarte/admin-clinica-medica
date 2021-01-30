@@ -23,7 +23,7 @@ class MedicamentController extends Controller
      */
     public function index()
     {
-        Gate::authorize('viewAny');
+        Gate::authorize('viewAny', Medicament::class);
 
         $medicaments = Medicament::all();
 
@@ -39,7 +39,7 @@ class MedicamentController extends Controller
      */
     public function create()
     {
-        Gate::authorize('create');
+        Gate::authorize('create', Medicament::class);
 
         return view('admin.medicaments.create');
     }
@@ -52,7 +52,7 @@ class MedicamentController extends Controller
      */
     public function store(MedicamentStoreRequest $request)
     {
-        Gate::authorize('create');
+        Gate::authorize('create', Medicament::class);
 
         $medicament = Medicament::create($request->all());
 

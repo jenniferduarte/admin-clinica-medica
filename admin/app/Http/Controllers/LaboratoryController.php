@@ -26,7 +26,7 @@ class LaboratoryController extends Controller
      */
     public function index()
     {
-        Gate::authorize('viewAny');
+        Gate::authorize('isAdmin');
 
         $laboratories = Laboratory::all();
 
@@ -43,7 +43,7 @@ class LaboratoryController extends Controller
      */
     public function create()
     {
-        Gate::authorize('create');
+        Gate::authorize('isAdmin');
 
         // Só mostra os usuários do tipo laboratório que não possuem vinculo com nenhum laboratório.
 
@@ -69,7 +69,7 @@ class LaboratoryController extends Controller
      */
     public function store(LaboratoryStoreRequest $request)
     {
-        Gate::authorize('create');
+        Gate::authorize('isAdmin');
 
         //$user = User::create($request->all());
 
@@ -91,7 +91,7 @@ class LaboratoryController extends Controller
      */
     public function show(Laboratory $laboratory)
     {
-       Gate::authorize('view', $laboratory);
+        Gate::authorize('isAdmin');
 
         return view('admin.laboratories.show', [
             'laboratory' => $laboratory
@@ -106,7 +106,7 @@ class LaboratoryController extends Controller
      */
     public function edit(Laboratory $laboratory)
     {
-       Gate::authorize('update', $laboratory);
+        Gate::authorize('isAdmin');
 
         $users = User::where([['role_id', Role::LABORATORY], ['active', 1]])->get();
 
@@ -125,7 +125,7 @@ class LaboratoryController extends Controller
      */
     public function update(LaboratoryUpdateRequest $request, Laboratory $laboratory)
     {
-        Gate::authorize('update', $laboratory);
+        Gate::authorize('isAdmin');
 
         $laboratory->update($request->all());
 
@@ -145,7 +145,7 @@ class LaboratoryController extends Controller
      */
     public function destroy(Laboratory $laboratory)
     {
-       Gate::authorize('delete', $laboratory);
+        Gate::authorize('isAdmin');
 
         $laboratory->delete();
 

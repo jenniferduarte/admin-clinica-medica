@@ -104606,6 +104606,9 @@ $(document).ready(function () {
   if ($('.datatable').length > 0) {
     $(function () {
       $('.datatable').DataTable({
+        "language": {
+          "url": "//cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
+        },
         "paging": true,
         "lengthChange": false,
         "searching": true,

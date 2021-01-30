@@ -4,20 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
-use Illuminate\Support\Facades\Gate;
 use App\Role;
-
-use App\Result;
-use App\Policies\ResultPolicy;
-
-use App\Doctor;
-use App\Laboratory;
-use App\Medicament;
-use App\Patient;
-use App\Policies\DoctorPolicy;
-use App\Policies\LaboratoryPolicy;
-use App\Policies\MedicamentPolicy;
-use App\Policies\PatientPolicy;
 
 
 class AuthServiceProvider extends ServiceProvider
@@ -32,7 +19,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Laboratory'    => 'App\Policies\LaboratoryPolicy',
         'App\Medicament'    => 'App\Policies\MedicamentPolicy',
         'App\Patient'       => 'App\Policies\PatientPolicy',
-        'App\Result'       => 'App\Policies\ResultPolicy',
+        'App\Result'        => 'App\Policies\ResultPolicy',
     ];
 
     /**
@@ -50,6 +37,64 @@ class AuthServiceProvider extends ServiceProvider
             if ($user->role->id == Role::SUPERADMIN) {
                 return true;
             }
+        });
+
+
+        // Minha Conta
+        $gate->define('manageMyAccount', function ($user) {
+            return true;
+        });
+
+
+        // Gerenciar Médicos - Admin
+        $gate->define('manageDoctors', function ($user) {
+            return $user->role->id === Role::ADMIN;
+        });
+
+        // Gerenciar Pacientes - Admin ou recepcionista
+        $gate->define('managePatients', function ($user) {
+            return $user->role->id === Role::ADMIN ||  $user->role->id === Role::RECEPTIONIST;
+        });
+
+        // Gerenciar Recepcionistas - Admin
+        $gate->define('manageRecepcionist', function ($user) {
+            return $user->role->id === Role::ADMIN;
+        });
+
+        // Gerenciar Medicamentos - Admin
+        $gate->define('manageMedicaments', function ($user) {
+            return $user->role->id === Role::ADMIN;
+        });
+
+        // Gerenciar Laboratórios - Admin
+        $gate->define('manageLabs', function ($user) {
+            return $user->role->id === Role::ADMIN;
+        });
+
+        // Agendamentos - Admin ou médico ou paciente ou recepcionista
+        $gate->define('schedules', function ($user) {
+            return $user->role->id === Role::ADMIN ||
+            $user->role->id === Role::DOCTOR ||
+            $user->role->id === Role::PATIENT ||
+            $user->role->id === Role::RECEPTIONIST;
+        });
+
+
+        // Gerenciar responsáveis por laboratório - Admin
+        $gate->define('responsibleLabs', function ($user) {
+            return $user->role->id === Role::ADMIN;
+        });
+
+        // Exames e prescrições  - Médico, paciente ou responsável pelo laboratório
+        $gate->define('examsAndPrescriptions', function ($user) {
+            return $user->role->id === Role::DOCTOR ||
+            $user->role->id === Role::PATIENT ||
+            $user->role->id === Role::LABORATORY;
+        });
+
+        // Admin
+        $gate->define('isAdmin', function ($user) {
+            return $user->role->id === Role::ADMIN;
         });
 
 
@@ -95,14 +140,6 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
-
-        // Visualizar exames e prescrições
-        // Médico, paciente ou responsável pelo laboratório
-        $gate->define('viewExamsAndPrescriptionsList', function ($user) {
-            if ($user->role->id === Role::DOCTOR || $user->role->id === Role::PATIENT || $user->role->id === Role::LABORATORY) {
-               return true;
-            }
-        });
 
         // Adicionar resultado de exame
         $gate->define('addExamResults', function ($user) {

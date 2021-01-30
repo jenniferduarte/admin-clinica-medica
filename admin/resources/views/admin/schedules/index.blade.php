@@ -3,7 +3,12 @@
 @section('page-name') {{ $doctor->treatment }} {{ $doctor->user->name }} › Horários @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
-<a href="{{ route('doctors.schedules.create', $doctor->id) }}" class="btn btn-block btn-outline-success btn-sm">
+
+<a href="#" class="btn btn-outline-secondary btn-sm goback">
+    <i class="fas fa-arrow-left"></i>  Voltar
+</a>
+
+<a href="{{ route('doctors.schedules.create', $doctor->id) }}" class="btn btn-outline-success btn-sm">
     <i class="nav-icon fas fa-user-md"></i>  Novos horários
 </a>
 @endsection
@@ -38,12 +43,10 @@
                     <td>{{ $schedule->active ? 'Sim' : 'Não' }}</td>
                     <td>
                         <div class="btn-group" role="group">
-                            {{-- <a href="{{ route('doctors.schedules.show', [$doctor->id, $schedule->id]) }}" class="btn btn-secondary">
-                                <i class="fas fa-eye"></i>
-                            </a>    --}}
-                            <a href="{{ route('doctors.schedules.edit', [$doctor->id, $schedule->id]) }}" class="btn btn-secondary">
-                                <i class="fas fa-pencil-alt"></i>
-                            </a>
+                            <form id="deleteForm" action="{{ route('doctors.schedules.destroy', [$doctor, $schedule]) }}" method="post">
+                                @method('delete') @csrf
+                                <button type="submit" data-id="{{ $doctor->id }}" class="text-danger btn btn-delete"><i class="fas fa-trash-alt"></i> Deletar</button>
+                            </form>
                         </div>
                     </td>
                 </tr>

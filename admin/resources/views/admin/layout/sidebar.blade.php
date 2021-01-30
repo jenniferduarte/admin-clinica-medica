@@ -1,5 +1,5 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar elevation-4 sidebar-light-warning">
+<aside class="main-sidebar elevation-4 sidebar-primary">
     <!-- Brand Logo -->
     <a href="{{route('home')}}" class="brand-link">
         <img src="{{ asset('img/logo.png') }}" width="180px" height="auto">
@@ -35,9 +35,10 @@
 
                 <hr>
 
+                @can('manageMyAccount')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user-md"></i>
+                        <i class="nav-icon fas fa-user-cog"></i>
                         <p>
                             Minha conta
                             <i class="fas fa-angle-left right"></i>
@@ -60,12 +61,13 @@
                             </a>
                         </li>
                     </ul>
-
                 </li>
 
                 <hr>
 
-                @can('isAdmin')
+                @endcan
+
+                @can('manageDoctors')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user-md"></i>
@@ -89,7 +91,9 @@
                 </li>
 
                 <hr>
+                @endcan
 
+                @can('managePatients')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user-injured"></i>
@@ -113,7 +117,9 @@
                 </li>
 
                 <hr>
+                @endcan
 
+                @can('manageRecepcionist')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user-clock"></i>
@@ -136,9 +142,10 @@
                     </ul>
                 </li>
 
-
                 <hr>
+                @endcan
 
+                @can('manageMedicaments')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-capsules"></i>
@@ -162,7 +169,9 @@
                 </li>
 
                 <hr>
+                @endcan
 
+                @can('responsibleLabs')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-flask"></i>
@@ -186,7 +195,9 @@
                 </li>
 
                 <hr>
+                @endcan
 
+                @can('manageLabs')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-flask"></i>
@@ -212,7 +223,8 @@
                 <hr>
                 @endcan
 
-                @can('scheduleAttendance')
+
+                @can('schedules')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-id-card"></i>
@@ -240,7 +252,7 @@
                 <hr>
                 @endcan
 
-                @can('viewExamsAndPrescriptionsList')
+                @can('examsAndPrescriptions')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-syringe"></i>

@@ -2,6 +2,10 @@
 /*a{
     color: #3490dc;
 }*/
+[class*=sidebar-primary] .user-panel {
+    border-bottom: 1px solid #dee2e6;
+}
+
 .alert a.btn {
     color: $white;
     text-decoration: none;
@@ -123,6 +127,11 @@
 }
 .nav-tabs .nav-link.active{
     color: $blue;
+}
+
+.nav hr {
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
 }
 
 /*

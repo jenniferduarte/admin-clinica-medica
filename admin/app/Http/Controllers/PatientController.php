@@ -32,7 +32,7 @@ class PatientController extends Controller
      */
     public function index()
     {
-        Gate::authorize('viewAny', Auth::user());
+        Gate::authorize('viewAny', Patient::class);
 
         $patients = Patient::all();
 
@@ -48,7 +48,7 @@ class PatientController extends Controller
      */
     public function create()
     {
-        Gate::authorize('create', Auth::user());
+        Gate::authorize('create', Patient::class);
 
         return view('admin.patients.create', [
             'genders' =>  Gender::all()
@@ -63,7 +63,7 @@ class PatientController extends Controller
      */
     public function store(PatientStoreRequest $request)
     {
-        Gate::authorize('create', Auth::user());
+        Gate::authorize('create', Patient::class);
 
         // Gera uma senha aleatória
         // Padrão: 5 primeiros caracteres do email do usuário + 3 dígitos aleatórios. Em caixa alta

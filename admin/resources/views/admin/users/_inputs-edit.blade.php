@@ -109,7 +109,7 @@
             class="form-control @error('street') is-invalid  @enderror"
             name="street" id="street"
             placeholder="Digite a rua"
-            value="{{ old('street', $user->addresses()->first()->street) }}">
+            value="{{ old('street', $user->addresses()->first()->street)}}">
 
         @error('street') <p class="text-danger">{{ $message }}</p> @enderror
     </div>

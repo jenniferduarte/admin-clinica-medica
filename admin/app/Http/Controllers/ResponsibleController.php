@@ -30,7 +30,7 @@ class ResponsibleController extends Controller
      */
     public function index()
     {
-        Gate::authorize('viewAny', Auth::user());
+        Gate::authorize('isAdmin');
 
         $responsibles = User::where('role_id', Role::LABORATORY)->get();
 
@@ -46,7 +46,7 @@ class ResponsibleController extends Controller
      */
     public function create()
     {
-        Gate::authorize('create', Auth::user());
+        Gate::authorize('isAdmin');
 
         return view('admin.responsibles.create', [
             'genders' =>  Gender::all()
@@ -61,7 +61,7 @@ class ResponsibleController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
-        Gate::authorize('create', Auth::user());
+        Gate::authorize('isAdmin');
 
         // Gera uma senha aleatória
         // Padrão: 5 primeiros caracteres do email do usuário + 3 dígitos aleatórios. Em caixa alta
@@ -114,7 +114,7 @@ class ResponsibleController extends Controller
      */
     public function show(User $responsible)
     {
-        Gate::authorize('view', $responsible);
+        Gate::authorize('isAdmin');
 
         return view('admin.users.show', [
             'user' => $responsible
@@ -129,7 +129,7 @@ class ResponsibleController extends Controller
      */
     public function edit(User $responsible)
     {
-        Gate::authorize('update', $responsible);
+        Gate::authorize('isAdmin');
 
         return view('admin.users.edit', [
             'user'          => $responsible,
@@ -146,7 +146,7 @@ class ResponsibleController extends Controller
      */
     public function update(UserUpdateRequest $request, User $responsible)
     {
-        Gate::authorize('update', $responsible);
+        Gate::authorize('isAdmin');
 
         User::find($responsible->id)->update([
             'name'          => $request->input('name'),
@@ -185,7 +185,7 @@ class ResponsibleController extends Controller
      */
     public function destroy(User $responsible)
     {
-        Gate::authorize('delete', $responsible);
+        Gate::authorize('isAdmin');
 
         # Exclui o usuário
         $responsible->delete();

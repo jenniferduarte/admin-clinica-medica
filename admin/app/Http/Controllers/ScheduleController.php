@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Doctor;
 use App\Http\Requests\ScheduleStoreRequest;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Gate;
+use Auth;
 
 
 class ScheduleController extends Controller
@@ -24,6 +26,8 @@ class ScheduleController extends Controller
      */
     public function index(Doctor $doctor)
     {
+        Gate::authorize('viewAny', Schedule::class);
+
         return view('admin.schedules.index', [
             'schedules' => Schedule::where('doctor_id', $doctor->id)->get(),
             'doctor'    => $doctor
@@ -37,6 +41,8 @@ class ScheduleController extends Controller
      */
     public function create(Doctor $doctor)
     {
+        Gate::authorize('create', Schedule::class);
+
         return view('admin.schedules.create', [
             'doctor' => $doctor
         ]);
@@ -50,6 +56,8 @@ class ScheduleController extends Controller
      */
     public function store(ScheduleStoreRequest $request, Doctor $doctor)
     {
+        Gate::authorize('create', Schedule::class);
+
         $dates = explode(',', $request->input('date'));
 
         if($dates){
@@ -115,10 +123,7 @@ class ScheduleController extends Controller
      */
     public function edit(Doctor $doctor, Schedule $schedule)
     {
-        return view('admin.schedules.edit', [
-            'doctor' => $doctor,
-            'schedule' => $schedule
-        ]);
+        //
     }
 
     /**
@@ -139,8 +144,18 @@ class ScheduleController extends Controller
      * @param  \App\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Schedule $schedule)
+    public function destroy(Doctor $doctor, Schedule $schedule)
     {
-        //
+        Gate::authorize('delete', $schedule);
+
+        # Exclui o horário do médico. Aqui a exclusão é FÍSICA.
+        $schedule->delete();
+
+        $notification = array(
+            'message'       => 'Excluído com sucesso!',
+            'alert-type'    => 'success'
+        );
+
+        return redirect()->action('ScheduleController@index', $doctor)->with($notification);
     }
 }

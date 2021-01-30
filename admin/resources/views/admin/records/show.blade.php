@@ -3,7 +3,9 @@
 @section('page-name') Ver Registro › #{{ $record->id}}  @endsection {{-- Page Name --}}
 
 @section('quick-actions')
-
+<a href="#" class="btn  btn-outline-secondary btn-sm goback">
+    <i class="fas fa-arrow-left"></i>  Voltar
+</a>
 @endsection
 
 @section('content')

@@ -3,10 +3,15 @@
 @section('page-name') Ver Paciente › {{ $patient->user->name }} @endsection {{-- Page Name --}}
 
 @section('quick-actions')
+<a href="#" class="btn  btn-outline-secondary btn-sm goback">
+    <i class="fas fa-arrow-left"></i>  Voltar
+</a>
 
-  <a href="{{ route('patients.records.create', $patient->id) }}" class="btn  btn-outline-secondary btn-sm">
-    <i class="fas fa-bookmark"></i>   Iniciar atendimento
-  </a>
+
+<a href="{{ route('patients.records.create', $patient->id) }}" class="btn  btn-outline-success btn-sm">
+<i class="fas fa-bookmark"></i>   Iniciar atendimento
+</a>
+
 
 @endsection
 

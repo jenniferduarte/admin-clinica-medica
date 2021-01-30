@@ -50,11 +50,6 @@
                     </div>
                 </div>
 
-                {{-- TODO: temporario. depois passar a utilizar como validação. requiredIf..  --}}
-                @can('isLaboratory')
-
-                @endcan
-
                 <!-- Paciente -->
                 <div class="col-md-4 col-sm-12">
                     <div class="form-group">

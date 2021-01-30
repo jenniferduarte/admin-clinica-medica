@@ -34,7 +34,7 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        Gate::authorize('viewAny', Auth::user());
+        Gate::authorize('viewAny', Doctor::class);
 
         $doctors = Doctor::all();
 
@@ -50,7 +50,7 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        Gate::authorize('create', Auth::user());
+        Gate::authorize('create', Doctor::class);
 
         return view('admin.doctors.create', [
             'genders' =>  Gender::all(),
@@ -66,7 +66,7 @@ class DoctorController extends Controller
      */
     public function store(DoctorStoreRequest $request)
     {
-        Gate::authorize('create', Auth::user());
+        Gate::authorize('create', Doctor::class);
 
         // Gera uma senha aleatória
         // Padrão: 5 primeiros caracteres do email do usuário + 3 dígitos aleatórios. Em caixa alta

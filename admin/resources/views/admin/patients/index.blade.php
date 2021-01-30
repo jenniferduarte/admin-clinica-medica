@@ -3,7 +3,11 @@
 @section('page-name') Pacientes @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
-<a href="{{ route('patients.create') }}" class="btn btn-block btn-outline-success btn-sm">
+<a href="#" class="btn  btn-outline-secondary btn-sm goback">
+<i class="fas fa-arrow-left"></i>  Voltar
+</a>
+
+<a href="{{ route('patients.create') }}" class="btn  btn-outline-success btn-sm">
     <i class="nav-icon fas fa-user-injured"></i>  Novo Paciente
 </a>
 @endsection
@@ -11,7 +15,6 @@
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-@can(!'isPatient')
 <div class="card card-primary">
     <div class="card-body">
 
@@ -35,11 +38,11 @@
                     <td>{{ $patient->social_name }} </td>
                     <td>{{ $patient->user->email }} </td>
                     <td>{{ $patient->user->cpf }} </td>
-                    <td> 
+                    <td>
                         <div class="btn-group" role="group">
                             <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-secondary">
                                 <i class="fas fa-eye"></i>
-                            </a>   
+                            </a>
                             <a href="{{ route('patients.edit', $patient->id) }}" class="btn btn-secondary">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
@@ -51,6 +54,6 @@
         </table>
     </div>
 </div>
-@endcan 
+
 @endsection
 
