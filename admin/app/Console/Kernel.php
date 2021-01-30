@@ -27,12 +27,13 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         # Apaga todos os horários disponíveis para marcação de consulta que estão vagos
-        # e que já passaram da data corrente menos 1 dia
+        # e que já passaram da data corrente menos 2 dias
         $schedule->call(function () {
             DB::table('schedules')
-                ->where('end_date', '<', Carbon::now()->subDays(1))
+                ->where('end_date', '<', Carbon::now()->subDays(2))
                 ->where('vacant', 1)->delete();
-        })->dailyAt('23:59');
+        })->dailyAt('23:59')->emailOutputTo('eu@jenniferduarte.dev');
+
     }
 
     /**
