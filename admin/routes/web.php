@@ -51,3 +51,6 @@ Route::get('/{doctor}/available-dates', 'DoctorController@availableDates')->name
 Route::get('/{doctor}/available-times', 'DoctorController@availableTimes')->name('available-times');
 Route::get('/attendances-perdate', 'AttendanceController@ajaxIndexPerDate')->name('attendances-perdate');
 Route::put('/attendances/{attendance}/status/{status}', 'AttendanceController@updateStatus')->name('attendance-update-status');
+Route::get('/dashboard', 'HomeController@dashboardAdmin')->name('dash-admin');
+Route::get('/top-specialties', 'HomeController@topSpecialties')->name('top-specialties');
+Route::get('/doctors-attendances', 'HomeController@doctorsAttendances')->name('doctors-attendances');

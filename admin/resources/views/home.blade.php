@@ -4,6 +4,10 @@
 
 @section('content')
 
+@can('isAdmin')
+    @include('home_admin')
+@endcan
+
 @can('isDoctor')
     <div id="calendarDoctor"></div>
 @endcan
@@ -13,9 +17,5 @@
 @if(Auth::user()->role_id == Role::PATIENT)
     @include('home_patient')
 @endif
-
-@endsection
-
-@section('javascript')
 
 @endsection

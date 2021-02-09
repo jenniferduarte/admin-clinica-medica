@@ -30,7 +30,6 @@ class LaboratoryController extends Controller
 
         $laboratories = Laboratory::all();
 
-
         return view('admin.laboratories.index', [
             'laboratories' => $laboratories
         ]);

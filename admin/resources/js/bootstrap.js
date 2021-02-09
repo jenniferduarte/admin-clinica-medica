@@ -12,6 +12,7 @@ try {
 
     require('bootstrap');
     require('admin-lte');
+    require('chart.js');
     window.toastr = require('toastr');
     window.Swal = require('sweetalert2');
     global.moment = require('moment');

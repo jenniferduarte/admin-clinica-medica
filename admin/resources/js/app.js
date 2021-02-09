@@ -12,6 +12,7 @@ require('tempusdominus-bootstrap-4');
 require('daterangepicker');
 require('./fullcalendar.js');
 require('./attendance.js');
+require('./dashboard.js');
 import bsCustomFileInput from 'bs-custom-file-input';
 
 

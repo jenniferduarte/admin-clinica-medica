@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
             DB::table('schedules')
                 ->where('end_date', '<', Carbon::now()->subDays(2))
                 ->where('vacant', 1)->delete();
-        })->dailyAt('23:59')->emailOutputTo('eu@jenniferduarte.dev');
+        })->everyTenMinutes()->emailOutputTo('eu@jenniferduarte.dev');
 
     }
 
