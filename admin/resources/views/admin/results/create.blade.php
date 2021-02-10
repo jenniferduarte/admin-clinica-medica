@@ -62,7 +62,6 @@
                     </div>
                 </div>
 
-
                 @can('isAdmin')
                 <!-- Laboratório -->
                 <div class="col-md-4 col-sm-12">
@@ -79,7 +78,14 @@
                         @error('laboratory_id') <p class="text-danger">{{ $message }}</p> @enderror
                     </div>
                 </div>
+                @else
+                <input type="hidden" name="laboratory_id" value="{{ Auth::user()->laboratory->id ?? $result->laboratory->id}}"/>
                 @endcan
+
+
+                @if(Auth::user()->role->id == Role::LABORATORY)
+
+                @endif
 
                 @can('isDoctor')
                 <!-- Mostrar ao paciente -->
@@ -97,6 +103,8 @@
                         </div>
                     </div>
                 </div>
+                @else
+                <input type="hidden" name="show_to_patient" value="0"/>
                 @endcan
 
             </div>

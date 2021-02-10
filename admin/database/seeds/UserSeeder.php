@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'id' => '1',
-            'name' => 'Super Admin',
+            'name' => 'Nome do Super Admin',
             'email' => 'superadmin@vidasaude.com',
             'password' => Hash::make('superadmin123'),
             'role_id' => '1'
@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'id' => '2',
-            'name' => 'Admin',
+            'name' => 'Nome do Admin',
             'email' => 'admin@vidasaude.com',
             'password' => Hash::make('admin123'),
             'role_id' => '2',
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
         // Doctors
         DB::table('users')->insert([
             'id' => '3',
-            'name' => 'Médico',
+            'name' => 'Nome do Médico',
             'email' => 'medico@vidasaude.com',
             'password' => Hash::make('medico123'),
             'role_id' => '3',
@@ -126,7 +126,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
 
             'id' => '12',
-            'name' => 'Laboratório',
+            'name' => 'Nome Responsável Lab',
             'email' => 'laboratorio@vidasaude.com',
             'password' => Hash::make('laboratorio123'),
             'role_id' => '5',
@@ -167,7 +167,7 @@ class UserSeeder extends Seeder
         // Patients
         DB::table('users')->insert([
             'id' => '16',
-            'name' => 'Paciente',
+            'name' => 'Nome do Paciente',
             'email' => 'paciente@vidasaude.com',
             'password' => Hash::make('paciente123'),
             'role_id' => '6',

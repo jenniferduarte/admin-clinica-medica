@@ -129,10 +129,12 @@
         <div class="card-footer">
         </form>
 
+            @can('delete', $result)
             <form id="deleteForm" action="{{ route('results.destroy', $result->id ) }}" method="post">
                 @method('delete') @csrf
                 <button type="submit" data-id="{{ $result->id }}" class="text-danger btn btn-delete">Deletar</button>
             </form>
+            @endcan
 
             <div class="float-right">
                 <button type="submit" class="btn btn-success" form="edit-form">Salvar</button>

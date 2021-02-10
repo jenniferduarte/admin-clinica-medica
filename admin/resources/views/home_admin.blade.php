@@ -5,7 +5,7 @@
                 <span class="info-box-icon bg-info elevation-1"><i class="fas fa-id-card"></i></span>
 
                 <div class="info-box-content">
-                <span class="info-box-text">Consultas realizadas</span>
+                <span class="info-box-text">Registros cadastrados de atendimentos</span>
                 <span class="info-box-number">
                     <span id="attendances"></span>
                     <i class="fas fa-1x fa-sync-alt fa-spin text-gray"></i>

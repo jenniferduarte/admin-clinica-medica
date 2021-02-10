@@ -134,8 +134,8 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         // Adicionar registro médico
-        $gate->define('addRecord', function ($user, $attendance) {
-            if ($user->role->id === Role::DOCTOR && $user->id == $attendance->doctor->user->id) {
+        $gate->define('addRecord', function ($user) {
+            if ($user->role->id === Role::DOCTOR){
                 return true;
             }
         });
@@ -147,6 +147,7 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
         });
+
 
     }
 }

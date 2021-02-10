@@ -15,6 +15,7 @@ use App\PrescriptionExam;
 use App\PrescriptionMedicament;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RecordController extends Controller
 {
@@ -41,15 +42,13 @@ class RecordController extends Controller
      */
     public function create(Patient $patient)
     {
-        if (Auth::user()->role->id == Role::DOCTOR) {
-            return view('admin.records.create', [
-                'patient'       => $patient,
-                'exams'         => Exam::all(),
-                'medicaments'   => Medicament::all(),
-            ]);
-        }
+        Gate::authorize('addRecord');
 
-        return redirect('home');
+        return view('admin.records.create', [
+            'patient'       => $patient,
+            'exams'         => Exam::all(),
+            'medicaments'   => Medicament::all(),
+        ]);
     }
 
     /**
@@ -60,6 +59,8 @@ class RecordController extends Controller
      */
     public function store(RecordStoreRequest $request, Patient $patient)
     {
+        Gate::authorize('addRecord');
+
         # TODO: usar transaction
 
         $doctor = Doctor::where('user_id', Auth::user()->id)->get();
@@ -156,6 +157,8 @@ class RecordController extends Controller
      */
     public function show(Patient $patient, Record $record)
     {
+        Gate::authorize('isDoctor');
+
         return view('admin.records.show',[
             'patient' => $patient,
             'record'  => $record

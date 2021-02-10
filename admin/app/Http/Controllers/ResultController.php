@@ -62,7 +62,7 @@ class ResultController extends Controller
      */
     public function create()
     {
-       // Gate::authorize('create');
+        Gate::authorize('addExamResults');
 
         $doctors = Doctor::all();
         $pacients = Patient::all();
@@ -83,7 +83,7 @@ class ResultController extends Controller
      */
     public function store(ResultStoreRequest $request)
     {
-        Gate::authorize('create', 'App\Result');
+        Gate::authorize('addExamResults');
 
         $file = $request->file;
 
@@ -107,6 +107,7 @@ class ResultController extends Controller
             'file_original_name'=> $file->getClientOriginalName(),
             'show_to_patient'   => $request->show_to_patient
         ]);
+
 
         $notification = array(
             'message' => 'Criado com sucesso!',
@@ -163,7 +164,7 @@ class ResultController extends Controller
      */
     public function update(Request $request, Result $result)
     {
-        //Gate::authorize('update', 'App\Result');
+        Gate::authorize('update', $result);
 
         $laboratory_id = $request->laboratory_id;
 

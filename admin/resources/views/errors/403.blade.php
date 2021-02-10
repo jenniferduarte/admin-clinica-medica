@@ -53,8 +53,7 @@
             </div>
 
             <div class="message" style="padding: 10px;">
-                Esta ação é proibida.
-
+               Oops.. Você não pode fazer isso!
             </div>
 
         </div>

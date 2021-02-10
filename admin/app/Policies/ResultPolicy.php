@@ -22,7 +22,6 @@ class ResultPolicy
     public function viewAny(User $user)
     {
         return true;
-        //return $user->role_id === Role::LABORATORY;
     }
 
     /**
@@ -34,7 +33,15 @@ class ResultPolicy
      */
     public function view(User $user, Result $result)
     {
-        return true;
+        if($user->id === $result->patient->user_id && $result->show_to_patient == 1){
+            return true;
+        }
+
+        if($user->id === $result->doctor->user_id || $user->id === $result->laboratory->user_id){
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -45,7 +52,7 @@ class ResultPolicy
      */
     public function create(User $user)
     {
-        return true;
+        return $user->role_id === Role::LABORATORY;
     }
 
     /**
@@ -57,7 +64,7 @@ class ResultPolicy
      */
     public function update(User $user, Result $result)
     {
-        return true;
+        return $user->id === $result->doctor->user_id || $user->id === $result->laboratory->user_id;
     }
 
     /**
@@ -69,7 +76,7 @@ class ResultPolicy
      */
     public function delete(User $user, Result $result)
     {
-        return true;
+        return $user->id === $result->laboratory->user_id;
     }
 
     /**

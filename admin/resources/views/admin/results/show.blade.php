@@ -4,13 +4,15 @@
 
 @section('quick-actions')
 
-  <a href="#" class="btn  btn-outline-secondary btn-sm goback">
-    <i class="fas fa-arrow-left"></i>  Voltar
-  </a>
+    <a href="#" class="btn  btn-outline-secondary btn-sm goback">
+        <i class="fas fa-arrow-left"></i>  Voltar
+    </a>
 
-  <a href="{{ route('results.edit', $result->id) }}" class="btn btn-outline-success btn-sm">
-    <i class="fas fa-pencil-alt"></i>  Editar
-  </a>
+    @can('update', $result)
+    <a href="{{ route('results.edit', $result->id) }}" class="btn btn-outline-success btn-sm">
+        <i class="fas fa-pencil-alt"></i>  Editar
+    </a>
+    @endcan
 
 @endsection
 
@@ -21,7 +23,7 @@
         <div class="card card-primary">
 
             <div class="card-body">
-                <strong><i class="fas fa-signature mr-1"></i> Data de Cadastro</strong>
+                <strong><i class="fas fa-calendar-alt mr-1"></i> Data de Cadastro</strong>
                 <p class="text-muted"> {{ $result->created_at->format('d/m/Y') }}</p>
 
                 <hr>

@@ -48,12 +48,17 @@
 
                     <td>
                         <div class="btn-group" role="group">
-                             <a href="{{ route('results.show', $result->id) }}" class="btn btn-secondary">
+                            @can('view', $result)
+                            <a href="{{ route('results.show', $result->id) }}" class="btn btn-secondary">
                                 <i class="fas fa-eye"></i>
                             </a>
+                            @endcan
+
+                            @can('update', $result)
                             <a href="{{ route('results.edit', $result->id) }}" class="btn btn-secondary ">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
+                            @endcan
                         </div>
                     </td>
 

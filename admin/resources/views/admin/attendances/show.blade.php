@@ -89,7 +89,7 @@
                 </a>
             @endcan
 
-            @can('addRecord', $attendance)
+            @can('addRecord')
                 <a href="{{ route('patients.records.create', $attendance->patient->id) }}"
                     class="btn btn-sm bg-success">
                     <i class="fas fa-bookmark"></i>  Iniciar atendimento
