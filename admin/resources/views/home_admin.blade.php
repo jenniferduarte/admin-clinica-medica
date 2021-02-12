@@ -5,7 +5,7 @@
                 <span class="info-box-icon bg-info elevation-1"><i class="fas fa-id-card"></i></span>
 
                 <div class="info-box-content">
-                <span class="info-box-text">Registros cadastrados de atendimentos</span>
+                <span class="info-box-text">Registros de atendimentos</span>
                 <span class="info-box-number">
                     <span id="attendances"></span>
                     <i class="fas fa-1x fa-sync-alt fa-spin text-gray"></i>
@@ -77,7 +77,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Especialidades mais cadastradas</h3>
 
-                    <div class="card-tools">
+                    <div class="card-tools hidden-xs">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                         </button>
                     </div>

@@ -3,9 +3,13 @@
 @section('page-name') Laboratórios @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
-<a href="{{ route('laboratories.create') }}" class="btn btn-block btn-outline-success btn-sm">
-    <i class="nav-icon fas fa-capsules"></i>  Novo Laboratório
-</a>
+
+<span class="quick-actions">
+    <a href="{{ route('laboratories.create') }}" class="btn btn-block btn-outline-success btn-sm">
+        <i class="nav-icon fas fa-capsules"></i>  Novo Laboratório
+    </a>
+</span>
+
 @endsection
 
 @section('content')
@@ -18,10 +22,10 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nome</th>
+                    <th data-priority="1">Nome</th>
                     <th>Email</th>
                     <th>Responsável</th>
-                    <th>Ações</th>
+                    <th data-priority="2">Ações</th>
                 </tr>
             </thead>
 

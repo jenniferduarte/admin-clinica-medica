@@ -92,7 +92,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
 
             'id' => '9',
-            'name' => 'Recepcionista',
+            'name' => 'Nome do Recepcionista',
             'email' => 'recepcionista@vidasaude.com',
             'password' => Hash::make('recepcionista123'),
             'role_id' => '4',

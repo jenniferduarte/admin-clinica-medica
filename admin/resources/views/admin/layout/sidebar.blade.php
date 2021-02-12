@@ -1,14 +1,16 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar elevation-4 sidebar-primary">
+<aside class="main-sidebar elevation-4 sidebar-light-primary">
     <!-- Brand Logo -->
     <a href="{{route('home')}}" class="brand-link">
-        <img src="{{ asset('img/logo.png') }}" width="180px" height="auto">
+        <img src="{{ asset('img/favicon.png') }}" width="40px" height="auto" class="logo-sm">
+        <img src="{{ asset('img/logo.png') }}" width="180px" height="auto" class="logo">
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex text-center">
+            <i class="nav-icon fas fa-user fa-2x"></i>
             <div class="info">
                 <a href="#" class="d-block">
                     @if(Auth::user())

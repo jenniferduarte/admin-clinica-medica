@@ -3,15 +3,16 @@
 @section('page-name') Ver Paciente › {{ $patient->user->name }} @endsection {{-- Page Name --}}
 
 @section('quick-actions')
-<a href="#" class="btn  btn-outline-secondary btn-sm goback">
-    <i class="fas fa-arrow-left"></i>  Voltar
-</a>
 
+<span class="quick-actions">
+    <a href="#" class="btn  btn-outline-secondary btn-sm goback">
+        <i class="fas fa-arrow-left"></i>  Voltar
+    </a>
 
-<a href="{{ route('patients.records.create', $patient->id) }}" class="btn  btn-outline-success btn-sm">
-<i class="fas fa-bookmark"></i>   Iniciar atendimento
-</a>
-
+    <a href="{{ route('patients.records.create', $patient->id) }}" class="btn  btn-outline-success btn-sm">
+        <i class="fas fa-bookmark"></i>   Iniciar atendimento
+    </a>
+</span>
 
 @endsection
 
@@ -25,40 +26,40 @@
         <div class="card card-primary card-outline">
           <div class="card-body box-profile">
 
-          <h3 class="profile-username text-center"> {{ $patient->user->name }}</h3>
+          <h3 class="profile-username text-center"> {{ $patient->user->name  ?? '' }}</h3>
 
-            <p class="text-muted text-center">{{ $patient->user->social_name }}</p>
+            <p class="text-muted text-center">{{ $patient->user->social_name  ?? '' }}</p>
 
             <ul class="list-group list-group-unbordered mb-3">
               <li class="list-group-item">
-                <b>Email:</b> <a class="">{{ $patient->user->email }}</a>
+                <b>Email:</b> <a class="">{{ $patient->user->email  ?? '' }}</a>
               </li>
               <li class="list-group-item">
               <b>Data de nascimento:</b> <a class="">{{ $patient->user->birth_date ? $patient->user->birth_date->format('d/m/Y') : ''}}</a>
               </li>
               <li class="list-group-item">
-                <b>CPF:</b> <a class="">{{ $patient->user->cpf }}</a>
+                <b>CPF:</b> <a class="">{{ $patient->user->cpf  ?? '' }}</a>
               </li>
               <li class="list-group-item">
-                <b>RG:</b> <a class="">{{ $patient->user->rg }}</a>
+                <b>RG:</b> <a class="">{{ $patient->user->rg  ?? '' }}</a>
               </li>
               <li class="list-group-item">
-                <b>Sexo:</b> <a class="">{{ $patient->user->gender->name }}</a>
+                <b>Sexo:</b> <a class="">{{ $patient->user->gender->name ?? '' }}</a>
               </li>
               <li class="list-group-item">
-                <b>Nome da mãe:</b> <a class="">{{ $patient->mother_name }}</a>
+                <b>Nome da mãe:</b> <a class="">{{ $patient->mother_name ?? ''  }}</a>
               </li>
               <li class="list-group-item">
-                <b>Nome do pai:</b> <a class="">{{ $patient->father_name }}</a>
+                <b>Nome do pai:</b> <a class="">{{ $patient->father_name  ?? '' }}</a>
               </li>
               <li class="list-group-item">
-                <b>Nome do responsável:</b> <a class="">{{ $patient->responsible_name }}</a>
+                <b>Nome do responsável:</b> <a class="">{{ $patient->responsible_name ?? ''  }}</a>
               </li>
               <li class="list-group-item">
-                <b>Telefone do responsável:</b> <a class="">{{ $patient->responsible_phone }}</a>
+                <b>Telefone do responsável:</b> <a class="">{{ $patient->responsible_phone ?? ''  }}</a>
               </li>
               <li class="list-group-item">
-                <b>Observações:</b> <a class="">{{ $patient->observation }}</a>
+                <b>Observações:</b> <a class="">{{ $patient->observation  ?? '' }}</a>
               </li>
 
             </ul>

@@ -91,7 +91,7 @@
 
                 @can('isDoctor')
                 <!-- Mostrar ao paciente -->
-                <div class="col-md-2 col-sm-12">
+                <div class="col-md-2 col-sm-12 mb-4">
                     <label for="show_to_patient">Mostrar ao paciente</label> <br>
                     <div class="bootstrap-switch">
                         <div class="bootstrap-switch-container">

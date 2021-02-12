@@ -3,9 +3,13 @@
 @section('page-name') Recepcionistas @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
-<a href="{{ route('receptionists.create') }}" class="btn btn-block btn-outline-success btn-sm">
-    <i class="nav-icon fas fa-user-clock"></i>  Novo recepcionista
-</a>
+
+<span class="quick-actions">
+    <a href="{{ route('receptionists.create') }}" class="btn btn-block btn-outline-success btn-sm">
+        <i class="nav-icon fas fa-user-clock"></i>  Novo recepcionista
+    </a>
+</span>
+
 @endsection
 
 @section('content')

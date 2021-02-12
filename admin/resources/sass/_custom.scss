@@ -134,6 +134,51 @@
     margin-bottom: 0.6rem;
 }
 
+.logo-sm,
+.user-panel .nav-icon{
+    display: none;
+}
+
+.sidebar-collapse {
+    .logo-sm{
+        display: inline-block;
+    }
+    .logo{
+        display: none;
+    }
+
+    .info{
+        display: none;
+    }
+    .user-panel .nav-icon{
+        display: block;
+        text-align: center;
+        color: #343a40;
+        font-size: 1.5rem;
+    }
+}
+
+
+.quick-actions {
+    a{
+        margin-top: 10px;
+    }
+}
+
+.control-attendences{
+    a{
+        display: block;
+        margin: 10px auto;
+
+        @include media-breakpoint-up(sm) {
+            display: inline-block;
+        }
+    }
+}
+
+
+
+
 /*
 .clone{
     margin: auto;

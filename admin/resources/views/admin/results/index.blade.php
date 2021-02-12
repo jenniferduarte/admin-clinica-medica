@@ -3,11 +3,13 @@
 @section('page-name') Resultados de exames @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
-@can('addExamResults')
-<a href="{{ route('results.create') }}" class="btn btn-block btn-outline-success btn-sm">
-    <i class="nav-icon fas fa-capsules"></i>  Adicionar resultado
-</a>
-@endcan
+<span class="quick-actions">
+    @can('addExamResults')
+    <a href="{{ route('results.create') }}" class="btn btn-block btn-outline-success btn-sm">
+        <i class="nav-icon fas fa-capsules"></i>  Adicionar resultado
+    </a>
+    @endcan
+</span>
 @endsection
 
 @section('content')
@@ -20,12 +22,12 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Médico</th>
+                    <th data-priority="1">Médico</th>
                     <th>Paciente</th>
                     <th>Laboratório</th>
                     @can('isDoctor')<th>Visível ao paciente</th>@endcan
                     <th>Última atualização</th>
-                    <th>Ações</th>
+                    <th data-priority="2">Ações</th>
                 </tr>
             </thead>
 

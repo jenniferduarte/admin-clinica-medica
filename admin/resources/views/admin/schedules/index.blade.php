@@ -3,14 +3,15 @@
 @section('page-name') {{ $doctor->treatment }} {{ $doctor->user->name }} › Horários @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
+<span class="quick-actions">
+    <a href="#" class="btn btn-outline-secondary btn-sm goback">
+        <i class="fas fa-arrow-left"></i>  Voltar
+    </a>
 
-<a href="#" class="btn btn-outline-secondary btn-sm goback">
-    <i class="fas fa-arrow-left"></i>  Voltar
-</a>
-
-<a href="{{ route('doctors.schedules.create', $doctor->id) }}" class="btn btn-outline-success btn-sm">
-    <i class="nav-icon fas fa-user-md"></i>  Novos horários
-</a>
+    <a href="{{ route('doctors.schedules.create', $doctor->id) }}" class="btn btn-outline-success btn-sm">
+        <i class="nav-icon fas fa-user-md"></i>  Novos horários
+    </a>
+</span>
 @endsection
 
 @section('content')
@@ -23,12 +24,12 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Data</th>
-                    <th>Horário</th>
+                    <th data-priority="1">Data</th>
+                    <th data-priority="3">Horário</th>
                     <th>Tempo da consulta</th>
-                    <th>Vago</th>
+                    <th data-priority="4">Vago</th>
                     <th>Ativo</th>
-                    <th>Ações</th>
+                    <th data-priority="2">Ações</th>
                 </tr>
             </thead>
 

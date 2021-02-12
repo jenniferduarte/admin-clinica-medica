@@ -3,11 +3,15 @@
 @section('page-name') Agendamentos @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
-@can('scheduleAttendance')
-<a href="{{ route('attendances.create') }}" class="btn btn-block btn-outline-success btn-sm">
-    <i class="nav-icon fas fa-user-md"></i>  Agendar consulta
-</a>
-@endcan
+
+<span class="quick-actions">
+    @can('scheduleAttendance')
+    <a href="{{ route('attendances.create') }}" class="btn btn-block btn-outline-success btn-sm">
+        <i class="nav-icon fas fa-user-md"></i>  Agendar consulta
+    </a>
+    @endcan
+</span>
+
 @endsection
 
 @section('content')
@@ -71,7 +75,7 @@
         <hr>
         @endcan
 
-        <div class="float-right">
+        <div class="control-attendences">
 
         @can('isDoctor')
         <br><br>

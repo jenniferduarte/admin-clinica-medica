@@ -3,7 +3,7 @@
 @section('page-name') Adicionar registro › {{ $patient->user->name }} @endsection {{-- Page Name --}}
 
 @section('quick-actions')
-
+<span class="quick-actions"></span>
 @endsection
 
 @section('content')
@@ -307,30 +307,26 @@
                 <div class="col-md-6 col-sm-12">
 
                     <!-- Exames -->
-                    <div class="col-md-12 col-sm-12">
-                        <div class="form-group">
-                            <label for="exams">Exames</label>
-                            <select class="select2 form-control select2-hidden-accessible" name="exams[]"
-                                style="width: 100%;" multiple>
-                                <option></option>
-                                @foreach($exams as $exam)
-                                    <option value="{{$exam->id}}">
-                                        {{ $exam->name }}
-                                    </option>
-                                @endforeach
-                            </select>
+                    <div class="form-group">
+                        <label for="exams">Exames</label>
+                        <select class="select2 form-control select2-hidden-accessible" name="exams[]"
+                            style="width: 100%;" multiple>
+                            <option></option>
+                            @foreach($exams as $exam)
+                                <option value="{{$exam->id}}">
+                                    {{ $exam->name }}
+                                </option>
+                            @endforeach
+                        </select>
 
-                            @error('exam') <p class="text-danger">{{ $message }}</p> @enderror
-                        </div>
-
-
-                       {{-- <div class="form-group">
-                            <label for="description">Observações Gerais</label>
-                            <textarea type="text" class="form-control @error('description') is-invalid  @enderror"
-                            name="description" id="description" value="{{ old('description') }}"></textarea>
-                        </div> --}}
+                        @error('exam') <p class="text-danger">{{ $message }}</p> @enderror
                     </div>
 
+                    {{-- <div class="form-group">
+                        <label for="description">Observações Gerais</label>
+                        <textarea type="text" class="form-control @error('description') is-invalid  @enderror"
+                        name="description" id="description" value="{{ old('description') }}"></textarea>
+                    </div> --}}
                 </div>
 
                 <div class="col-md-6 col-sm-12">

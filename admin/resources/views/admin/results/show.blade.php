@@ -3,7 +3,7 @@
 @section('page-name') Ver Resultado › {{ $result->id }} @endsection {{-- Page Name --}}
 
 @section('quick-actions')
-
+<span class="quick-actions">
     <a href="#" class="btn  btn-outline-secondary btn-sm goback">
         <i class="fas fa-arrow-left"></i>  Voltar
     </a>
@@ -13,7 +13,7 @@
         <i class="fas fa-pencil-alt"></i>  Editar
     </a>
     @endcan
-
+</span>
 @endsection
 
 @section('content')

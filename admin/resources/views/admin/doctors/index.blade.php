@@ -3,9 +3,11 @@
 @section('page-name') Médicos @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
-<a href="{{ route('doctors.create') }}" class="btn btn-block btn-outline-success btn-sm">
-    <i class="nav-icon fas fa-user-md"></i>  Novo médico
-</a>
+<span class="quick-actions">
+    <a href="{{ route('doctors.create') }}" class="btn btn-block btn-outline-success btn-sm">
+        <i class="nav-icon fas fa-user-md"></i>  Novo médico
+    </a>
+</span>
 @endsection
 
 @section('content')
@@ -18,11 +20,11 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nome</th>
+                    <th data-priority="1">Nome</th>
                     <th>Especialidade</th>
                     <th>Email</th>
                     <th>CPF</th>
-                    <th>Ações</th>
+                    <th data-priority="2">Ações</th>
                 </tr>
             </thead>
 
@@ -34,11 +36,11 @@
                     <td> @foreach($doctor->specialties as $specialty) {{ $specialty->name }} @if(!$loop->last)|@endif @endforeach</td>
                     <td>{{ $doctor->user->email }} </td>
                     <td>{{ $doctor->user->cpf }} </td>
-                    <td> 
+                    <td>
                         <div class="btn-group" role="group">
                             <a href="{{ route('doctors.show', $doctor->id) }}" class="btn btn-secondary">
                                 <i class="fas fa-eye"></i>
-                            </a>   
+                            </a>
                             <a href="{{ route('doctors.edit', $doctor->id) }}" class="btn btn-secondary">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
@@ -53,6 +55,6 @@
         </table>
     </div>
 </div>
-   
+
 @endsection
 

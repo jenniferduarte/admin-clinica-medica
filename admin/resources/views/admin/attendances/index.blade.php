@@ -3,11 +3,13 @@
 @section('page-name') Agendamentos @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
-@can('scheduleAttendance')
-<a href="{{ route('attendances.create') }}" class="btn btn-block btn-outline-success btn-sm">
-    <i class="nav-icon fas fa-user-md"></i>  Agendar consulta
-</a>
-@endcan
+<span class="quick-actions">
+    @can('scheduleAttendance')
+    <a href="{{ route('attendances.create') }}" class="btn btn-block btn-outline-success btn-sm">
+        <i class="nav-icon fas fa-user-md"></i>  Agendar consulta
+    </a>
+    @endcan
+</span>
 @endsection
 
 @section('content')
@@ -37,8 +39,8 @@
           <h4 class="text-primary"><i class="fas fa-arrow-right text-info"></i> Próximas consultas</h4>
           <br>
           <div class="row">
-            {{-- Loop com as próximas consultas --}}
 
+            {{-- Loop com as próximas consultas --}}
             @foreach($attendances->sortBy('status') as $attendance)
                 @if($attendance->schedule->start_date >= now())
                 <div class="col-md-6">

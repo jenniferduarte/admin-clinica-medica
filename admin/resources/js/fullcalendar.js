@@ -12,18 +12,18 @@ if ($('#calendar').length > 0) {
             plugins: [dayGridPlugin],
             initialView: 'dayGridWeek',
             locale: ptbrLocale,
-            eventTimeFormat: { 
+            eventTimeFormat: {
                 hour: '2-digit',
-                minute: '2-digit', 
+                minute: '2-digit',
                 hour12: false
             },
             eventSources: [{
                 url: '/attendances-perdate',
-                color: '#3490dc',  
-                textColor: '#3490dc', 
+                color: '#3490dc',
+                textColor: '#3490dc',
                 timeZoneParam: 'America/Sao_Paulo'
-            }]
-        }); 
+            }],
+        });
 
         calendar.render();
     });
@@ -36,7 +36,7 @@ if ($('#calendarDoctor').length > 0) {
 
         let calendar = new Calendar(calendarEl, {
             plugins: [timeGridPlugin],
-            initialView: 'timeGridFourDay', 
+            initialView: 'timeGridFourDay',
             locale: ptbrLocale,
             nowIndicator: true,
             now: new Date(),
@@ -44,11 +44,10 @@ if ($('#calendarDoctor').length > 0) {
             allDaySlot: false,
             contentHeight: 600,
             titleFormat: {
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
             },
-           
             headerToolbar: {
                 left: 'prev,next',
                 center: 'title',
@@ -60,7 +59,7 @@ if ($('#calendarDoctor').length > 0) {
                     duration: { days: 4 },
                     buttonText: '4 dias'
                 }
-            }, 
+            },
             eventTimeFormat: {
                 hour: '2-digit',
                 minute: '2-digit',
@@ -70,11 +69,11 @@ if ($('#calendarDoctor').length > 0) {
             eventSources: [{
                 url: '/attendances-perdate',
                 color: '#3490dc',
-                textColor: '#fff', 
+                textColor: '#fff',
                 timeZoneParam: 'America/Sao_Paulo'
-            }]
-        }); 
-    
+            }],
+        });
+
         calendar.render();
     });
 }

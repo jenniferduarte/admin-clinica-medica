@@ -5,11 +5,11 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nome</th>
+                    <th data-priority="1">Nome</th>
                     <th>Email</th>
                     <th>CPF</th>
                     <th>Telefone</th>
-                    <th>Ações</th>
+                    <th data-priority="2">Ações</th>
                 </tr>
             </thead>
 

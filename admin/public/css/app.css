@@ -18004,6 +18004,45 @@ button.toast-close-button {
   margin-bottom: 0.6rem;
 }
 
+.logo-sm,
+.user-panel .nav-icon {
+  display: none;
+}
+
+.sidebar-collapse .logo-sm {
+  display: inline-block;
+}
+
+.sidebar-collapse .logo {
+  display: none;
+}
+
+.sidebar-collapse .info {
+  display: none;
+}
+
+.sidebar-collapse .user-panel .nav-icon {
+  display: block;
+  text-align: center;
+  color: #343a40;
+  font-size: 1.5rem;
+}
+
+.quick-actions a {
+  margin-top: 10px;
+}
+
+.control-attendences a {
+  display: block;
+  margin: 10px auto;
+}
+
+@media (min-width: 576px) {
+  .control-attendences a {
+    display: inline-block;
+  }
+}
+
 /*
 .clone{
     margin: auto;

@@ -4,15 +4,18 @@
 
 @section('quick-actions')
 
+<span class="quick-actions">
   <a href="#" class="btn btn-outline-secondary btn-sm goback">
     <i class="fas fa-arrow-left"></i>  Voltar
   </a>
+
 
   @can('update', $doctor)
   <a href="{{ route('doctors.edit', $doctor->id) }}" class="btn btn-outline-success btn-sm">
     <i class="fas fa-pencil-alt"></i>  Editar
   </a>
   @endcan
+</span>
 
 @endsection
 
@@ -28,8 +31,11 @@
 
           <div class="text-center">
 
+            @if($doctor->user->gender)
             <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/doctor-' . $doctor->user->gender->id . '.png') }}"
               alt="Médico profile picture">
+            @endif
+
           </div>
 
           <h3 class="profile-username text-center"> {{ $doctor->user->name }}</h3>

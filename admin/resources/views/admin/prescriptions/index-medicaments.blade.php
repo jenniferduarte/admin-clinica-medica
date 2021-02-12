@@ -3,7 +3,9 @@
 @section('page-name') Prescrições de medicamentos @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
+<span class="quick-actions">
 
+</span>
 @endsection
 
 @section('content')
@@ -20,8 +22,8 @@
                     <th>Médico solicitante</th>
                     @endcan
                     <th>Data</th>
-                    <th>Medicamentos</th>
-                    <th>Ações</th>
+                    <th data-priority="1">Medicamentos</th>
+                    <th data-priority="2">Ações</th>
                 </tr>
             </thead>
 

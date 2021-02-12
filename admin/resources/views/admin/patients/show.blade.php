@@ -4,6 +4,7 @@
 
 @section('quick-actions')
 
+<span class="quick-actions">
   <a href="#" class="btn  btn-outline-secondary btn-sm goback">
     <i class="fas fa-arrow-left"></i>  Voltar
   </a>
@@ -11,6 +12,7 @@
   <a href="{{ route('patients.edit', $patient->id) }}" class="btn btn-outline-success btn-sm">
     <i class="fas fa-pencil-alt"></i>  Editar
   </a>
+</span>
 
 @endsection
 

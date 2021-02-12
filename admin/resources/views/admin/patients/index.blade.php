@@ -3,13 +3,16 @@
 @section('page-name') Pacientes @endsection {{-- Page Name  --}}
 
 @section('quick-actions')
-<a href="#" class="btn  btn-outline-secondary btn-sm goback">
-<i class="fas fa-arrow-left"></i>  Voltar
-</a>
 
-<a href="{{ route('patients.create') }}" class="btn  btn-outline-success btn-sm">
-    <i class="nav-icon fas fa-user-injured"></i>  Novo Paciente
-</a>
+<span class="quick-actions">
+    <a href="#" class="btn  btn-outline-secondary btn-sm goback">
+        <i class="fas fa-arrow-left"></i>  Voltar
+    </a>
+
+    <a href="{{ route('patients.create') }}" class="btn  btn-outline-success btn-sm">
+        <i class="nav-icon fas fa-user-injured"></i>  Novo Paciente
+    </a>
+</span>
 @endsection
 
 @section('content')
@@ -22,11 +25,11 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nome</th>
+                    <th data-priority="1">Nome</th>
                     <th>Nome social</th>
                     <th>Email</th>
                     <th>CPF</th>
-                    <th>Ações</th>
+                    <th data-priority="2">Ações</th>
                 </tr>
             </thead>
 
