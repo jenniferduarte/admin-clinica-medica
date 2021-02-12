@@ -10,7 +10,7 @@
         </div>
         <!-- /.login-logo -->
         <div class=" login-box">
-            <div class="card-body login-card-body">
+            <div class="login-card-body">
                 <p class="login-box-msg">Redefinição de senha</p>
 
                 <div class="card-body">

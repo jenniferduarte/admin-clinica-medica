@@ -176,7 +176,12 @@
     }
 }
 
-
+@include media-breakpoint-down(sm) {
+    .login-box, .register-box {
+        margin-top: .5rem;
+        width: 100%;
+    }
+}
 
 
 /*

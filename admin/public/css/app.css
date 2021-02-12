@@ -18043,6 +18043,14 @@ button.toast-close-button {
   }
 }
 
+@media (max-width: 767.98px) {
+  .login-box,
+  .register-box {
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+}
+
 /*
 .clone{
     margin: auto;

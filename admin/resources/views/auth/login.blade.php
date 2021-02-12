@@ -64,8 +64,8 @@
                         </div>
                     </div>
                     <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">
+                    <div class="col-lg-4 col-sm-12">
+                        <button type="submit" class="btn btn-primary btn-block mt-1 mb-2">
                             Entrar
                         </button>
                     </div>
