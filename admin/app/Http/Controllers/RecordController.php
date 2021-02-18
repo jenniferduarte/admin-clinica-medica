@@ -99,11 +99,10 @@ class RecordController extends Controller
             'expected_return'       => $request->input('expected_return')
         ]);
 
-
         # Persiste os medicamentos
         if($request->input('medicaments') && !is_null($request->input('medicaments')[0]))
         {
-            $prescription = Prescription::create([
+            $prescription_type_medicament = Prescription::create([
                 'record_id'     => $record->id,
                 'description'   => '',
                 'type'          => Prescription::MEDICAMENT
@@ -114,7 +113,7 @@ class RecordController extends Controller
                 $medicament = Medicament::find($medicament_id);
 
                 $prescription_medicament = PrescriptionMedicament::create([
-                    'prescription_id'   => $prescription->id,
+                    'prescription_id'   => $prescription_type_medicament->id,
                     'medicament_id'     => $medicament->id,
                     'dosage'            => $request->input('dosages')[$index]
                 ]);
@@ -122,9 +121,9 @@ class RecordController extends Controller
         }
 
         # Persiste os exames
-        if($request->input('exams'))
+        if($request->input('exams') && !is_null($request->input('exams')[0]))
         {
-            $prescription_exam = Prescription::create([
+            $prescription_type_exam = Prescription::create([
                 'record_id'     => $record->id,
                 'description'   => '',
                 'type'          => Prescription::EXAM
@@ -135,7 +134,7 @@ class RecordController extends Controller
                 $exam = Exam::find($exam_id);
 
                 $prescription_exam =  PrescriptionExam::create([
-                    'prescription_id'   => $prescription_exam->id,
+                    'prescription_id'   => $prescription_type_exam->id,
                     'exam_id'           => $exam->id
                 ]);
             }
