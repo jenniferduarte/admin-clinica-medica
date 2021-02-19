@@ -139,6 +139,10 @@
     display: none;
 }
 
+.small-box h3 {
+    white-space: initial;
+}
+
 .sidebar-collapse {
     .logo-sm{
         display: inline-block;
@@ -180,6 +184,9 @@
     .login-box, .register-box {
         margin-top: .5rem;
         width: 100%;
+    }
+    #topSpecialties {
+        height: auto    !important;
     }
 }
 

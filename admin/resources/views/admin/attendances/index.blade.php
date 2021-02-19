@@ -58,7 +58,7 @@
                       <br>
                       <div class="card-body pt-0">
                         <div class="row">
-                          <div class="col-7">
+                          <div class="col-md-7">
                             <h2 class="lead"><b>{{ $attendance->doctor->treatment }} {{ $attendance->doctor->user->name }}</b></h2>
                             <p class="text-muted text-sm">
                               <strong> Especialista em: </strong>
@@ -66,7 +66,7 @@
                                 {{ $specialty->name }} @if(!$loop->last) / @endif
                               @endforeach
                             </p>
-                            <ul class="ml-4 mb-0 fa-ul text-muted">
+                            <ul class="mb-2 ml-3 fa-ul text-muted">
                               <li class="small"><span class="fa-li"><i class="fas fa-lg fa-at"></i></span>
                                 {{ $attendance->doctor->user->email }}
                               </li>
@@ -80,8 +80,8 @@
                           </div>
                         </div>
 
-                        <div class="text-right">
-                          <a href="{{ route('attendances.show', $attendance->id) }}" class="btn btn-sm bg-secondary">
+                        <div class="text-ht mt-4">
+                          <a href="{{ route('attendances.show', $attendance->id) }}" class="btn btn-sm bg-secondary col-md-2 col-sm-12">
                             <i class="fas fa-plus"></i>
                             Ver detalhes
                           </a>

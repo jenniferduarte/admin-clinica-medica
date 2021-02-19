@@ -1,6 +1,6 @@
 {{-- Next attendance --}}
 @if($next_attendance)
-<div class="alert alert-info alert-dismissible">
+<div class="alert alert-info">
     <h5><i class="icon fas fa-info"></i><strong> Atenção! </strong></h5>
     Sua próxima consulta é no dia
     <strong> {{ Carbon\Carbon::parse($next_attendance->start_date)->format('d/m/Y à\s\ H:i') }} </strong>
@@ -27,7 +27,7 @@
 <br><br>
 <div class="row">
 
-    <div class="col-lg-6 col-6">
+    <div class="col-md-6 col-sm-12">
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
@@ -43,7 +43,7 @@
         </div>
     </div>
 
-    <div class="col-lg-6 col-6">
+    <div class="col-md-6 col-sm-12">
 
         <!-- small box -->
 
@@ -62,7 +62,7 @@
 
     </div>
 
-    <div class="col-lg-6 col-6">
+    <div class="col-md-6 col-sm-12">
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
@@ -78,7 +78,7 @@
         </div>
     </div>
 
-      <div class="col-lg-6 col-6">
+      <div class="col-md-6 col-sm-12">
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">

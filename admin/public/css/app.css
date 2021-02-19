@@ -18009,6 +18009,10 @@ button.toast-close-button {
   display: none;
 }
 
+.small-box h3 {
+  white-space: initial;
+}
+
 .sidebar-collapse .logo-sm {
   display: inline-block;
 }
@@ -18048,6 +18052,10 @@ button.toast-close-button {
   .register-box {
     margin-top: 0.5rem;
     width: 100%;
+  }
+
+  #topSpecialties {
+    height: auto !important;
   }
 }
 
